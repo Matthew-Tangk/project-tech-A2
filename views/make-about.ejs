@@ -1,0 +1,36 @@
+<%- include('header') %>
+
+<body>
+  <main>
+    <!-- About me -->
+    <section>
+      <span>3/4</span>
+      <h1>About me</h1>
+      <p>Let other people know who you are and what you like</p>
+
+      <form
+        action="/select-artists?username=<%= username %>&age=<%= age %>&tel=<%= tel %>&file=<%= file %>&about=<%= about %>"
+        method="post"
+      >
+        <fieldset>
+          <legend>Fill in the about me below</legend>
+          <label for="about">About me</label>
+          <textarea
+            id="about"
+            name="about"
+            rows="15"
+            cols="33"
+            placeholder="Something about me"
+          ></textarea>
+
+          <input type="hidden" name="username" value="<%= username %>" />
+          <input type="hidden" name="age" value="<%= age %>" />
+          <input type="hidden" name="tel" value="<%= tel %>" />
+          <input type="hidden" name="file" value="<%= file %>" />
+
+          <input type="submit" value="Next" />
+        </fieldset>
+      </form>
+    </section>
+  </main>
+</body>

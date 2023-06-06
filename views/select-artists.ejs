@@ -1,0 +1,25 @@
+<%- include('header') %>
+
+<body>
+  <main>
+    <!-- Bands / artists -->
+    <section id="artistList">
+      <span>4/4</span>
+      <h1>Bands / artists</h1>
+      <p>Select your favorite artists</p>
+    
+        <ul>
+          <% items.forEach(item => { %>
+            <li>
+              <img src="<%= item.image %>" alt="<%= item.name %>">
+              <p><%= item.name %></p>
+            </li>
+          <% }); %>
+        </ul>
+      
+      <a href="/profile">Next</a>
+    </section>
+  </main>
+  <script src="js/selectartists.js"></script>
+</body>
+</html>
