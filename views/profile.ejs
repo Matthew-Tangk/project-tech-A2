@@ -1,4 +1,4 @@
-<%- include('header') %>
+<%- include('./partials/header') %>
 
 <body>
   <main id="yourProfile">
@@ -8,9 +8,9 @@
     </section>
 
     <section>
-      <img width="100px" src="/static/<%= profileData.file %>"  alt="Profile Picture"/>
-      <P> <%= profileData.age %> years </P>
-      <P> <%= profileData.about %></P>
+      <img width="100px" src="/static/img/profilepic/<%= profileData.file %>"  alt="Profile Picture"/>
+      <p> <%= profileData.age %> years </p>
+      <p> <%= profileData.about %></p>
     </section>
 
     <section>
