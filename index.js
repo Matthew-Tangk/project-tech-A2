@@ -61,6 +61,10 @@ const artists = [
   {id:18, name: 'Bad omens', image: '/static/badomens.jpg'},
 ];
 
+const profileRoutes = require('./routes/profileRoutes.js');
+console.log(profileRoutes);
+app.use('/profile', profileRoutes);
+
 // Make new profile page
 app.get('/new-profile',(req, res) => {
   res.render('make-profile.ejs', { username: '', age: '', tel: '' });
