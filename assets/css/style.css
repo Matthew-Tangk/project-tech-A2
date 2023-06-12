@@ -6,7 +6,6 @@
 }
 
 :root {
-    --main: #504D62;
     --text: #FAFBFB;
     --input: #2B2936;
     --placeholder: #5F5E66;
@@ -20,7 +19,6 @@
 body {
     background-color: var(--background);
     color: var(--text);
-    font-weight: 300;
     font-size: 1em;
 }
 
@@ -94,17 +92,17 @@ textarea#about  {
 }
 
 input:focus-visible, textarea:focus-visible {
-    outline: 2px solid var(--active1);
+    outline: 2px solid var(--accent1);
     background-color: var(--light);
 }
 
 input::-webkit-input-placeholder {
-    color: var(--placeholder); 
+    color: var(--placeholder);  
     font-weight: 400;
 }
 
 input::-moz-placeholder {
-    color: var(--placeholder); 
+    color: var(--placeholder);  
     font-weight: 400;
 }
 
@@ -114,7 +112,7 @@ input:-ms-input-placeholder {
 }
 
 input::-ms-input-placeholder {
-    color: var(--placeholder); 
+    color: var(--placeholder);  
     font-weight: 400;
 }
 
