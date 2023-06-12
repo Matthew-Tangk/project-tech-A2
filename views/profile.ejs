@@ -1,34 +1,80 @@
 <%- include('./partials/header') %>
 
+<style>
+  #yourProfile h1 {
+    font-size: 1.8em;
+}
+
+#yourProfile p {
+    font-size: 0.9em;
+}
+
+#yourProfile p:nth-last-of-type(2) {
+    font-weight: 600;
+    padding-bottom: 0.6em;
+}
+
+#yourProfile img {
+    width: 8em;
+    height: 8em;
+    margin: auto;
+    -o-object-fit: cover;
+       object-fit: cover;
+    margin-bottom: 1em;
+    border-radius: 100%;
+}
+  #yourProfile li {
+    background-color: var(--light);
+    padding: 0.8em;
+    font-size: 0.9em;
+    border-radius: 5em;
+}
+
+/* Code for profile page */
+#yourProfile section:first-of-type {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 2em;
+}
+
+</style>
+
+
 <body>
   <main id="yourProfile">
     <section>
-      <h1> <%= profileData.username %> </h1>
-      <p> Welcome </p>
-    </section>
+      <div>
+        <p> Welcome </p>
+        <h1> <%= profileData.username %> </h1>
+        <P> <%= profileData.age %> years </P>
+        <P> <%= profileData.about %></P>
+      </div>
+
+=======
+      <img width="100px" src="/static/<%= profileData.file %>"  alt="Profile Picture"/>
+
 
     <section>
       <img width="100px" src="/static/img/profilepic/<%= profileData.file %>"  alt="Profile Picture"/>
       <p> <%= profileData.age %> years </p>
       <p> <%= profileData.about %></p>
+
+=======
+
+
     </section>
 
     <section>
-      <div id="embedIframe">
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/21eMasL93nEafqRwlI851z?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/1dkVl41242u0eGODPvjd0l?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/7nzsY8vlnKdvGOEE0rjAXZ?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/1d6JbnI9S2GCjbQjLCH73x?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/6Z6mjsCgIcFb3JBOxHBcn9?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/7CAbF0By0Fpnbiu6Xn5ZF7?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/1M3XB6EUPUZy58Aqt6zbKr?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/3MTfE3Mo3lfwAymYLU2luX?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/5PlGxNgE62io6OBc1BsIaq?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/3sjgaVtZIOEwR21pfM42Ly?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      </div>
+      <ul>
+          <li> Genre 1</li>
+          <li> Genre 1</li>
+          <li> Genre 1</li>
+      </ul>
     </section>
+    
 
   </main>
-  <script src="https://open.spotify.com/embed-podcast/iframe-api/v1" async></script>
 </body>
 </html>
