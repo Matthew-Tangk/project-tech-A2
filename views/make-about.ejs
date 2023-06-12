@@ -1,20 +1,17 @@
-<%- include('header') %>
+<%- include('./partials/header') %>
 
 <body>
   <main>
     <!-- About me -->
     <section>
       <span>3/4</span>
-      <h1>About me</h1>
+      <h1>Add a bio</h1>
       <p>Let other people know who you are and what you like</p>
 
-      <form
-        action="/select-artists?username=<%= username %>&age=<%= age %>&tel=<%= tel %>&file=<%= file %>&about=<%= about %>"
-        method="post"
-      >
+      <form action="/select-artists" method="post">
         <fieldset>
           <legend>Fill in the about me below</legend>
-          <label for="about">About me</label>
+          <label for="about">Something about me</label>
           <textarea
             id="about"
             name="about"

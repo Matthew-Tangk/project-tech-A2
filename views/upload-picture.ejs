@@ -1,14 +1,11 @@
-<%- include('header') %>
+<%- include('./partials/header') %>
 
 <body>
   <main>
     <section id="profilePicture">
       <span>2/4</span>
-      <form
-        action="/new-about?username=<%= username %>&age=<%= age %>&tel=<%= tel %>&file=<%= file %>"
-        method="post"
-      >
-        <h1>Profile picture</h1>
+      <form action="/new-about" method="post">
+        <h1>Upload a photo</h1>
 
         <p>Make your profile yours by adding a profile picture</p>
 
