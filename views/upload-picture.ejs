@@ -1,0 +1,37 @@
+<%- include('./partials/header') %>
+
+<body>
+  <main>
+    <section id="profilePicture">
+      <span>2/4</span>
+      <form action="/new-about" method="post">
+        <h1>Upload a photo</h1>
+
+        <p>Make your profile yours by adding a profile picture</p>
+
+        <p id="message"></p>
+        <label for="upload-image">
+          <input
+            type="file"
+            name="file"
+            id="upload-image"
+            accept="image/png, image/jpeg"
+          />
+          <img width="100%" src="static/img/profilepic/upload-image.svg" alt="" />
+        </label>
+        <div id="error-message"></div>
+
+        <input type="hidden" name="username" value="<%= username %>" />
+        <input type="hidden" name="age" value="<%= age %>" />
+        <input type="hidden" name="tel" value="<%= tel %>" />
+
+        <noscript>
+          <p>You need to enable JavaScript to see the image preview</p>
+        </noscript>
+
+        <input type="submit" value="Next" />
+      </form>
+    </section>
+  </main>
+  <script src="js/script.js"></script>
+</body>

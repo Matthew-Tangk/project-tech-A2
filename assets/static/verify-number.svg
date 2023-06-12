@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="340" height="132" viewBox="0 0 340 132">
+  <g id="Group_5" data-name="Group 5" transform="translate(-25 -90)">
+    <rect id="Rectangle_6986" data-name="Rectangle 6986" width="340" height="132" transform="translate(25 90)" fill="#f3f2f7"/>
+    <text id="mobile-notch" transform="translate(153 189)" fill="#c8c4d9" font-size="88" font-family="FontAwesome6Pro-Light, 'Font Awesome \36  Pro'" font-weight="300"><tspan x="0" y="0">mobile-notch</tspan></text>
+    <g id="Group_2" data-name="Group 2" transform="translate(-60 -38)">
+      <rect id="Rectangle_7020" data-name="Rectangle 7020" width="28" height="22" transform="translate(265 186)" fill="#f3f2f7"/>
+      <text id="Check-circle" transform="translate(260 211)" fill="#c8c4d9" font-size="38" font-family="FontAwesome6Pro-Solid, 'Font Awesome \36  Pro'"><tspan x="0" y="0">Check-circle</tspan></text>
+    </g>
+  </g>
+</svg>
