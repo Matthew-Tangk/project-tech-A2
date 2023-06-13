@@ -1,18 +1,8 @@
-:root {
-    --main-color:#1F1D2A;
-    --input-color:#2B2936;
-    --placeholder-color:#5F5E66;
-    --text-color:#FAFBFB;
-    --accent-color1:#6862C8;
-    --accent-color1-dark:#322F54;
-    --accent-color2:#DA6864;
-    --accent-color2-dark:#63383E;
-}
-
 main > section {
     display:flex;
     flex-wrap:wrap;
     justify-content: space-between;;
+    align-items: center;
 }
 
 main > section > h1 {
@@ -21,8 +11,8 @@ main > section > h1 {
 }
 
 main > section > a {
-    color:var(--text-color);
-    background-color:var(--accent-color1-dark);
+    color:var(--text);
+    background-color:var(--accent1dark);
     font-weight:bold;
 
     align-self: flex-end;
@@ -32,7 +22,6 @@ form {
     margin-top:2rem;
     display:flex;
     flex-direction: column;
-
 }
 
 form > fieldset {
@@ -57,7 +46,7 @@ form > fieldset > div > label {
     width:100%;
 
     text-align: center;
-    color:var(--text-color);
+    color:var(--text);
     
     padding:.2rem;
 }
@@ -80,11 +69,11 @@ input + label {
 
 input[type="checkbox"]:checked + label {
     border-radius:10px;
-  background-color:var(--accent-color1);
+  background-color:var(--accent1);
 }
 
 form > fieldset > legend {
-    color:var(--text-color);
+    color:var(--text);
     font-weight:bold;
     font-size:1.5rem;
 
@@ -96,8 +85,8 @@ form > fieldset > legend {
 }
 
 form > button {
-    color:var(--text-color);
-    background-color:var(--accent-color1);
+    color:var(--text);
+    background-color:var(--accent1);
     font-weight:bold;
     font-size:1.25rem;
 
@@ -109,4 +98,8 @@ form > button {
     align-self: flex-end;
 
     margin-top:1.5rem;
+}
+
+legend {
+    visibility: hidden;
 }
