@@ -201,3 +201,7 @@ noscript p{
     min-height: 100vh;
     margin: 0;
 }
+
+legend {
+    visibility: hidden;
+}
