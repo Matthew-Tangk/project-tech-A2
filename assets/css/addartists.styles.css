@@ -1,0 +1,112 @@
+:root {
+    --main-color:#1F1D2A;
+    --input-color:#2B2936;
+    --placeholder-color:#5F5E66;
+    --text-color:#FAFBFB;
+    --accent-color1:#6862C8;
+    --accent-color1-dark:#322F54;
+    --accent-color2:#DA6864;
+    --accent-color2-dark:#63383E;
+}
+
+main > section {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-between;;
+}
+
+main > section > h1 {
+    order:-100;
+    width:fit-content;
+}
+
+main > section > a {
+    color:var(--text-color);
+    background-color:var(--accent-color1-dark);
+    font-weight:bold;
+
+    align-self: flex-end;
+}
+
+form {
+    margin-top:2rem;
+    display:flex;
+    flex-direction: column;
+
+}
+
+form > fieldset {
+    border:none;
+
+    display:flex;
+    flex-wrap:wrap;
+    gap:.5rem;
+
+    max-height:60%;
+    overflow: auto;
+}
+
+form > fieldset > div {
+    width:calc(95%/3);
+
+    margin-top:.5rem;
+}
+
+form > fieldset > div > label {
+    display: block;
+    width:100%;
+
+    text-align: center;
+    color:var(--text-color);
+    
+    padding:.2rem;
+}
+
+form > fieldset > div > label > img {
+    display: block;
+    width:100%;
+
+    border-radius:10px;
+    margin-bottom:.5rem;
+}
+
+input[type="checkbox"] {
+  display:none;
+}
+
+input + label {
+    display:inline-block;
+}
+
+input[type="checkbox"]:checked + label {
+    border-radius:10px;
+  background-color:var(--accent-color1);
+}
+
+form > fieldset > legend {
+    color:var(--text-color);
+    font-weight:bold;
+    font-size:1.5rem;
+
+    margin-top:2rem 0;
+
+    display:block;
+
+    margin-bottom:1rem;
+}
+
+form > button {
+    color:var(--text-color);
+    background-color:var(--accent-color1);
+    font-weight:bold;
+    font-size:1.25rem;
+
+    padding:1rem 2.5rem;
+    border-radius:10px;
+
+    border:none;
+
+    align-self: flex-end;
+
+    margin-top:1.5rem;
+}
