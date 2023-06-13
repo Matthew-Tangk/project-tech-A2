@@ -1,173 +1,176 @@
-<%- include('./partials/header') %>
+<%- include('./partials/head') %>
 
 <body>
     <main>
-      <section id="artistList">
-        <a href="./profile">Cancel</a>
+        <section id="artistList">
+          <a href="/profile">Cancel</a>
+  
+          <h1>Edit profile</h1>
+  
+          <form action="/profile/add-artists" method="post">
+              <fieldset>
+                  <legend>Add your favorite artists</legend>
+              
+                  <% items.forEach(item => { %>
+                  <div>
+                    <input type="checkbox" id="<%= item.name %>" name="samplename" value="samplevalue">
+                    <label for="<%= item.name %>">
+                      <img src="<%=item.image %>" alt="<%= item.name %>">
+                      <%= item.name %>
+                    </label>
+                  </div>
+                  <% }); %>
+              
+              </fieldset>
+  
+              <button type="submit">Save my favorites</button>
+          </form>
+        </section>
+      </main>
 
-        <h1>Edit profile</h1>
+      <%- include('./partials/footer') %>
+</body>
+</html>
 
-        <form action="/profile" method="post">
-            <fieldset>
-                <legend>Add your favorite artists</legend>
-            
-                <% items.forEach(item => { %>
-                <div>
-                  <input type="checkbox" id="<%= item.name %>" name="samplename" value="samplevalue">
-                  <label for="<%= item.name %>">
-                    <img src="<%=item.image %>" alt="<%= item.name %>">
-                    <%= item.name %>
-                  </label>
-                </div>
-                <% }); %>
-            
-            </fieldset>
+<style>
+  :root {
+      --main-color:#1F1D2A;
+      --input-color:#2B2936;
+      --placeholder-color:#5F5E66;
+      --text-color:#FAFBFB;
+      --accent-color1:#6862C8;
+      --accent-color1-dark:#322F54;
+      --accent-color2:#DA6864;
+      --accent-color2-dark:#63383E;
 
-            <button type="submit">Save my favorites</button>
-        </form>
-      </section>
-    </main>
-  </body>
+     --main-font:'Unbounded', cursive;
+  }
 
-  <style>
-    :root {
-        --main-color:#1F1D2A;
-        --input-color:#2B2936;
-        --placeholder-color:#5F5E66;
-        --text-color:#FAFBFB;
-        --accent-color1:#6862C8;
-        --accent-color1-dark:#322F54;
-        --accent-color2:#DA6864;
-        --accent-color2-dark:#63383E;
+  @import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@400;600;900&display=swap');
 
-       --main-font:'Unbounded', cursive;
-    }
+  * {
+      font-family: 'Catamaran', sans-serif; ;
+  }
+  
+  body {
+      background:var(--main-color);
+  }
 
-    @import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@400;600;900&display=swap');
+  h1 {
+      color:var(--accent-color2);
+  }
 
-    * {
-        font-family: 'Catamaran', sans-serif; ;
-    }
-    
-    body {
-        background:var(--main-color);
-    }
+  main {
+      padding:1.5rem;
+  }
 
-    h1 {
-        color:var(--accent-color2);
-    }
+  main > section {
+      display:flex;
+      /* flex-direction: column; */
+      flex-wrap:wrap;
+      justify-content: space-between;;
+  }
 
-    main {
-        padding:1.5rem;
-    }
+  main > section > h1 {
+      order:-100;
 
-    main > section {
-        display:flex;
-        /* flex-direction: column; */
-        flex-wrap:wrap;
-        justify-content: space-between;;
-    }
+      font-weight:bold;
+  }
 
-    main > section > h1 {
-        order:-100;
+  main > section > a {
+      text-decoration: none;
 
-        font-weight:bold;
-    }
+      color:var(--text-color);
+      background-color:var(--accent-color1-dark);
+      font-weight:bold;
 
-    main > section > a {
-        text-decoration: none;
+      padding:1rem 2.5rem;
+      border-radius:10px;
 
-        color:var(--text-color);
-        background-color:var(--accent-color1-dark);
-        font-weight:bold;
+      align-self: flex-end;
+  }
 
-        padding:1rem 2.5rem;
-        border-radius:10px;
+  form {
+      margin-top:2rem;
+      display:flex;
+      flex-direction: column;
 
-        align-self: flex-end;
-    }
+  }
 
-    form {
-        margin-top:2rem;
-        display:flex;
-        flex-direction: column;
+  form > fieldset {
+      border:none;
 
-    }
+      display:flex;
+      flex-wrap:wrap;
+      gap:.5rem;
 
-    form > fieldset {
-        border:none;
+      max-height:60%;
+      overflow: auto;
+  }
 
-        display:flex;
-        flex-wrap:wrap;
-        gap:.5rem;
+  form > fieldset > div {
+      width:calc(95%/3);
 
-        max-height:60%;
-        overflow: auto;
-    }
+      margin-top:.5rem;
+  }
 
-    form > fieldset > div {
-        width:calc(95%/3);
+  form > fieldset > div > label {
+      display: block;
+      width:100%;
 
-        margin-top:.5rem;
-    }
+      text-align: center;
+      color:var(--text-color);
+      
+      padding:.2rem;
+  }
 
-    form > fieldset > div > label {
-        display: block;
-        width:100%;
+  form > fieldset > div > label > img {
+      display: block;
+      width:100%;
 
-        text-align: center;
-        color:var(--text-color);
-        
-        padding:.2rem;
-    }
+      border-radius:10px;
+      margin-bottom:.5rem;
+  }
 
-    form > fieldset > div > label > img {
-        display: block;
-        width:100%;
+  input[type="checkbox"] {
+    display:none;
+  }
 
-        border-radius:10px;
-        margin-bottom:.5rem;
-    }
+  input + label {
+      display:inline-block;
+  }
 
-    input[type="checkbox"] {
-	    display:none;
-    }
+  input[type="checkbox"]:checked + label {
+      border-radius:10px;
+    background-color:var(--accent-color1);
+  }
 
-    input + label {
-        display:inline-block;
-    }
+  form > fieldset > legend {
+      color:var(--text-color);
+      font-weight:bold;
+      font-size:1.5rem;
 
-    input[type="checkbox"]:checked + label {
-        border-radius:10px;
-	    background-color:var(--accent-color1);
-    }
+      margin-top:2rem 0;
 
-    form > fieldset > legend {
-        color:var(--text-color);
-        font-weight:bold;
-        font-size:1.5rem;
+      display:block;
 
-        margin-top:2rem 0;
+      margin-bottom:1rem;
+  }
 
-        display:block;
+  form > button {
+      color:var(--text-color);
+      background-color:var(--accent-color1);
+      font-weight:bold;
+      font-size:1.25rem;
 
-        margin-bottom:1rem;
-    }
+      padding:1rem 2.5rem;
+      border-radius:10px;
 
-    form > button {
-        color:var(--text-color);
-        background-color:var(--accent-color1);
-        font-weight:bold;
-        font-size:1.25rem;
+      border:none;
 
-        padding:1rem 2.5rem;
-        border-radius:10px;
+      align-self: flex-end;
 
-        border:none;
-
-        align-self: flex-end;
-
-        margin-top:1.5rem;
-    }
-  </style>
+      margin-top:1.5rem;
+  }
+</style>
   
