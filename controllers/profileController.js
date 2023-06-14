@@ -76,7 +76,13 @@ exports.profile = async (req, res) => {
     
     try {
       await sendFavoriteArtistData(favoriteArtists);
-      res.render('profile.ejs', {title:"My profile"})
+
+      // Hier de profielData nog toevoegen door die uit de database te halen
+      
+      res.render('profile.ejs', {
+        title:"My profile",
+        profileData: profileData
+      })
     } catch(err) {
       console.error("Something went wrong with sending data to the db", err);
     }
