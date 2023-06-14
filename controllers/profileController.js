@@ -27,44 +27,71 @@ const tinify = require("tinify");
 tinify.key = "9v2Bl9fzC6qgqXWvTJ0sCSt19L33nt2M";
 
 exports.addArtists = async (req, res) => {
-    try {
-        await client.connect();
+  try {
+      await client.connect();
 
-        const artistCollection = client.db('concertBuddies').collection('artists')
+      const artistCollection = client.db('concertBuddies').collection('artists')
 
-        const allArtistsData = await artistCollection.find({ }, 
-          { name: 1, img: 0, path:1, _id: 0 }
-          ).toArray();
+      const allArtistsData = await artistCollection.find({ }, 
+        { name: 1, img: 0, path:1, _id: 0 }
+        ).toArray();
 
-        //DATA KRIJG IK NU BINNEN< Nu nog omzetten hieronder in de render dat de data meegerenderd wordt en de afbeelding
-        //in de view plaatsen met ejs
-        res.render('addartists.ejs', {
-            title:"Add artists", 
-            artists: allArtistsData
-        });
+      //DATA KRIJG IK NU BINNEN< Nu nog omzetten hieronder in de render dat de data meegerenderd wordt en de afbeelding
+      //in de view plaatsen met ejs
+      res.render('addartists.ejs', {
+          title:"Add artists", 
+          artists: allArtistsData
+      });
 
-    } catch (err) {
-        console.error("Something went wrong with sending data to the server", err)
-    }
-    
+  } catch (err) {
+      console.error("Something went wrong with sending data to the server", err)
+  }
+  
 
-    //DIT is optie1
-    // artists.forEach(artist => {
+  //DIT is optie1
+  // artists.forEach(artist => {
 
-        // const sourceFile = tinify.fromFile(artist.path);
-        // sourceFile.toFile(artist.name + "optimized");
-        // console.log(sourceFile);
-    // })
+      // const sourceFile = tinify.fromFile(artist.path);
+      // sourceFile.toFile(artist.name + "optimized");
+      // console.log(sourceFile);
+  // })
 
-    // const sourceFile = tinify.fromFile("arcticmonkeys.jpg");
-    // sourceFile.toFile("optimizedarcticmonkeys.jpg");
+  // const sourceFile = tinify.fromFile("arcticmonkeys.jpg");
+  // sourceFile.toFile("optimizedarcticmonkeys.jpg");
 
-    //OPTIE 2
-    // const source = tinify.fromFile("large.jpg");
-    // const resized = source.resize({
-    //     method: "fit",
-    //     width: 150,
-    //     height: 100
-    // });
-    // resized.toFile("thumbnail.jpg");
+  //OPTIE 2
+  // const source = tinify.fromFile("large.jpg");
+  // const resized = source.resize({
+  //     method: "fit",
+  //     width: 150,
+  //     height: 100
+  // });
+  // resized.toFile("thumbnail.jpg");
 }
+
+exports.profile = async (req, res) => {
+    selectedFavoriteArtists = req.body.favoriteartists;
+    
+    const favoriteArtists = {selectedFavoriteArtists}
+    
+    try {
+      await sendFavoriteArtistData(favoriteArtists);
+      res.render('profile.ejs', {title:"My profile"})
+    } catch(err) {
+      console.error("Something went wrong with sending data to the db", err);
+    }
+}
+
+const sendFavoriteArtistData = async (data) => {
+  try {
+    const favoriteArtists = client
+    .db("concertBuddies")
+    .collection("favoriteArtists");
+
+    const uploadFavoriteArtistsData = await favoriteArtists.insertOne(data);
+    console.log("The artists are succesfully added to the database", uploadFavoriteArtistsData.insertedId);
+  } catch (err) {
+    console.error("Something went wrong with adding the artists to the database :(", err);
+  }
+}
+

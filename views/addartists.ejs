@@ -7,13 +7,13 @@
   
           <h1>Edit profile</h1>
   
-          <form action="/profile/add-artists" method="post">
+          <form action="/profile" method="post">
               <fieldset>
                   <legend>Add your favorite artists</legend>
               
                   <% artists.forEach(artist => { %>
                   <div>
-                    <input type="checkbox" id="<%= artist.name %>" name="<%= artist.name %>" value="<%= artist.name %>">
+                    <input type="checkbox" id="<%= artist.name %>" name="favoriteartists" value="<%= artist.name %>">
                     <label for="<%= artist.name %>">
                       <img src="<%= artist.path %>" alt="<%= artist.name %>">
                       <%= artist.name %>
