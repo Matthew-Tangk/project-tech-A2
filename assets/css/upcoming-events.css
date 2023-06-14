@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Catamaran&display=swap');
+body {
+    font-family: 'Catamaran', sans-serif;
+    background-color: #1F1D2A;
+    color: #DBDADA !important;
+    font-weight: 500;
+  }
+  
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  row-gap: 30px;
+}
+
+
+.grid-item {
+  padding: 20px 20px 0 20px 20px;
+  text-align: center;
+}
+
+.featured {
+  grid-column: 1/3;
+  justify-self: center;
+  display: flex;
+  align-items: flex-end;  
+  background-image: url('../static/img/drake-concert.jpeg');
+  background-size: cover;
+  height: 25vh;
+  width: 70vw;
+  border-radius: 25%;
+  margin-top: 20%;
+
+}
+
+
+.grid-item button  {
+color: inherit;
+cursor: pointer;
+padding: 0;
+background: none;
+border: none;
+outline: none;
+font: inherit;
+text-align: inherit;
+text-decoration: none;
+cursor: pointer;
+
+  }
+
+  .featured h1 {
+font-size: 1.5em;
+padding-bottom: 25%;
+
+  }
+  .featured h2 {
+    font-size: 1em; 
+
+      }
+
+      .plus-button {
+        font-size: 1em;
+        background-color: #DBDADA;
+        color: #1F1D2A;
+        border: none;
+        border-radius: 100%;
+        width: 8%;
+        height: 15%;
+        margin-left: 5px;
+        cursor: pointer;
+      } 
+
+      #datepicker {
+        grid-column: 1/3;
+        justify-self: center;
+        width: 80%;
+      }
+
+
+  .text-container {
+    padding: 20px;
+    color: white;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the background color and transparency as needed */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    border-radius: 25%;
+  }
+  .grid-item button:hover  {
+    color: #ffffff;
+    transition-duration: 0.5s;
+
+
+      }
