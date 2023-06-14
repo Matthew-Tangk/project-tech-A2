@@ -11,12 +11,12 @@
               <fieldset>
                   <legend>Add your favorite artists</legend>
               
-                  <% items.forEach(item => { %>
+                  <% artists.forEach(artist => { %>
                   <div>
-                    <input type="checkbox" id="<%= item.name %>" name="samplename" value="samplevalue">
-                    <label for="<%= item.name %>">
-                      <img src="<%=item.image %>" alt="<%= item.name %>">
-                      <%= item.name %>
+                    <input type="checkbox" id="<%= artist.name %>" name="<%= artist.name %>" value="<%= artist.name %>">
+                    <label for="<%= artist.name %>">
+                      <img src="<%= artist.path %>" alt="<%= artist.name %>">
+                      <%= artist.name %>
                     </label>
                   </div>
                   <% }); %>
