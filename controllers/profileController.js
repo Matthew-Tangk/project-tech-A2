@@ -21,5 +21,5 @@ const artists = [
   ];
 
 exports.addArtists = (req, res) => {
-    res.render('addartists.ejs', {title:"Add artists", items: artists});
+    res.render('addartists.ejs', {items: artists});
 }

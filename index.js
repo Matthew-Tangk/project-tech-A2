@@ -65,6 +65,9 @@ const profileRoutes = require('./routes/profileRoutes.js');
 console.log(profileRoutes);
 app.use('/profile', profileRoutes);
 
+const invitesRoutes = require('./routes/invitesRoutes.js');
+app.use('/invites', invitesRoutes);
+
 // Make new profile page
 app.get('/new-profile',(req, res) => {
   res.render('make-profile.ejs', { username: '', age: '', tel: '', title:"New profile" });
@@ -146,5 +149,5 @@ app.get('/profile', async (req, res) => {
 
 // 404 error if page is not found
 app.use((req, res, next) => {
-  res.status(404).render('error.ejs');
+  res.status(404).render('error.ejs', {title:"Error"});
 });
