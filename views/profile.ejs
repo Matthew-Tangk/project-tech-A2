@@ -1,4 +1,34 @@
-<%- include('./partials/header') %>
+<%- include('./partials/head') %>
+<body>
+  <main id="yourProfile">
+    <section>
+      <div>
+        <p> Welcome </p>
+        <h1> <%= profileData.username %> </h1>
+        <P> <%= profileData.age %> years </P>
+        <P> <%= profileData.about %></P>
+      </div>
+
+      <img width="100px" src="/static/<%= profileData.file %>"  alt="Profile Picture"/>
+
+    <section>
+      <img width="100px" src="/static/img/profilepic/<%= profileData.file %>"  alt="Profile Picture"/>
+      <p> <%= profileData.age %> years </p>
+      <p> <%= profileData.about %></p>
+    </section>
+
+    <section>
+      <ul>
+          <li> Genre 1</li>
+          <li> Genre 1</li>
+          <li> Genre 1</li>
+      </ul>
+    </section>
+  </main>
+
+  <%- include('./partials/footer') %>
+</body>
+</html>
 
 <style>
   #yourProfile h1 {
@@ -40,41 +70,3 @@
 }
 
 </style>
-
-
-<body>
-  <main id="yourProfile">
-    <section>
-      <div>
-        <p> Welcome </p>
-        <h1> <%= profileData.username %> </h1>
-        <P> <%= profileData.age %> years </P>
-        <P> <%= profileData.about %></P>
-      </div>
-
-=======
-      <img width="100px" src="/static/<%= profileData.file %>"  alt="Profile Picture"/>
-
-
-    <section>
-      <img width="100px" src="/static/img/profilepic/<%= profileData.file %>"  alt="Profile Picture"/>
-      <p> <%= profileData.age %> years </p>
-      <p> <%= profileData.about %></p>
-
-=======
-
-
-    </section>
-
-    <section>
-      <ul>
-          <li> Genre 1</li>
-          <li> Genre 1</li>
-          <li> Genre 1</li>
-      </ul>
-    </section>
-    
-
-  </main>
-</body>
-</html>
