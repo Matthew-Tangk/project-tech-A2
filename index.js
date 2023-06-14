@@ -65,6 +65,14 @@ const profileRoutes = require('./routes/profileRoutes.js');
 console.log(profileRoutes);
 app.use('/profile', profileRoutes);
 
+
+// Homepage 
+app.get('/', (req, res) => {
+  res.render('index.ejs', {
+    title:"Welcome to Concert Buddies!"
+  })
+})
+
 // Make new profile page
 app.get('/new-profile',(req, res) => {
   res.render('make-profile.ejs', { username: '', age: '', tel: '', title:"New profile" });

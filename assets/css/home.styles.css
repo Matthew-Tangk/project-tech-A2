@@ -1,0 +1,48 @@
+body {
+    background:url("../static/pexels-wendy-wei-1540406.png") center center no-repeat fixed;
+    background-size:cover;
+}
+
+main {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    width:100vw;
+    height:100vh;
+    background-image:radial-gradient(#1F1D2A10, #1F1D2A80)
+}
+
+main section img {
+    width:25%;
+    aspect-ratio:1/1;
+}
+
+main section:first-of-type {
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+
+nav {
+    width:80%;
+    margin-bottom:2rem;
+}
+
+nav ul {
+    width:100%;
+
+    display:flex;
+    flex-wrap:wrap;
+}
+
+nav ul li {
+    width:100%;
+}
+
+nav ul li a {
+    width:100%;
+
+}

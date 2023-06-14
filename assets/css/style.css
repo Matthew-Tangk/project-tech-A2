@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+ul {
+    list-style: none;
+}
+
 :root {
     --text: #FAFBFB;
     --input: #2B2936;
