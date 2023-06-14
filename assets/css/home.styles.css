@@ -6,7 +6,7 @@ body {
 main {
     display:flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 
     width:100vw;
@@ -17,6 +17,8 @@ main {
 main section img {
     width:25%;
     aspect-ratio:1/1;
+
+    margin-top:5rem;
 }
 
 main section:first-of-type {
@@ -40,6 +42,11 @@ nav ul {
 
 nav ul li {
     width:100%;
+    display:flex;
+
+    padding:.5rem 0rem;
+    align-items: center;
+    justify-content: center;
 }
 
 nav ul li a {
