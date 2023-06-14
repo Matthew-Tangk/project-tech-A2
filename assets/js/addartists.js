@@ -1,6 +1,6 @@
 const artistCheckboxes = document.querySelectorAll('form fieldset div input');
 const artistCountText = document.querySelector('form > p');
-const artistCountNumber = document.querySelector('form > p > span');
+const artistCountNumber = document.querySelector('form > p:last-of-type > span');
 console.log(artistCheckboxes);
 
 let artistCheckedCount = 0;
