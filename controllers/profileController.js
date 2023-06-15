@@ -47,27 +47,6 @@ exports.addArtists = async (req, res) => {
   } catch (err) {
       console.error("Something went wrong with sending data to the server", err)
   }
-  
-
-  //DIT is optie1
-  // artists.forEach(artist => {
-
-      // const sourceFile = tinify.fromFile(artist.path);
-      // sourceFile.toFile(artist.name + "optimized");
-      // console.log(sourceFile);
-  // })
-
-  // const sourceFile = tinify.fromFile("arcticmonkeys.jpg");
-  // sourceFile.toFile("optimizedarcticmonkeys.jpg");
-
-  //OPTIE 2
-  // const source = tinify.fromFile("large.jpg");
-  // const resized = source.resize({
-  //     method: "fit",
-  //     width: 150,
-  //     height: 100
-  // });
-  // resized.toFile("thumbnail.jpg");
 }
 
 exports.profile = async (req, res) => {
