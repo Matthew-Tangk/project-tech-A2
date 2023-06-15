@@ -1,23 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-
-    <title>CB_my_events</title>
-    <link rel="stylesheet" href="./css/stylesheet.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+<%-include('partials/head.ejs')%>
   <body class="page2">
     <header>
       <a href="">Profile</a>
@@ -62,8 +43,20 @@
         </div>
       </div>
     </main>
-    <footer></footer>
-
+    <footer>
+      <div class="footer-container">
+        <a href="index.html"
+          ><img src="../assets/static/img/events/calendar_icon.png" alt="calendar_icon"
+        /></a>
+        <a href="stage.html"
+          ><img src="../assets/static/img/events/inbox_icon.png" alt="my_events"
+        /></a>
+        <a href="profile.html"
+          ><img src="../assets/static/img/events/inbox_icon.png" alt="inbox"
+        /></a>
+      </div>
+    </footer>
+   
     <style>
       styles {
         visibility: hidden;
@@ -98,62 +91,6 @@
         color: #ffffff;
       }
 
-      .inviteStatus {
-        text-align: center;
-        margin: 0;
-        font-weight: lighter;
-        color: #ffffff;
-      }
-
-      /* container for the tickets */
-      .ticket {
-        background-color: #322f54;
-        width: 100%;
-        border-radius: 25px;
-        background-image: url(../assets/sos_cover.jpg);
-        background-size: cover;
-        background-position: left;
-        background-repeat: no-repeat;
-        background-size: 40% 100%;
-        padding: 5px 0;
-        margin: 30px 0;
-      }
-
-      .eventDetails {
-        display: flex;
-        flex-direction: column;
-        font-size: 14px;
-        color: white;
-        margin: 5px 0 5px 43%;
-      }
-
-      .eventDetails p {
-        margin: 0;
-        font-weight: bold;
-      }
-
-      .eventDetails p:first-of-type {
-        margin-bottom: 20px;
-        font-weight: lighter;
-      }
-
-      .eventDetails {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .date {
-        width: 20%;
-        float: left;
-        text-align: center;
-        color: white;
-        margin-left: 10%;
-      }
-
-      .date p {
-        font-size: 2.5em;
-      }
-
       h2 {
         font-weight: lighter;
         color: #ffffff;
@@ -161,64 +98,6 @@
 
       h3 {
         margin: 0;
-      }
-
-      /* Toggle button */
-      .toggle-button {
-        display: inline-block;
-        position: relative;
-        width: 60px;
-        height: 34px;
-        margin-left: 60%;
-      }
-
-      .slider {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: 17px;
-        background-color: #6862c8;
-        transition: 0.4s;
-      }
-
-      .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        border-radius: 50%;
-        background-color: #da6864;
-        transition: 0.4s;
-      }
-
-      #toggle:checked + .slider {
-        background-color: #6862c8;
-      }
-
-      #toggle:checked + .slider:before {
-        transform: translateX(26px);
-        background-color: #64ff88;
-      }
-
-      .ticket:nth-of-type(2) {
-        background-image: url(../assets/MMATBS_cover.jpeg);
-      }
-
-      .ticket:nth-of-type(3) {
-        background-image: url(../assets/planetHer_cover.jpeg);
-      }
-
-      .ticket:nth-of-type(4) {
-        background-image: url(../assets/drake_cover.jpeg);
-      }
-
-      .main-container {
-        min-height: calc(100vh - 50px);
-        padding-bottom: 50px;
       }
 
       footer {
@@ -251,7 +130,12 @@
         background-color: #2b2936;
       }
 
+      .page2 header {
+        background-color: #2b2936;
+      }
+
       #spread {
+        background-image: url(../static/img/events/mmatbs_spread.webp);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -304,3 +188,4 @@
     </style>
   </body>
 </html>
+
