@@ -26,6 +26,39 @@
   }
 
 
+  /* Code for registration */
+  label {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    font-weight: bold;
+    margin-top: 0.3em;
+}
+
+input, textarea {
+    margin-top: .6em;
+    padding: 1em;
+    border: 2px solid var(--main);
+    background-color: var(--input);
+    color: var(--text);
+    border-radius: 10em;
+    font-weight: 400;
+    font-family: 'Catamaran', sans-serif;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    text-align: left;
+}
+
+textarea#about  {
+    border-radius: 0.5em;
+}
+
+
 /* Code select genres */
 #selectGenres li{
     background-color: var(--input);
