@@ -74,13 +74,13 @@ app.get('/',(req, res) => {
 
 // Make new profile page
 app.get('/personal-info',(req, res) => {
-  res.render('make-profile.ejs', { username: '', age: '', tel: '', email: '' });
+  res.render('make-profile.ejs', { username: '', age: '', tel: '', email: '', title:"Personal info"});
 });
 
 // Upload profile picture page
 app.post('/upload-photo', (req, res) => {
   const { username, age, tel, email } = req.body;
-  res.render('upload-picture.ejs', { username, age, tel, email });
+  res.render('upload-picture.ejs', { username, age, tel, email, title:"Upload photo"});
 });
 
 // Fill in about info
@@ -88,7 +88,7 @@ app.post('/add-bio', upload.single('file'),  (req, res) => {
   const { username, age, tel, email, about } = req.body;
   const picture  = req.file.filename;
   console.log(picture)
-  res.render('make-about.ejs', { username, age, tel, email, picture, about });
+  res.render('make-about.ejs', { username, age, tel, email, picture, about, title:"Add bio"});
 });
 
 // Select genres
@@ -114,7 +114,7 @@ app.post('/add-genres', async (req, res) => {
 
     console.log('User data successfully saved in MongoDB');
 
-    res.render('genres.ejs');
+    res.render('genres.ejs', {title:"Add genres"});
   } catch (error) {
     console.error('An error occurred while saving the data:', error);
     res.render('error.ejs');
