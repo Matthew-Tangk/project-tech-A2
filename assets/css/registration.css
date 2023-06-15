@@ -1,0 +1,119 @@
+/* Code for Home page */
+#homePage {
+    background-image: url("../static/img/concertbuddies-home.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  #homePage section {
+    display: flex;
+    justify-content: space-between;
+    min-height: 90vh;
+    align-items: center;
+  }
+
+  #homePage a {
+    margin-left: 0;
+    width: 80vw;
+  }
+
+  #homePage img {
+    margin: 2em 0 0 0;
+    width: 75vw;
+  }
+
+
+  /* Code for registration */
+  label {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    font-weight: bold;
+    margin-top: 0.3em;
+}
+
+input, textarea {
+    margin-top: .6em;
+    padding: 1em;
+    border: 2px solid var(--main);
+    background-color: var(--input);
+    color: var(--text);
+    border-radius: 10em;
+    font-weight: 400;
+    font-family: 'Catamaran', sans-serif;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    text-align: left;
+}
+
+textarea#about  {
+    border-radius: 0.5em;
+}
+
+
+/* Code select genres */
+#selectGenres li{
+    background-color: var(--input);
+    padding: 1em 0;
+}
+
+#selectGenres label{
+    margin-top: 0.8em;
+    font-weight: 300;
+}
+
+#selectGenres input[type=checkbox]{
+    height: 1.5em;
+}
+
+.selectedGenre{
+    border: 2px solid var(--accent1);
+}
+
+
+/* Code for profile page */
+#yourProfile h1 {
+    font-size: 1.8em;
+}
+
+#yourProfile p {
+    font-size: 0.9em;
+}
+
+#yourProfile p:nth-last-of-type(2) {
+    font-weight: 600;
+    padding-bottom: 0.6em;
+}
+
+#yourProfile img {
+    width: 8em;
+    height: 8em;
+    margin: auto;
+    -o-object-fit: cover;
+       object-fit: cover;
+    margin-bottom: 1em;
+    border-radius: 100%;
+}
+  #yourProfile li {
+    background-color: var(--light);
+    padding: 0.8em;
+    font-size: 0.9em;
+    border-radius: 5em;
+}
+
+/* Code for profile page */
+#yourProfile section:first-of-type {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 2em;
+}

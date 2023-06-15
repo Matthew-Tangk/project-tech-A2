@@ -2,6 +2,7 @@
     font-family: 'Catamaran', sans-serif;
     margin: 0;
     padding: 0;
+    
 }
 
 :root {
@@ -54,6 +55,8 @@ img {
     margin-bottom: 0.5em;
 }
 
+
+
 input:focus-visible, textarea:focus-visible {
     outline: 2px solid var(--accent1);
     background-color: var(--light);
@@ -84,7 +87,7 @@ input::placeholder {
     font-weight: 400;
 }
 
-input[type=submit], a {
+button[type=submit], a {
     display: -ms-grid;
     display: grid;
     margin-left: auto;

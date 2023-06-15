@@ -31,12 +31,12 @@ form > fieldset {
     flex-wrap:wrap;
     gap:.5rem;
 
-    max-height:60%;
+    max-height:65vh;
     overflow: auto;
 }
 
 form > fieldset > div {
-    width:calc(95%/3);
+    width:calc(93%/3);
 
     margin-top:.5rem;
 }
@@ -69,7 +69,9 @@ input + label {
 
 input[type="checkbox"]:checked + label {
     border-radius:10px;
-  background-color:var(--accent1);
+    background-color:var(--accent1);
+
+    transition:.3s;
 }
 
 form > fieldset > legend {
@@ -84,18 +86,20 @@ form > fieldset > legend {
     margin-bottom:1rem;
 }
 
+form > p {
+    margin-top:1rem;
+    align-self: flex-end;
+}
+
+form > p > span {
+    color:var(--accent1);
+}
+
 form > button {
-    color:var(--text);
-    background-color:var(--accent1);
     font-weight:bold;
-    font-size:1.25rem;
 
     padding:1rem 2.5rem;
     border-radius:10px;
 
-    border:none;
-
     align-self: flex-end;
-
-    margin-top:1.5rem;
 }
