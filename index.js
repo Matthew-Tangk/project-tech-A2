@@ -29,6 +29,8 @@ const dbName = 'usersData';
 const collectionName = 'user';
 
 const express = require('express')
+const multer  = require('multer')
+const upload = multer({ dest: 'assets/static/img/profilepic' })
 const bodyParser = require('body-parser')
 
 const app = express()
@@ -65,31 +67,39 @@ const profileRoutes = require('./routes/profileRoutes.js');
 console.log(profileRoutes);
 app.use('/profile', profileRoutes);
 
+// Home page
+app.get('/',(req, res) => {
+  res.render('home.ejs');
+});
+
 // Make new profile page
-app.get('/new-profile',(req, res) => {
-  res.render('make-profile.ejs', { username: '', age: '', tel: '', title:"New profile" });
+app.get('/personal-info',(req, res) => {
+  res.render('make-profile.ejs', { username: '', age: '', tel: '', email: '' });
 });
 
 // Upload profile picture page
-app.post('/upload-picture',(req, res) => {
-  const { username, age, tel, file } = req.body;
-  res.render('upload-picture.ejs', { username, age, tel, file, title:"Add picture" });
+app.post('/upload-photo', (req, res) => {
+  const { username, age, tel, email } = req.body;
+  res.render('upload-picture.ejs', { username, age, tel, email });
 });
 
 // Fill in about info
-app.post('/new-about', (req, res) => {
-  const { username, age, tel, file, about } = req.body;
-  res.render('make-about.ejs', { username, age, tel, file, about, title:"Add bio" });
+app.post('/add-bio', upload.single('file'),  (req, res) => {
+  const { username, age, tel, email, about } = req.body;
+  const picture  = req.file.filename;
+  console.log(picture)
+  res.render('make-about.ejs', { username, age, tel, email, picture, about });
 });
 
-// Select the band/artist page
-app.post('/select-artists', async (req, res) => {
-  const { username, age, tel, file, about } = req.body;
+// Select genres
+app.post('/add-genres', async (req, res) => {
+  const { username, age, tel, email, file, about } = req.body;
 
   const userData = {
     username: username,
     age: age,
     tel: tel,
+    email: email,
     file: file,
     about: about,
   };
@@ -104,10 +114,10 @@ app.post('/select-artists', async (req, res) => {
 
     console.log('User data successfully saved in MongoDB');
 
-    res.render('select-artists.ejs', { items: artists, username, age, tel, file, about, title:"Select artists" });
+    res.render('genres.ejs');
   } catch (error) {
     console.error('An error occurred while saving the data:', error);
-    res.render('error-page.ejs');
+    res.render('error.ejs');
   } finally {
     await client.close();
   }
@@ -138,7 +148,7 @@ app.get('/profile', async (req, res) => {
     }
   } catch (error) {
     console.error('An error occurred while saving the data:', error);
-    res.render('error-page.ejs');
+    res.render('error.ejs');
   } finally {
     await client.close();
   }

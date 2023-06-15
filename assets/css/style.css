@@ -2,6 +2,7 @@
     font-family: 'Catamaran', sans-serif;
     margin: 0;
     padding: 0;
+    
 }
 
 :root {
@@ -53,6 +54,8 @@ img {
     border-radius: 0.5em;
     margin-bottom: 0.5em;
 }
+
+
 
 input:focus-visible, textarea:focus-visible {
     outline: 2px solid var(--accent1);
