@@ -8,7 +8,7 @@
       <h1>Add a bio</h1>
       <p>Let other people know who you are and what you like</p>
 
-      <form action="/select-artists" method="post">
+      <form action="/add-genres" method="post">
         <fieldset>
           <legend>Fill in the about me below</legend>
           <label for="about">Something about me</label>
@@ -23,7 +23,8 @@
           <input type="hidden" name="username" value="<%= username %>" />
           <input type="hidden" name="age" value="<%= age %>" />
           <input type="hidden" name="tel" value="<%= tel %>" />
-          <input type="hidden" name="file" value="<%= file %>" />
+          <input type="hidden" name="email" value="<%= email %>" />
+          <input type="hidden" name="file" value="<%= picture %>" />
 
           <input type="submit" value="Next" />
         </fieldset>
@@ -31,3 +32,4 @@
     </section>
   </main>
 </body>
+</html>
