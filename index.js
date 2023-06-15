@@ -67,19 +67,19 @@ app.use('/profile', profileRoutes);
 
 // Make new profile page
 app.get('/new-profile',(req, res) => {
-  res.render('make-profile.ejs', { username: '', age: '', tel: '' });
+  res.render('make-profile.ejs', { username: '', age: '', tel: '', title:"New profile" });
 });
 
 // Upload profile picture page
 app.post('/upload-picture',(req, res) => {
   const { username, age, tel, file } = req.body;
-  res.render('upload-picture.ejs', { username, age, tel, file });
+  res.render('upload-picture.ejs', { username, age, tel, file, title:"Add picture" });
 });
 
 // Fill in about info
 app.post('/new-about', (req, res) => {
   const { username, age, tel, file, about } = req.body;
-  res.render('make-about.ejs', { username, age, tel, file, about });
+  res.render('make-about.ejs', { username, age, tel, file, about, title:"Add bio" });
 });
 
 // Select the band/artist page
@@ -104,7 +104,7 @@ app.post('/select-artists', async (req, res) => {
 
     console.log('User data successfully saved in MongoDB');
 
-    res.render('select-artists.ejs', { items: artists, username, age, tel, file, about });
+    res.render('select-artists.ejs', { items: artists, username, age, tel, file, about, title:"Select artists" });
   } catch (error) {
     console.error('An error occurred while saving the data:', error);
     res.render('error-page.ejs');
@@ -132,9 +132,9 @@ app.get('/profile', async (req, res) => {
         about: userData.about
       };
 
-      res.render('profile', { profileData: profileData });
+      res.render('profile', { profileData: profileData, title:"My profile" });
     } else {
-      res.render('profile', { profileData: null });
+      res.render('profile', { profileData: null, title:"My profile" });
     }
   } catch (error) {
     console.error('An error occurred while saving the data:', error);
