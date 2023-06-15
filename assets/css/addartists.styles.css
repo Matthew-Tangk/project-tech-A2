@@ -1,0 +1,105 @@
+main > section {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-between;;
+    align-items: center;
+}
+
+main > section > h1 {
+    order:-100;
+    width:fit-content;
+}
+
+main > section > a {
+    color:var(--text);
+    background-color:var(--accent1dark);
+    font-weight:bold;
+
+    align-self: flex-end;
+}
+
+form {
+    margin-top:2rem;
+    display:flex;
+    flex-direction: column;
+}
+
+form > fieldset {
+    border:none;
+
+    display:flex;
+    flex-wrap:wrap;
+    gap:.5rem;
+
+    max-height:65vh;
+    overflow: auto;
+}
+
+form > fieldset > div {
+    width:calc(93%/3);
+
+    margin-top:.5rem;
+}
+
+form > fieldset > div > label {
+    display: block;
+    width:100%;
+
+    text-align: center;
+    color:var(--text);
+    
+    padding:.2rem;
+}
+
+form > fieldset > div > label > img {
+    display: block;
+    width:100%;
+
+    border-radius:10px;
+    margin-bottom:.5rem;
+}
+
+input[type="checkbox"] {
+  display:none;
+}
+
+input + label {
+    display:inline-block;
+}
+
+input[type="checkbox"]:checked + label {
+    border-radius:10px;
+    background-color:var(--accent1);
+
+    transition:.3s;
+}
+
+form > fieldset > legend {
+    color:var(--text);
+    font-weight:bold;
+    font-size:1.5rem;
+
+    margin-top:2rem 0;
+
+    display:block;
+
+    margin-bottom:1rem;
+}
+
+form > p {
+    margin-top:1rem;
+    align-self: flex-end;
+}
+
+form > p > span {
+    color:var(--accent1);
+}
+
+form > button {
+    font-weight:bold;
+
+    padding:1rem 2.5rem;
+    border-radius:10px;
+
+    align-self: flex-end;
+}

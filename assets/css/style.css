@@ -1,297 +1,108 @@
 * {
-    font-family: 'Unbounded', sans-serif;
+    font-family: 'Catamaran', sans-serif;
     margin: 0;
     padding: 0;
+    
 }
 
 :root {
-    --main: #504D62;
-    --text: #707070;
-    --input: #EFEFEF;
-    --active: #817BD2;
-    --light: #F3F2F7;
-    --accent: #C8C4D9;
+    --text: #FAFBFB;
+    --input: #2B2936;
+    --placeholder: #5F5E66;
+    --accent1: #6862C8;
+    --accent1dark: #322F54;
+    --accent2: #DA6864;
+    --accent2dark: #63383E;
+    --background: #1F1D2A;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@400;600;900&display=swap');
 
 body {
-    color: var(--main);
-    font-weight: 300;
-    font-size: 0.9em;
+    background-color: var(--background);
+    color: var(--text);
+    font-size: 1em;
 }
 
-section {
+main > section {
     margin: 1.8em;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
 }
 
 h1 {
-    font-size: 1.4em;
+    font-size: 1.5em;
     font-weight: bold;
-    margin-bottom: 0.5em;
 }
 
 p {
     color: var(--text);
     margin: 0;
+    line-height: 1.4em;
 }
 
 span {
-    color: var(--accent);
+    color: var(--accent2dark);
     font-weight: bold;
-    font-size: 1.2em;
-    margin-bottom: 1em;
+    font-size: 1.4em;
+    margin-bottom: .3em;
 }
 
 span::first-letter {
-    color: var(--main);
+    color: var(--accent2);
 }
 
 img {
-    border-radius: .5em;
-    margin-bottom: 1.5em;
+    border-radius: 0.5em;
+    margin-bottom: 0.5em;
 }
 
-label {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    font-weight: bold;
-    margin-top: 1.3em;
-}
 
-input, textarea {
-    margin-top: .6em;
-    padding: 1em;
-    border: 2px solid var(--input);
-    border-radius: .5em;
-    font-weight: 400;
-    font-family: 'Unbounded', cursive;
-    width: 100%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-    text-align: left;
-}
 
 input:focus-visible, textarea:focus-visible {
-    outline: 2px solid var(--active);
+    outline: 2px solid var(--accent1);
     background-color: var(--light);
 }
 
 input::-webkit-input-placeholder {
-    color: var(--input); 
+    color: var(--placeholder);  
     font-weight: 400;
 }
 
 input::-moz-placeholder {
-    color: var(--input); 
+    color: var(--placeholder);  
     font-weight: 400;
 }
 
 input:-ms-input-placeholder {
-    color: var(--input); 
+    color: var(--placeholder); 
     font-weight: 400;
 }
 
 input::-ms-input-placeholder {
-    color: var(--input); 
+    color: var(--placeholder);  
     font-weight: 400;
 }
 
 input::placeholder {
-    color: var(--input); 
+    color: var(--placeholder); 
     font-weight: 400;
 }
 
-input[type=submit], a {
+button[type=submit], a {
     display: -ms-grid;
     display: grid;
     margin-left: auto;
-    margin-top: 2em;
+    margin-top: 1em;
     text-decoration: none;
     text-align: center;
     border-radius: .5em;
-    background-color: var(--main);
+    background-color: var(--accent1);
+    border: none;
     color: white;
-    width: 10em;
-    padding: 1em 0; 
+    font-size: 1em;
+    width: 9em;
+    padding: 0.6em 0; 
 }
 
 fieldset {
     border: none;
-}
-
-legend {
-    visibility: hidden;
-}
-
-
-/* Code for Select artists/bands page */
-ul {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 1fr .5em 1fr .5em 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: .5em;
-    margin-top: 1.3em;
-    max-height: 58vh;
-    overflow: scroll;
-    scroll-behavior: smooth;
-}
-
-li {
-    list-style-type: none;
-    border-radius: .5em;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    text-align: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    padding-bottom: .5em;
-}
-
-li img {
-    height: 5em;
-    margin: 0;
-}
-
-li p {
-    font-size: 0.85em;
-    margin-top: 0.4em;
-}
-
-.selected {
-    background-color: var(--active);
-    -webkit-transition: .3s;
-    -o-transition: .3s;
-    transition: .3s;
-}
-
-.selected p {
-    color: var(--light)
-}
-
-.selected img {
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-    border: 3px solid var(--active);
-}
-
-
-/* Code for profile picture page */
-#profilePicture form label {
-    background-color: var(--light);
-    height: 80vw;
-    width: 80vw;
-    margin: auto;
-    margin-top: 2em;
-    border-radius: .5em;
-    -o-object-fit: cover;
-       object-fit: cover;
-}
-
-#profilePicture form label input {
-    display: none;
-}
-
-#profilePicture img {
-    height: 100%;
-    margin: 0;
-    -o-object-fit: cover;
-       object-fit: cover;
-}
-
-noscript p{
-    color: darkred;
-    font-style: italic;
-    margin-top: 1em;
-    text-align: center;
-}
-
-
-/* Code for profile page */
-#yourProfile section:nth-of-type(1) {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: reverse;
-        -ms-flex-direction: column-reverse;
-            flex-direction: column-reverse;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-}
-
-#yourProfile img {
-    width: 7em;
-    height: 7em;
-    margin: auto;
-    -o-object-fit: cover;
-       object-fit: cover;
-    margin-bottom: 1em;
-}
-
-#yourProfile section:nth-of-type(2) {
-    background-color: var(--light);
-    padding: 2em;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-    text-align: center;
-    border-radius: 0.5em;
-}
-
-#yourProfile section:nth-of-type(2) p:first-of-type {
-    margin-bottom: 1em;
-    font-weight: bold;
-    color: var(--main);
-}
-
-#embedIframe {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    gap: 1em;
-    overflow: scroll;
-}
-
-/* Code for Error page */
-
-#error h1{
-    font-size: 3em;
-    font-weight: bold;
-    text-align: center;
-}
-
-#error p {
-    text-align: center;
-}
-
-#error section {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack :center;
-        -ms-flex-pack :center;
-            justify-content :center;
-    -webkit-box-align:center;
-        -ms-flex-align:center;
-            align-items:center;
-    min-height: 100vh;
-    margin: 0;
 }
