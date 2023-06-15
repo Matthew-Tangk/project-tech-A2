@@ -69,7 +69,7 @@ app.use('/profile', profileRoutes);
 
 // Home page
 app.get('/',(req, res) => {
-  res.render('home.ejs');
+  res.render('home.ejs', {title:"Concert buddies"});
 });
 
 // Make new profile page
