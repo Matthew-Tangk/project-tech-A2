@@ -142,9 +142,9 @@ app.get('/profile', async (req, res) => {
         about: userData.about
       };
 
-      res.render('profile', { profileData: profileData });
+      res.render('profile', { profileData: profileData, title:"My profile" });
     } else {
-      res.render('profile', { profileData: null });
+      res.render('profile', { profileData: null, title:"My profile" });
     }
   } catch (error) {
     console.error('An error occurred while saving the data:', error);
