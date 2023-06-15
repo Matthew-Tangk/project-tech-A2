@@ -7,28 +7,32 @@
   
           <h1>Edit profile</h1>
   
-          <form action="/profile/add-artists" method="post">
+          <form action="/profile" method="post">
               <fieldset>
                   <legend>Add your favorite artists</legend>
               
-                  <% items.forEach(item => { %>
+                  <% artists.forEach(artist => { %>
                   <div>
-                    <input type="checkbox" id="<%= item.name %>" name="samplename" value="samplevalue">
-                    <label for="<%= item.name %>">
-                      <img src="<%=item.image %>" alt="<%= item.name %>">
-                      <%= item.name %>
+                    <input type="checkbox" id="<%= artist.name %>" name="favoriteartists" value="<%= artist.name %>">
+                    <label for="<%= artist.name %>">
+                      <img src="<%= artist.path %>" alt="<%= artist.name %>">
+                      <%= artist.name %>
                     </label>
                   </div>
                   <% }); %>
               
               </fieldset>
   
+              <p>Select all your fav's!</p>
+              <p><span>0</span> Selected</p>
               <button type="submit">Save my favorites</button>
           </form>
         </section>
       </main>
 
       <%- include('./partials/footer') %>
+
+      <script src="../js/addartists.js"></script>
 </body>
 </html>
   

@@ -87,7 +87,7 @@ input::placeholder {
     font-weight: 400;
 }
 
-input[type=submit], a {
+button[type=submit], a {
     display: -ms-grid;
     display: grid;
     margin-left: auto;

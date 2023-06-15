@@ -156,5 +156,5 @@ app.get('/profile', async (req, res) => {
 
 // 404 error if page is not found
 app.use((req, res, next) => {
-  res.status(404).render('error.ejs');
+  res.status(404).render('error.ejs', {title:"not found"});
 });
