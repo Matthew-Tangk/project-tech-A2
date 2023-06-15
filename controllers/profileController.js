@@ -25,6 +25,7 @@ run().catch(console.dir);
 
 const tinify = require("tinify");
 tinify.key = "9v2Bl9fzC6qgqXWvTJ0sCSt19L33nt2M";
+tinify.fromFile("assets/static/img/artists/arcticmonkeys.jpg").toFile("assets/static/img/artists/optimized/arcticoptimized.png");
 
 exports.addArtists = async (req, res) => {
   try {
