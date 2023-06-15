@@ -22,9 +22,11 @@ artistCheckboxes.forEach(artist => {
 })
 
 const countEvents = () => {
-    if(artistCheckedCount == 5) {
+    if(artistCheckedCount >1 && artistCheckedCount < 5) {
+        artistCountText.innerHTML="Great start, love your choices!"
+    } else if(artistCheckedCount == 5) {
         artistCountText.innerHTML="wow that many! I almost dont believe you";
-    } 
-  
-    // NOG NAAR KIJKEN< Want inner HTML zorgt ervoor dat de span ook verdwijnt
+    } else if (artistCheckedCount > 5) {
+        artistCountText.innerHTML="Keep adding!";
+    }
 }
