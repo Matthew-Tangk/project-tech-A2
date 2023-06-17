@@ -58,6 +58,18 @@ exports.profile = async (req, res) => {
       await sendFavoriteArtistData(favoriteArtists);
 
       // Hier de profielData nog toevoegen door die uit de database te halen
+      await client.connect();
+      const db = client.db('usersData');
+      const collection = db.collection('user');
+  
+      const userData = await collection.findOne({});
+  
+      const profileData = {
+          username: userData.username,
+          age: userData.age,
+          file: userData.file,
+          about: userData.about,
+        };
       
       res.render('profile.ejs', {
         title:"My profile",
@@ -80,4 +92,3 @@ const sendFavoriteArtistData = async (data) => {
     console.error("Something went wrong with adding the artists to the database :(", err);
   }
 }
-
