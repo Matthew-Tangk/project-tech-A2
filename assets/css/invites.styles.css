@@ -8,6 +8,8 @@ main > section > section {
     align-items: center;
     justify-content:center;
 
+    margin:1rem 0;
+
 }
 
 main > section > section > h2 {

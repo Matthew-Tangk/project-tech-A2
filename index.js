@@ -86,8 +86,10 @@ const artists = [
 ];
 
 const profileRoutes = require("./routes/profileRoutes.js");
-console.log(profileRoutes);
 app.use("/profile", profileRoutes);
+
+const invitesRoutes = require("./routes/invitesRoutes.js");
+app.use("/invites", invitesRoutes);
 
 // Home page
 app.get("/", (req, res) => {
