@@ -25,29 +25,42 @@ run().catch(console.dir);
 
 const tinify = require("tinify");
 tinify.key = process.env.KEY;
-tinify.fromFile("assets/static/img/artists/arcticmonkeys.jpg").toFile("assets/static/img/artists/optimized/arcticoptimized.png");
+// tinify.fromFile("assets/static/img/artists/arcticmonkeys.jpg").toFile("assets/static/img/artists/optimized/arcticoptimized.png");
+
+// POGING2
+const path = require('path');
+const fs = require('fs');
+
+const artistImgPath = "assets/static/img/artists";
+
+let filesArray = fs.readdirSync(artistImgPath);
+
+filesArray.forEach(file => { 
+  tinify.fromFile("assets/static/img/artists/" + file).toFile("assets/static/img/artists/optimized/" + file);
+});
+
 
 // Code for reading all img files
 // VithalReddy (2018) Medium.com
 // https://medium.com/stackfame/get-list-of-all-files-in-a-directory-in-node-js-befd31677ec5
 //requiring path and fs modules
-const path = require('path');
-const fs = require('fs');
+// const path = require('path');
+// const fs = require('fs');
 
-//joining path of directory 
-const artistImgPath = path.join(__dirname, '../assets/static/img/artists');
+// //joining path of directory 
+// const artistImgPath = path.join(__dirname, '../assets/static/img/artists');
 
-//passsing directoryPath and callback function
-fs.readdir(artistImgPath, async (err, files) => {
-    if (err) {
-        return console.log('Unable to scan directory: ' + err);
-    }
+// //passsing directoryPath and callback function
+// fs.readdir(artistImgPath, async (err, files) => {
+//     if (err) {
+//         return console.log('Unable to scan directory: ' + err);
+//     }
 
-    files.forEach(file => {
-      console.log(file); 
-      console.log("filename" + artistImgPath + "/"+file)
-    })
-});
+//     files.forEach(file => {
+//       console.log(file); 
+//       console.log("filename" + artistImgPath + "/"+file)
+//     })
+// });
 
 
 exports.addArtists = async (req, res) => {
