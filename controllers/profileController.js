@@ -69,6 +69,7 @@ exports.profile = async (req, res) => {
     
     try {
       await sendFavoriteArtistData(favoriteArtists);
+      // await updateFavoriteArtists(favoriteArtists);
 
       // Hier de profielData nog toevoegen door die uit de database te halen
       await client.connect();
@@ -105,3 +106,23 @@ const sendFavoriteArtistData = async (data) => {
     console.error("Something went wrong with adding the artists to the database :(", err);
   }
 }
+
+// WERKT NIET
+// const updateFavoriteArtists = async (data) => {
+//   try {
+//     const favoriteArtists = client
+//     .db("userData")
+//     .collection("user");
+
+//     const uploadFavoriteArtistsData =
+//     await favoriteArtists.findOneAndUpdate(
+//       { "username" : "testjulia" },
+//       { $set: { "favartists" : data } })
+
+//       console.log("get data" + uploadFavoriteArtistsData);
+
+//       console.log("The artists are succesfully added to profile", uploadFavoriteArtistsData.insertedId);
+//   } catch(err) {
+//     console.error("Something went wrong with adding the artists to your profile :(", err);
+//   }
+// }
