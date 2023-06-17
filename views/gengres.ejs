@@ -1,0 +1,88 @@
+<style>
+/* Code for Select Genres */
+
+#selectGenres li{
+    background-color: var(--light);
+    padding: 1.8em 0;
+}
+
+#selectGenres label{
+    margin-top: 0.8em;
+    font-weight: 300;
+}
+
+#selectGenres input{
+    margin: 0;
+}
+
+#selectGenres input[type=checkbox]{
+    height: 1.5em;
+}
+</style>
+
+<%- include('./partials/head') %>
+<body>
+  <main>
+    <!-- Genres -->
+    <section id="selectGenres">
+      <span>4/4</span>
+      <h1>Add your favorite genres</h1>
+    
+      <form action="/profile" method="post">
+        <fieldset>
+          <legend>Fill in the about me below</legend>
+            <ul>
+                <li>
+                  <input type="checkbox" id="genre" name="genre" >
+                  <label for="genre">Genre 1</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="genre" name="genre" >
+                  <label for="genre">Genre 1</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="genre" name="genre" >
+                  <label for="genre">Genre 1</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="genre" name="genre" >
+                  <label for="genre">Genre 1</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="genre" name="genre" >
+                  <label for="genre">Genre 1</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="genre" name="genre" >
+                  <label for="genre">Genre 1</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="genre" name="genre" >
+                  <label for="genre">Genre 1</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="genre" name="genre" >
+                  <label for="genre">Genre 1</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="genre" name="genre" >
+                  <label for="genre">Genre 1</label>
+                </li>
+            </ul>
+
+            <input type="hidden" name="username" value="<%= username %>" />
+            <input type="hidden" name="age" value="<%= age %>" />
+            <input type="hidden" name="tel" value="<%= tel %>" />
+            <input type="hidden" name="file" value="<%= file %>" />
+
+            <input type="submit" value="Next" />
+          </fieldset>
+        </form>
+    
+    </section>
+  </main>
+
+  <script src="js/selectartists.js"></script>
+</body>
+</html>
+  
