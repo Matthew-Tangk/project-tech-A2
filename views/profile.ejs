@@ -18,9 +18,12 @@
     
     <section>
       <ul>
-          <li> Genre 1</li>
-          <li> Genre 2</li>
-          <li> Genre 3</li>
+        <% selectedGenre.forEach(selectedGenre => { %>
+          <li>
+            <img src="../static/img/genres/<%= selectedGenre.img %>" alt="<%= selectedGenre.name %>">
+            <p><%= selectedGenre.name %></p>
+          </li>
+          <% }); %>
       </ul>
     </section>
 
@@ -28,7 +31,7 @@
       <p> My artists</p>
       <div>
         <p>Complete your profile</p>
-        <a href="/add-artists">Add artists</a>
+        <a href="/profile/add-artists">Add artists</a>
       </div>
     </section>
     
