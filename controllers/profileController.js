@@ -28,16 +28,27 @@ tinify.key = process.env.KEY;
 tinify.fromFile("assets/static/img/artists/arcticmonkeys.jpg").toFile("assets/static/img/artists/optimized/arcticoptimized.png");
 
 // TINIFY alle afbeeldingen in 1 keer
-// const path = require('path');
-// const fs = require('fs');
+const fs = require('fs');
 
-// const artistImgPath = "assets/static/img/artists";
+const artistImgPath = "assets/static/img/artists";
 
-// let filesArray = fs.readdirSync(artistImgPath);
+let filesArray = fs.readdir(artistImgPath, (err, files) => {
+  if(err) {
+    console.log('Error reading folder', err);
+    return;
+  }
 
-// filesArray.forEach(file => { 
-//   tinify.fromFile("assets/static/img/artists/" + file).toFile("assets/static/img/artists/optimized/" + file);
-// });
+  const artistImagesFiles = files.filter(file => {
+    const extension = file.split('.').pop().toLowerCase();
+    return ['jpg', 'png'].includes(extension);
+  })
+
+  artistImagesFiles.forEach(file => { 
+    tinify.fromFile("assets/static/img/artists/" + file).toFile("assets/static/img/artists/optimized/" + file);
+  });
+  })
+
+
 
 
 exports.addArtists = async (req, res) => {
