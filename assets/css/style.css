@@ -106,3 +106,51 @@ button[type=submit], a {
 fieldset {
     border: none;
 }
+
+/*header code */
+header {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    text-align: center;
+    align-items: center;
+    padding: 1.3em 1.8em;
+    background-color: var(--input);
+}
+  
+header img {
+    margin: 0;
+}
+  
+header a{
+    background-color: transparent;
+    width: auto;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* Code for Error page */
+#error h1{
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+}
+
+#error p {
+    text-align: center;
+}
+
+#error section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack :center;
+        -ms-flex-pack :center;
+            justify-content :center;
+    -webkit-box-align:center;
+        -ms-flex-align:center;
+            align-items:center;
+    min-height: 100vh;
+    margin: 0;
+}

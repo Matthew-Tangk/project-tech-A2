@@ -7,58 +7,17 @@
       <span>4/4</span>
       <h1>Add your favorite genres</h1>
     
-      <form>
+      <form >
         <fieldset>
           <legend>Fill in the about me below</legend>
             <ul>
-                <li>
-                  <input type="checkbox" id="genre" name="genre" >
-                  <label for="genre">Genre 1</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="genre" name="genre" >
-                  <label for="genre">Genre 1</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="genre" name="genre" >
-                  <label for="genre">Genre 1</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="genre" name="genre" >
-                  <label for="genre">Genre 1</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="genre" name="genre" >
-                  <label for="genre">Genre 1</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="genre" name="genre" >
-                  <label for="genre">Genre 1</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="genre" name="genre" >
-                  <label for="genre">Genre 1</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="genre" name="genre" >
-                  <label for="genre">Genre 1</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="genre" name="genre" >
-                  <label for="genre">Genre 1</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="genre" name="genre" >
-                  <label for="genre">Genre 1</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="genre" name="genre" >
-                  <label for="genre">Genre 1</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="genre" name="genre" >
-                  <label for="genre">Genre 1</label>
-                </li>
+              <% genres.forEach(genres => { %>
+              <li>
+                <img src="../static/img/genres/<%= genres.img %>" alt="<%= genres.name %>">
+                <input type="checkbox" id="<%= genres.name %>" name="<%= genres.name %>" >
+                <label for="<%= genres.name %>"> <%= genres.name %> </label>
+              </li>
+              <% }); %>
             </ul>
 
             <a href="/profile">Next</a>

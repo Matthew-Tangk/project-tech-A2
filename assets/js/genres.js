@@ -1,11 +1,12 @@
-/* Select & deselect artists */
-  const selectArtist = document.querySelectorAll("#selectGenres ul li ");
-  selectArtist.forEach(genre => {
-    genre.addEventListener('click', () => {
-      if (genre.classList.contains('selectedGenre')) { 
-        genre.classList.remove('selectedGenre'); 
-      } else { 
-        genre.classList.add('selectedGenre'); 
-      }
-    });
+/* Select & deselect Genres */
+const checkboxes = document.querySelectorAll("#selectGenres ul li input[type='checkbox']");
+checkboxes.forEach(checkbox => {
+  checkbox.addEventListener('change', () => {
+    const li = checkbox.parentElement;
+    if (li.classList.contains('selectedGenre')) { 
+      li.classList.remove('selectedGenre'); 
+    } else { 
+      li.classList.add('selectedGenre'); 
+    }
   });
+});
