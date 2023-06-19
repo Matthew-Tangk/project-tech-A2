@@ -19,25 +19,25 @@
   });
 
   /* Image upload server-side check */
-  // document.querySelector("#upload-image").addEventListener("change", (event) => {
-  //   const messageElement = document.querySelector("#message");
-  //   const file = event.target.files[0];
+  document.querySelector("#upload-image").addEventListener("change", (event) => {
+    const messageElement = document.querySelector("#message");
+    const file = event.target.files[0];
     
-  //   if (file) {
-  //     const fr = new FileReader();
-  //     fr.onload = () => {
-  //       if (fr.readyState === FileReader.DONE) {
-  //         messageElement.textContent = "File uploaded successfully!";
-  //         messageElement.style.color = "green";
-  //       }
-  //     };
-  //     fr.onerror = () => {
-  //       messageElement.textContent = "There was an error with uploading the file.";
-  //       messageElement.style.color = "red";
-  //     };
-  //     fr.readAsDataURL(file);
-  //   }
-  // });
+    if (file) {
+      const fr = new FileReader();
+      fr.onload = () => {
+        if (fr.readyState === FileReader.DONE) {
+          messageElement.textContent = "File uploaded successfully!";
+          messageElement.style.color = "green";
+        }
+      };
+      fr.onerror = () => {
+        messageElement.textContent = "There was an error with uploading the file.";
+        messageElement.style.color = "red";
+      };
+      fr.readAsDataURL(file);
+    }
+  });
 
   /* Spotify embed */
   window.onSpotifyIframeApiReady = (IFrameAPI) => {
