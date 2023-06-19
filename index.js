@@ -161,7 +161,11 @@ app.post("/add-genres", async (req, res) => {
 
     console.log("User data successfully saved in MongoDB");
 
-    res.render("genres.ejs", { title: "Add genres" });
+
+    const genreCollection = client.db('concertBuddies').collection('genres')
+    const allGenreData = await genreCollection.find({}).toArray();
+
+    res.render("genres.ejs", { title: "Add genres", genres: allGenreData });
   } catch (error) {
     console.error("An error occurred while saving the data:", error);
     res.render("error.ejs");
@@ -169,6 +173,7 @@ app.post("/add-genres", async (req, res) => {
     await client.close();
   }
 });
+
 
 // User profile
 app.get("/profile", async (req, res) => {
@@ -188,10 +193,13 @@ app.get("/profile", async (req, res) => {
         about: userData.about,
       };
 
-      res.render("profile", { profileData: profileData, title: "My profile" });
-    } else {
-      res.render("profile", { profileData: null, title: "My profile" });
-    }
+    const selectedGenreCollection = client.db('concertBuddies').collection('selectedGenres')
+    const allSelectedGenreData = await selectedGenreCollection.find({}).toArray();
+
+    res.render("profile", { profileData: profileData, title: "My profile", selectedGenre: allSelectedGenreData });
+  } else {
+    res.render("profile", { profileData: null, title: "My profile", selectedGenre: allSelectedGenreData });
+  }
   } catch (error) {
     console.error("An error occurred while saving the data:", error);
     res.render("error.ejs");
@@ -199,6 +207,9 @@ app.get("/profile", async (req, res) => {
     await client.close();
   }
 });
+
+
+
 
 // 404 error if page is not found
 app.use((req, res, next) => {
