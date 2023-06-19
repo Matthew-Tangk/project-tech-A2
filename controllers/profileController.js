@@ -81,6 +81,8 @@ exports.profile = async (req, res) => {
     
     try {
       await client.connect();
+
+      await sendFavoriteArtistData(favoriteArtists);
   
       const profileDataCollection = client.db(dbName).collection(collectionName)
       const userData = await profileDataCollection.findOne({}, { sort: { _id: -1}});
@@ -96,32 +98,45 @@ exports.profile = async (req, res) => {
       // Retrieve favorite genres from db
       const selectedGenreCollection = client.db('concertBuddies').collection('selectedGenres')
       const allSelectedGenreData = await selectedGenreCollection.find({}).toArray();
-  
+
       // Retrieve favorite artists from db
       const favoriteArtists = client.db('concertBuddies').collection('favoriteArtists');
       const mostRecentFavArtists = await favoriteArtists.findOne({}, { sort: { _id: -1 } });
       // Write a statement to prevent error when favArtistData is empty
       const favArtistsData = mostRecentFavArtists ? mostRecentFavArtists.selectedFavoriteArtists : [];
-      
+
       const foundObjectsFromFavoriteArtists = [];
-  
-      if (favArtistsData && favArtistsData.length > 0) {
-        const retrieveAdditionalArtistData = favArtistsData.map(artist => {
-          const findAllInfoOfFavArtist = async() => { 
+
+      if (Array.isArray(favArtistsData)) {
+       const retrieveAdditionalArtistData = favArtistsData.map(artist => {
+         const findAllInfoOfFavArtist = async() => { 
             try {
               await client.connect();
               const allArtist = client.db('concertBuddies').collection('artists');
               let nowActiveArtists = await allArtist.find({ name: artist }).toArray();
-              foundObjectsFromFavoriteArtists.push(...nowActiveArtists);
-            } catch (error) {
-              console.error("An error occurred while retrieving the data from the db", error);
-            } 
-          };
+             foundObjectsFromFavoriteArtists.push(...nowActiveArtists);
+           } catch (error) {
+             console.error("An error occurred while retrieving the data from the db", error);
+           } 
+         };
           return findAllInfoOfFavArtist();
         });
         await Promise.all(retrieveAdditionalArtistData);
+        
+        } else {
+        console.log("KORTE ARRAY VAN 1");
+        const findAllInfoOfFavArtist = async() => { 
+         try {
+            await client.connect();
+            const allArtist = client.db('concertBuddies').collection('artists');
+           let nowActiveArtists = await allArtist.find({ name: favArtistsData }).toArray();
+           foundObjectsFromFavoriteArtists.push(...nowActiveArtists);
+          } catch (error) {
+            console.error("An error occurred while retrieving the data from the db", error);
+          } 
+        };
+       await findAllInfoOfFavArtist();
       }
-      
       res.render("profile", { profileData: profileData, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
     } else {
       res.render("profile", { profileData: null, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: mostRecentFavArtists  });
