@@ -23,9 +23,6 @@ async function run() {
 
 run().catch(console.dir);
 
-const dbName = "usersData";
-const collectionName = "user";
-
 const tinify = require("tinify");
 tinify.key = process.env.KEY;
 tinify.fromFile("assets/static/img/artists/arcticmonkeys.jpg").toFile("assets/static/img/artists/optimized/arcticoptimized.png");
@@ -80,10 +77,14 @@ exports.profile = async (req, res) => {
     const favoriteArtists = {selectedFavoriteArtists}
     
     try {
-      await client.connect();
-
       await sendFavoriteArtistData(favoriteArtists);
+      // await updateFavoriteArtists(favoriteArtists);
+
+      // Hier de profielData nog toevoegen door die uit de database te halen
+      await client.connect();
   
+      await sendFavoriteArtistData(favoriteArtists);
+
       const profileDataCollection = client.db(dbName).collection(collectionName)
       const userData = await profileDataCollection.findOne({}, { sort: { _id: -1}});
   
@@ -98,15 +99,15 @@ exports.profile = async (req, res) => {
       // Retrieve favorite genres from db
       const selectedGenreCollection = client.db('concertBuddies').collection('selectedGenres')
       const allSelectedGenreData = await selectedGenreCollection.find({}).toArray();
-
+  
       // Retrieve favorite artists from db
       const favoriteArtists = client.db('concertBuddies').collection('favoriteArtists');
       const mostRecentFavArtists = await favoriteArtists.findOne({}, { sort: { _id: -1 } });
       // Write a statement to prevent error when favArtistData is empty
       const favArtistsData = mostRecentFavArtists ? mostRecentFavArtists.selectedFavoriteArtists : [];
-
+      
       const foundObjectsFromFavoriteArtists = [];
-
+  
       if (Array.isArray(favArtistsData)) {
        const retrieveAdditionalArtistData = favArtistsData.map(artist => {
          const findAllInfoOfFavArtist = async() => { 
