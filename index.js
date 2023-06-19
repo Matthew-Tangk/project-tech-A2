@@ -198,8 +198,11 @@ app.get("/profile", async (req, res) => {
     const favoriteArtists = client.db('concertBuddies').collection('favoriteArtists')
     const allFavoriteArtists = await favoriteArtists.find({}).toArray();
     const mostRecentFavArtists = allFavoriteArtists[allFavoriteArtists.length - 1];
+    const favArtistsData = mostRecentFavArtists.selectedFavoriteArtists;
 
-    res.render("profile", { profileData: profileData, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: mostRecentFavArtists });
+    console.log("data"+favArtistsData);
+
+    res.render("profile", { profileData: profileData, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: favArtistsData });
     console.log(mostRecentFavArtists);
   } else {
     res.render("profile", { profileData: null, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: mostRecentFavArtists  });

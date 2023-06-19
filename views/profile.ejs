@@ -28,23 +28,22 @@
     </section>
 
     <section>
-      <p> My artists</p>
-      <section id="emptyState">
-        <p>Complete your profile</p>
-        <a href="/profile/add-artists">Add artists</a>
-      </section>
-
-      <section>
-        <ul>
-          <% favoriteArtists.forEach(favoriteArtist => { %>
-          <li>
-            <img src="<%= favoriteArtist.path %>" alt="<%= favoriteArtist.name %>">
-            <%= favoriteArtists.name %>
-          </li>
-          <% }); %>
-        </ul>
-      </section>
-      
+      <% if(favoriteArtists == null) { %>
+        <p> My artists</p>
+        <section id="emptyState">
+          <p>Complete your profile</p>
+          <a href="/profile/add-artists">Add artists</a>
+        </section>
+      <% } else { %>
+        <section>
+          <ul>
+            <% favoriteArtists.forEach(artist =>  { %>
+              <li><%= artist  %></li>
+            <%  }); %>
+          </ul>
+  
+        </section>
+      <% } %>
     </section>
   </main>
 </body>
