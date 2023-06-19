@@ -4,7 +4,6 @@
   <title>Upcoming Events</title>
   <link rel="stylesheet" href="/css/upcoming-events.css">
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/slider.css"> <!-- Add a separate CSS file for slider styles -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="">
@@ -14,66 +13,47 @@
   <main>
     <div id="slider-container" class="scroll-container">
       <div class="step-indicator">
-      <section class="hero scroll-item">
-        <section>
-          <h1> Populair in </h1>
-          <h1>Juni</h1>
-        </section>
-        <section>
-          <h2>Burna boy Love Damini</h2>
-          <h3>Rotterdam</h3>
-          <h3>10 juni 2023</h3>
-          <h3>Ahoy</h3>
-        </section>
-        <section>
-          <h3>15</h3>
-          <h3>Deelnemers</h3>
-          <button>Meer informatie ></button>
-        </section>
-      </section>
-      <!-- Add more hero sections as needed -->
-           <section class="hero scroll-item">
-        <section>
-          <h1> Populair in </h1>
-          <h1>Juni</h1>
-        </section>
-        <section>
-          <h2>Burna boy Love Damini</h2>
-          <h3>Rotterdam</h3>
-          <h3>10 juni 2023</h3>
-          <h3>Ahoy</h3>
-        </section>
-        <section>
-          <h3>15</h3>
-          <h3>Deelnemers</h3>
-          <button>Meer informatie ></button>
-        </section>
-      </section>
-
-            <!-- Add more hero sections as needed -->
-            <section class="hero scroll-item">
-              <section>
-                <h1> Populair in </h1>
-                <h1>Juni</h1>
-              </section>
-              <section>
-                <h2>Burna boy Love Damini</h2>
-                <h3>Rotterdam</h3>
-                <h3>10 juni 2023</h3>
-                <h3>Ahoy</h3>
-              </section>
-              <section>
-                <h3>15</h3>
-                <h3>Deelnemers</h3>
-                <button>Meer informatie ></button>
-              </section>
+        <% events.forEach(event => { %>
+          <section class="hero scroll-item">
+            <section>
+              <h1> Populair in </h1>
+              <h1>Juni</h1>
             </section>
-
-
-
+            <section>
+              <h2> <%= event.title %></h2>
+              <h3><%= event.city %></h3>
+              <h3><%= event.formattedDate %></h3>
+              <h3><%= event.location %></h3>
+            </section>
+            <section>
+              <h3><%= event.attendees %></h3>
+              <h3>Deelnemers</h3>
+              <button><a class="hero-cta" href="<%= event.link %>"> Meer informatie > </a></button>
+            </section>
+          </section>
+        <% }) %>
+      </div>
+    </div>
   </main>
 
-  <script src="js/upcoming-events.js"></script>
-  <script src="js/slider.js"></script> <!-- Add a separate JavaScript file for slider functionality -->
+  <style>
+    .scroll-item {
+      scroll-snap-align: start;
+      width: 100%;
+      display: inline-block;
+      vertical-align: top;
+      white-space: normal;
+      background-size: cover;
+      position: relative;
+    }
+
+
+    <% events.forEach((event, index) => { %>
+.scroll-item:nth-of-type(<%= index + 1 %>) {
+  background-image: url('<%= event.background %>');
+  background-size: cover;
+}
+<% }) %>
+  </style>
 </body>
 </html>

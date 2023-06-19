@@ -13,6 +13,7 @@
   "author": "Jeannet Welboren",
   "license": "MIT",
   "dependencies": {
+    "@uvarov.frontend/vanilla-calendar": "^2.6.0",
     "axios": "^1.4.0",
     "body-parser": "^1.20.2",
     "dotenv": "^16.0.3",

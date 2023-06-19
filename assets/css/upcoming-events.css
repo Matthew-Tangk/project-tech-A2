@@ -67,7 +67,7 @@ align-self:last baseline;
 
 
 
-button {
+button, .hero-cta {
   display: grid;
   grid-row: 3;
   -webkit-appearance: none;
@@ -82,7 +82,11 @@ button {
   cursor: pointer;
   z-index: 1; /* Move the overlay behind the text */
   align-items: end;
+  text-decoration: none;
+  font-weight: 500;
+
 }
+
 
 .scroll-item section:nth-of-type(2) {
 position: relative;
@@ -108,17 +112,6 @@ top: 50%;
   height: auto; /* Remove fixed height to adjust based on content */
 }
 
-
-.scroll-item {
-  scroll-snap-align: start; /* Align items to the start of the scroll container */
-  width: 100%; /* Make each item the full width of the scroll container */
-  display: inline-block; /* Display items in a line */
-  vertical-align: top; /* Align items to the top of the line */
-  white-space: normal; /* Reset white-space to allow text wrapping */
-  background-image: url('../static/img/events/burna-boy-hero.jpeg');
-  background-size: cover;
-  position: relative;
-}
 
 .scroll-item::before {
   content: "";
