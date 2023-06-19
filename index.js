@@ -159,6 +159,10 @@ app.post("/add-genres", async (req, res) => {
 
     await collection.insertOne(userData);
 
+    // HIER TOEVOEGEN LEGE object aanmaken in favoriete artiesten
+    const favoriteArtists = client.db('concertBuddies').collection('favoriteArtists');
+    await favoriteArtists.insertOne({});
+
     console.log("User data successfully saved in MongoDB");
 
 
@@ -181,8 +185,7 @@ app.get("/profile", async (req, res) => {
     await client.connect();
 
     const profileDataCollection = client.db(dbName).collection(collectionName)
-    const allProfileData = await profileDataCollection.find({}).toArray();
-    const userData = allProfileData[allProfileData.length - 1];
+    const userData = await profileDataCollection.findOne({}, { sort: { _id: -1}});
 
     if (userData) {
       const profileData = {
@@ -192,27 +195,43 @@ app.get("/profile", async (req, res) => {
         about: userData.about,
       };
 
+    // Retrieve favorite genres from db
     const selectedGenreCollection = client.db('concertBuddies').collection('selectedGenres')
     const allSelectedGenreData = await selectedGenreCollection.find({}).toArray();
 
-    const favoriteArtists = client.db('concertBuddies').collection('favoriteArtists')
-    const allFavoriteArtists = await favoriteArtists.find({}).toArray();
-    const mostRecentFavArtists = allFavoriteArtists[allFavoriteArtists.length - 1];
-    const favArtistsData = mostRecentFavArtists.selectedFavoriteArtists;
+    // Retrieve favorite artists from db
+    const favoriteArtists = client.db('concertBuddies').collection('favoriteArtists');
+    const mostRecentFavArtists = await favoriteArtists.findOne({}, { sort: { _id: -1 } });
+    // Write a statement to prevent error when favArtistData is empty
+    const favArtistsData = mostRecentFavArtists ? mostRecentFavArtists.selectedFavoriteArtists : [];
+    
+    const foundObjectsFromFavoriteArtists = [];
 
-    console.log("data"+favArtistsData);
-
-    res.render("profile", { profileData: profileData, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: favArtistsData });
-    console.log(mostRecentFavArtists);
+    if (favArtistsData && favArtistsData.length > 0) {
+      const retrieveAdditionalArtistData = favArtistsData.map(artist => {
+        const findAllInfoOfFavArtist = async() => { 
+          try {
+            await client.connect();
+            const allArtist = client.db('concertBuddies').collection('artists');
+            let nowActiveArtists = await allArtist.find({ name: artist }).toArray();
+            foundObjectsFromFavoriteArtists.push(...nowActiveArtists);
+          } catch (error) {
+            console.error("An error occurred while retrieving the data from the db", error);
+          } 
+        };
+        return findAllInfoOfFavArtist();
+      });
+      await Promise.all(retrieveAdditionalArtistData);
+    }
+    
+    res.render("profile", { profileData: profileData, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
   } else {
     res.render("profile", { profileData: null, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: mostRecentFavArtists  });
   }
   } catch (error) {
     console.error("An error occurred while saving the data:", error);
     res.render("error.ejs");
-  } finally {
-    await client.close();
-  }
+  } 
 });
 
 

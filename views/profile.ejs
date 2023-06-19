@@ -34,16 +34,20 @@
           <p>Complete your profile</p>
           <a href="/profile/add-artists">Add artists</a>
         </section>
+
       <% } else { %>
         <section>
           <ul>
-            <% favoriteArtists.forEach(artist =>  { %>
-              <li><%= artist  %></li>
-            <%  }); %>
+            <% additionFavoriteArtistsData.forEach(artist => { %>
+              <li>
+                <img src="<%= artist.path %>" alt="<%= artist.name %>">
+                <%= artist.name %>
+              </li>
+            <% }) %>
           </ul>
-  
         </section>
       <% } %>
+      
     </section>
   </main>
 </body>
