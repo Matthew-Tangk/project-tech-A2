@@ -180,10 +180,9 @@ app.get("/profile", async (req, res) => {
   try {
     await client.connect();
 
-    const db = client.db(dbName);
-    const collection = db.collection(collectionName);
-
-    const userData = await collection.findOne({});
+    const profileDataCollection = client.db(dbName).collection(collectionName)
+    const allProfileData = await profileDataCollection.find({}).toArray();
+    const userData = allProfileData[allProfileData.length - 1];
 
     if (userData) {
       const profileData = {
@@ -196,9 +195,14 @@ app.get("/profile", async (req, res) => {
     const selectedGenreCollection = client.db('concertBuddies').collection('selectedGenres')
     const allSelectedGenreData = await selectedGenreCollection.find({}).toArray();
 
-    res.render("profile", { profileData: profileData, title: "My profile", selectedGenre: allSelectedGenreData });
+    const favoriteArtists = client.db('concertBuddies').collection('favoriteArtists')
+    const allFavoriteArtists = await favoriteArtists.find({}).toArray();
+    const mostRecentFavArtists = allFavoriteArtists[allFavoriteArtists.length - 1];
+
+    res.render("profile", { profileData: profileData, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: mostRecentFavArtists });
+    console.log(mostRecentFavArtists);
   } else {
-    res.render("profile", { profileData: null, title: "My profile", selectedGenre: allSelectedGenreData });
+    res.render("profile", { profileData: null, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: mostRecentFavArtists  });
   }
   } catch (error) {
     console.error("An error occurred while saving the data:", error);

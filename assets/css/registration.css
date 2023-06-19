@@ -227,7 +227,7 @@ li {
   font-weight: 300;
 }
 
-#yourProfile section:last-of-type div{
+#yourProfile section#emptyState{
   background-color: var(--input);
   border-radius: 0.5em;
   display: flex;
@@ -237,7 +237,7 @@ li {
   gap: 0.5em;
 }
 
-#yourProfile section:last-of-type div a{
+#yourProfile section#emptyState a{
   margin: auto;
   padding: 0.5em 0;
 }
