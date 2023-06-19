@@ -7,10 +7,10 @@
     if (file) {
       const reader = new FileReader();
 
-      // reader.addEventListener("error", (event) => {
-      //   const error = reader.error;
-      //   errorMessage.textContent = `Error reading the file ${error.message}`;
-      // });
+      reader.addEventListener("error", (event) => {
+        const error = reader.error;
+        errorMessage.textContent = `Error reading the file ${error.message}`;
+      });
 
       reader.readAsDataURL(file);
       document.querySelector("img").src = URL.createObjectURL(file);
@@ -38,14 +38,3 @@
       fr.readAsDataURL(file);
     }
   });
-
-  /* Spotify embed */
-  window.onSpotifyIframeApiReady = (IFrameAPI) => {
-    const element = document.getElementById("embed-iframe");
-    const options = {
-        uri: 'spotify:episode:7makk4oTQel546B0PZlDM5'
-      };
-    const callback = (EmbedController) => {};
-    IFrameAPI.createController(element, options, callback);
-  };  
-  

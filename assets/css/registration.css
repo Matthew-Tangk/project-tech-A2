@@ -116,7 +116,7 @@ legend {
 }
 
 noscript p{
-  color: darkred;
+  color: var(--accent2);
   font-style: italic;
   margin-top: 1em;
   text-align: center;
@@ -124,11 +124,13 @@ noscript p{
 
 
 /* Code select genres */
-li {
+#selectGenres  label {
+  font-weight: 300;
   background-color: var(--input);
   list-style-type: none;
   border-radius: .5em;
-  padding: 1em 0;
+  padding: 1.5em 0 1em;
+  min-height: 4em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -142,10 +144,6 @@ li {
           align-items: center;
 }
 
-#selectGenres label{
-  font-weight: 300;
-}
-
 #selectGenres img{
   border-radius: 0;
 }
@@ -154,13 +152,14 @@ li {
   display: none;
 }
 
-.selectedGenre{
+input[type="checkbox"]:checked + label {
   border: 2px solid var(--accent1);
 }
 
  ul {
   display: -ms-grid;
   display: grid;
+  list-style: none;
   -ms-grid-columns: 1fr .5em 1fr .5em 1fr;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: .5em;
@@ -172,12 +171,12 @@ li {
 
 
 /* Code for profile page */
-#yourProfile section:first-of-type {
+#yourProfile section#profileData {
   display: -webkit-box;
   display: -ms-flexbox;
   display: grid;
   grid-template-columns: 3fr 1fr;
-  gap: 2em;
+  gap: 1em;
 }
 
 #yourProfile h2 {
@@ -188,14 +187,12 @@ li {
 }
 
 #yourProfile p {
-  font-weight: 600;
   padding-bottom: 0.6em;
 }
 
 #yourProfile main img {
-  width: 8em;
-  height: 8em;
-  margin: 1em 0 0 0;
+  width: 7em;
+  height: 7em;
   -o-object-fit: cover;
       object-fit: cover;
   border-radius: 100%;
@@ -240,5 +237,22 @@ li {
 #yourProfile section#emptyState a{
   margin: auto;
   padding: 0.5em 0;
+}
+
+#yourProfile section#favArtists li{
+  flex-direction: column;
+  border-radius: 0.5em;
+  padding: 0;
+  background-color: transparent;
+}
+
+#yourProfile section#favArtists li img{
+  max-width: 100%;
+  border-radius: 0.5em;
+}
+
+#yourProfile section#favArtists a{
+  padding: 0.6em;
+  width: 7em;
 }
 
