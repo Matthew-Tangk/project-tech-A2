@@ -30,12 +30,17 @@ exports.invites = async(req, res) => {
 
         const invitesCollection = client.db('concertBuddies').collection('invites');
 
-        const allInvitesData = await invitesCollection.findOne();
-        console.log(allInvitesData);
+        const newInvitesData = await invitesCollection.find({status:"New"}).toArray();
+        const waitingForAcceptationInvitesData = await invitesCollection.find({status:"Waiting for acceptation"}).toArray();
+        const pendingData = await invitesCollection.find({status:"Pending"});
+        console.log(newInvitesData);
+        console.log(waitingForAcceptationInvitesData)
 
         res.render('invites.ejs', {
             title:"Invites",
-            invites: allInvitesData
+            newInvites: newInvitesData,
+            waitingForAcceptationInvite: waitingForAcceptationInvitesData,
+            pendingInvite: pendingData
         });
     } catch(err) {
         console.error("Something went wrong with sending data to the server", err)
