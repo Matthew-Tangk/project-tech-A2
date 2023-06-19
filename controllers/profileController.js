@@ -23,6 +23,9 @@ async function run() {
 
 run().catch(console.dir);
 
+const dbName = "usersData";
+const collectionName = "user";
+
 const tinify = require("tinify");
 tinify.key = process.env.KEY;
 tinify.fromFile("assets/static/img/artists/arcticmonkeys.jpg").toFile("assets/static/img/artists/optimized/arcticoptimized.png");
