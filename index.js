@@ -207,22 +207,36 @@ app.get("/profile", async (req, res) => {
     
     const foundObjectsFromFavoriteArtists = [];
 
-    if (favArtistsData && favArtistsData.length > 0) {
+    if (Array.isArray(favArtistsData)) {
       const retrieveAdditionalArtistData = favArtistsData.map(artist => {
         const findAllInfoOfFavArtist = async() => { 
-          try {
-            await client.connect();
-            const allArtist = client.db('concertBuddies').collection('artists');
-            let nowActiveArtists = await allArtist.find({ name: artist }).toArray();
+           try {
+             await client.connect();
+             const allArtist = client.db('concertBuddies').collection('artists');
+             let nowActiveArtists = await allArtist.find({ name: artist }).toArray();
             foundObjectsFromFavoriteArtists.push(...nowActiveArtists);
           } catch (error) {
             console.error("An error occurred while retrieving the data from the db", error);
           } 
         };
-        return findAllInfoOfFavArtist();
-      });
-      await Promise.all(retrieveAdditionalArtistData);
-    }
+         return findAllInfoOfFavArtist();
+       });
+       await Promise.all(retrieveAdditionalArtistData);
+
+       } else {
+       console.log("KORTE ARRAY VAN 1");
+       const findAllInfoOfFavArtist = async() => { 
+        try {
+           await client.connect();
+           const allArtist = client.db('concertBuddies').collection('artists');
+          let nowActiveArtists = await allArtist.find({ name: favArtistsData }).toArray();
+          foundObjectsFromFavoriteArtists.push(...nowActiveArtists);
+         } catch (error) {
+           console.error("An error occurred while retrieving the data from the db", error);
+         } 
+       };
+      await findAllInfoOfFavArtist();
+     }
     
     res.render("profile", { profileData: profileData, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
   } else {

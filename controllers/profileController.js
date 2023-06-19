@@ -122,9 +122,9 @@ exports.profile = async (req, res) => {
           return findAllInfoOfFavArtist();
         });
         await Promise.all(retrieveAdditionalArtistData);
-        
+
         } else {
-        console.log("KORTE ARRAY VAN 1");
+        // Deze code wordt toegepast als de favoriete artiesten bestaat uit 1 geselecteerde
         const findAllInfoOfFavArtist = async() => { 
          try {
             await client.connect();
@@ -137,9 +137,11 @@ exports.profile = async (req, res) => {
         };
        await findAllInfoOfFavArtist();
       }
-      res.render("profile", { profileData: profileData, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
+      // res.render("profile", { profileData: profileData, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
+      res.redirect("/profile");
     } else {
-      res.render("profile", { profileData: null, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: mostRecentFavArtists  });
+      // res.render("profile", { profileData: null, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: mostRecentFavArtists  });
+      res.redirect("/profile");
     }
     } catch (error) {
       console.error("An error occurred while saving the data:", error);
