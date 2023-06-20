@@ -18,11 +18,26 @@
                                 <ul>
                                     <li><a href="">Event info</a></li>
                                     <li><a href="">Ignore</a></li>
-                                    <li > <a href="" class="acceptationbutton">Accept</a></li>
+                                    <li ><a href="" class="acceptationbutton">Accept</a></li>
                                 </ul>
                             </li>
                         <% }) %>
                     </ul>
+                <% } %>
+            </section>
+
+            <section>
+                <h2>Accepted</h2>
+                <% if (acceptedInvites.length == 0) { %>
+                    <p>Now accepted invites yet</p>
+                <% } else { %>
+                    <% acceptedInvites.forEach(invite => { %>
+                        <ul>
+                            <li>Yeah! You are going to <%= invite.event %> with <%= invite.from %> </li>
+                            <li><img src="../static/img/profilepic/serenoiia.jpg" alt="profilepic"></li>
+                        </ul>
+                   <% }) %>
+                   <a href="/my-events">See all my events</a>
                 <% } %>
             </section>
 
@@ -57,7 +72,7 @@
                                 <ul>
                                     <li><a href="">Event info</a></li>
                                     <li><a href="">Ignore</a></li>
-                                    <li ><a href="">Accept</a></li>
+                                    <li><a href="" class="acceptionbuttonpending">Accept</a></li>
                                 </ul>
                             </li>
                         </ul>

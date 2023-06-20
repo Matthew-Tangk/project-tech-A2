@@ -32,13 +32,16 @@ exports.invites = async(req, res) => {
 
         const newInvitesData = await invitesCollection.find({status:"New"}).toArray();
         const waitingForAcceptationInvitesData = await invitesCollection.find({status:"Waiting for acceptation"}).toArray();
-        const pendingData = await invitesCollection.find({status:"Pending"}).toArray();
+        const pendingInvitesData = await invitesCollection.find({status:"Pending"}).toArray();
+
+        const acceptedInvitesData = await invitesCollection.find({status: "Accepted"}).toArray();
 
         res.render('invites.ejs', {
             title:"Invites",
             newInvites: newInvitesData,
             waitingForAcceptationInvite: waitingForAcceptationInvitesData,
-            pendingInvite: pendingData
+            pendingInvite: pendingInvitesData,
+            acceptedInvites: acceptedInvitesData
         });
     } catch(err) {
         console.error("Something went wrong with sending data to the server", err)
@@ -50,10 +53,8 @@ exports.updateInviteStatus = async (req, res) => {
     try {
         await client.connect();
 
-        console.log('connected');
         const invitesCollection = client.db('concertBuddies').collection('invites');
         await invitesCollection.updateOne({status: 'New'}, {$set: {status: 'Accepted'}});
-        console.log('updated');
 
         res.sendStatus(200);
 
@@ -62,23 +63,18 @@ exports.updateInviteStatus = async (req, res) => {
         res.sendStatus(500);
     }
 } 
-// DIT OMSCHRIJVEN NAAR CONTROLLER EN ROUTE
-// app.post('/update-object', async (req, res) => {
-//     try {
-//       // Connect to MongoDB
-//       const client = await MongoClient.connect(databaseUrl);
-  
-//       // Access the collection and perform the update operation
-//       const collection = client.db('yourDatabase').collection('yourCollection');
-//       await collection.updateOne({ /* your update condition */ }, { $set: { /* updated properties */ } });
-  
-//       // Close the database connection
-//       await client.close();
-  
-//       // Send a success response
-//       res.sendStatus(200);
-//     } catch (error) {
-//       console.error('An error occurred while updating the object:', error);
-//       res.sendStatus(500);
-//     }
-//   });
+
+exports.updatePendingStatus = async (req, res) => {
+    try {
+        await client.connect();
+
+        const invitesCollection = client.db('concertBuddies').collection('invites');
+        await invitesCollection.updateOne({status: 'Pending'}, {$set: {status: 'Accepted'}});
+
+        res.sendStatus(200);
+
+    } catch (error) {
+        console.error('An error occured while updating the invite info', error);
+        res.sendStatus(500);
+    }
+} 
