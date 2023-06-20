@@ -5,13 +5,13 @@
   <%- include('./partials/header') %>
 
   <main>
-    <section>
-      <div>
+    <section id="profileData">
+      <section>
         <p> Welcome </p>
         <h2> <%= profileData.username %> </h2>
         <P> <%= profileData.age %> </P>
         <P> <%= profileData.about %></P>
-      </div>
+      </section>
 
       <img width="100px" src="/static/img/profilepic/<%= profileData.file %>"  alt="Profile Picture"/>
     </section>
@@ -29,12 +29,29 @@
 
     <section>
       <p> My artists</p>
-      <div>
-        <p>Complete your profile</p>
-        <a href="/profile/add-artists">Add artists</a>
-      </div>
+      <% if(favoriteArtists == null) { %>
+        <section id="emptyState">
+          <p>Complete your profile</p>
+          <a href="/profile/add-artists">Add artists</a>
+        </section>
+
+      <% } else { %>
+        <section id="favArtists">
+          <ul>
+            <% additionFavoriteArtistsData.forEach(artist => { %>
+              <li>
+                <img src="<%= artist.path %>" alt="<%= artist.name %>">
+                <%= artist.name %>
+              </li>
+            <% }) %>
+          </ul>
+
+          <a href="/profile/add-artists">Edit artists</a>
+        </section>
+      <% } %>
+
     </section>
-    
   </main>
+  <%- include('./partials/footer') %>
 </body>
 </html>
