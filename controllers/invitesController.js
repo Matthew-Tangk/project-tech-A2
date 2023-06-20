@@ -45,3 +45,40 @@ exports.invites = async(req, res) => {
     }
 
 }
+
+exports.updateInviteStatus = async (req, res) => {
+    try {
+        await client.connect();
+
+        console.log('connected');
+        const invitesCollection = client.db('concertBuddies').collection('invites');
+        await invitesCollection.updateOne({status: 'New'}, {$set: {status: 'Accepted'}});
+        console.log('updated');
+
+        res.sendStatus(200);
+
+    } catch (error) {
+        console.error('An error occured while updating the invite info', error);
+        res.sendStatus(500);
+    }
+} 
+// DIT OMSCHRIJVEN NAAR CONTROLLER EN ROUTE
+// app.post('/update-object', async (req, res) => {
+//     try {
+//       // Connect to MongoDB
+//       const client = await MongoClient.connect(databaseUrl);
+  
+//       // Access the collection and perform the update operation
+//       const collection = client.db('yourDatabase').collection('yourCollection');
+//       await collection.updateOne({ /* your update condition */ }, { $set: { /* updated properties */ } });
+  
+//       // Close the database connection
+//       await client.close();
+  
+//       // Send a success response
+//       res.sendStatus(200);
+//     } catch (error) {
+//       console.error('An error occurred while updating the object:', error);
+//       res.sendStatus(500);
+//     }
+//   });

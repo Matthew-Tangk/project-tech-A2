@@ -6,20 +6,24 @@
         <section>
             <section>
                 <h2>New</h2>
-                <ul>
-                    <% newInvites.forEach(invite => { %>
-                        <li>Hi! I am <%= invite.from %> </li>
-                        <li>Do you want to go to <%= invite.event %> with me?</li>
-                        <li><img src="../static/img/profilepic/serenoiia.jpg" alt="profielfoto"></li>
-                        <li>
-                            <ul>
-                                <li><a href="">Event info</a></li>
-                                <li><a href="">Ignore</a></li>
-                                <li><a href="">Accept</a></li>
-                            </ul>
-                        </li>
-                    <% }) %>
-                </ul>
+                <% if(newInvites.length ==0) { %>
+                    <p>No new invites yet</p>
+                <% } else { %>
+                    <ul>
+                        <% newInvites.forEach(invite => { %>
+                            <li>Hi! I am <%= invite.from %> </li>
+                            <li>Do you want to go to <%= invite.event %> with me?</li>
+                            <li><img src="../static/img/profilepic/serenoiia.jpg" alt="profielfoto"></li>
+                            <li>
+                                <ul>
+                                    <li><a href="">Event info</a></li>
+                                    <li><a href="">Ignore</a></li>
+                                    <li > <a href="" class="acceptationbutton">Accept</a></li>
+                                </ul>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } %>
             </section>
 
             <section>
@@ -53,7 +57,7 @@
                                 <ul>
                                     <li><a href="">Event info</a></li>
                                     <li><a href="">Ignore</a></li>
-                                    <li><a href="">Accept</a></li>
+                                    <li ><a href="">Accept</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -65,6 +69,7 @@
     </main>
 
     <%- include('./partials/footer') %>
+    <script src="../js/invites.js"></script>
 
 </body>
 </html>
