@@ -104,13 +104,15 @@ top: 50%;
 
 
 .scroll-container {
+  display: flex;
   scroll-snap-type: x mandatory; /* Enable horizontal scroll snapping */
   -webkit-overflow-scrolling: touch;
-  overflow-x: scroll; /* Enable horizontal scrolling */
+  overflow-x: auto; /* Enable horizontal scrolling */
   white-space: nowrap; /* Keep scroll items in a single line */
   width: 100%; /* Set the width to 100% to take the full available space */
   height: auto; /* Remove fixed height to adjust based on content */
 }
+
 
 
 .scroll-item::before {
@@ -122,6 +124,33 @@ top: 50%;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.4); /* Adjust the opacity as desired */
   z-index: 1; /* Move the overlay behind the text */
+}
+
+
+section.calendar .flatpickr-calendar {
+  /* Styling for section.calendar .flatpickr-calendar */
+  /* ... */
+
+  /* Exclude properties defined in :root */
+  --text: initial;
+  --input: initial;
+  --placeholder: initial;
+  --accent1: initial;
+  --accent1dark: initial;
+  --accent2: initial;
+  --accent2dark: initial;
+  --background: initial;
+}
+
+
+.scroll-item {
+  scroll-snap-align: start;
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
+  background-size: cover;
+  position: relative;
 }
 
 .scroll-item section {
@@ -161,6 +190,11 @@ top: 50%;
 
 .scroll-item section:nth-of-type(3) h3 {
   display: inline;
+}
+
+.calendar h1 {
+  text-align:center;
+  font-weight: 400;
 }
 
 
