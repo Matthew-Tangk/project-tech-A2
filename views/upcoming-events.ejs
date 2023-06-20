@@ -139,7 +139,14 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script>
+    
     document.addEventListener("DOMContentLoaded", function() {
+      function formatDate(dateString) {
+  const options = { weekday: "long", day: "numeric", month: "long" };
+  const date = new Date(dateString);
+  return date.toLocaleDateString("nl-NL", options);
+}
+
       const datePicker = flatpickr("#myDatePicker", {
         inline: true,
         dateFormat: "d/m/Y",
@@ -160,6 +167,10 @@
                   <h2>${event.title}</h2>
                   <p>${event.city}</p>
                   <p>${event.location}</p>
+                  <p>${formatDate(event.date)}</p>
+
+                    <button class="event-button"><a href="${event.link}">Meer informatie</a></button>
+
                   <!-- Add more event details here -->
                 `;
                 calendarResults.appendChild(eventCard);
