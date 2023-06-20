@@ -2,6 +2,26 @@ ul li {
     list-style:none;
 }
 
+main {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main > p {
+    text-align: center;
+    color:var(--text);
+    background-color:var(--accent2);
+    border-radius:10px;
+    width:75%;
+    margin:1rem 0 0;
+    padding:.2rem;
+}
+
+.jsactive {
+    display:none;
+}
+
 main > section > section {
     display:flex;
     flex-direction: column;;

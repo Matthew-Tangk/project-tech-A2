@@ -1,3 +1,6 @@
+const enableJsMessage = document.querySelector('main > p');
+enableJsMessage.classList.add('jsactive');
+
 const acceptButton = document.querySelector('.acceptationbutton');
 const ignoreButton = document.querySelector('.ignoreButton');
 
