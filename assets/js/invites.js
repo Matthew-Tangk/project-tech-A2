@@ -1,6 +1,7 @@
 const acceptButton = document.querySelector('.acceptationbutton');
+const ignoreButton = document.querySelector('.ignoreButton');
+
 const acceptButtonPending = document.querySelector('.acceptionbuttonpending')
-console.log(acceptButtonPending);
 
 if(acceptButton != null) {
     acceptButton.addEventListener('click', async() => {
@@ -8,8 +9,15 @@ if(acceptButton != null) {
     });
 }
 
+if(ignoreButton != null) {
+    ignoreButton.addEventListener('click', async() => {
+        await fetch('invites/updateIgnoreStatus', { method: 'POST'});
+    })
+}
+
 if(acceptButtonPending != null) {
     acceptButtonPending.addEventListener('click', async() => {
+        console.log('ignored bitch')
         await fetch('/invites/updatePendingStatus',  { method: 'POST'});
     });
 }

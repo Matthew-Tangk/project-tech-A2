@@ -78,3 +78,18 @@ exports.updatePendingStatus = async (req, res) => {
         res.sendStatus(500);
     }
 } 
+
+exports.updateIgnoreStatus = async (req, res) => {
+    try {
+        await client.connect();
+
+        const invitesCollection = client.db('concertBuddies').collection('invites');
+        await invitesCollection.updateOne({status: 'Pending'}, {$set: {status: 'Ignored'}});
+
+        res.sendStatus(200);
+
+    } catch (error) {
+        console.error('An error occured while updating the invite info', error);
+        res.sendStatus(500);
+    }
+}
