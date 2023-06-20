@@ -34,6 +34,7 @@ const express = require("express");
 const multer = require("multer");
 const upload = multer({ dest: "assets/static/img/profilepic" });
 const bodyParser = require("body-parser");
+const uglifycss = require("uglifycss");
 
 const app = express();
 
@@ -43,7 +44,15 @@ app.use(express.static("assets"));
 app.use(express.urlencoded({ extended: true }));
 app.listen(3000);
 
+// Uglifycss
+const inputFiles = ["assets/css/style.css", "assets/css/addartists.styles.css", "assets/css/invites.styles.css", "assets/css/my-events.css", "assets/css/registration.css", "assets/css/upcoming-events.css" ];
+const options = {
+  maxLineLen: 500,
+  expandVars: true
+};
 
+const output = uglifycss.processFiles(inputFiles, options);
+console.log(output);
 
 const profileRoutes = require("./routes/profileRoutes.js");
 console.log(profileRoutes);
@@ -266,3 +275,5 @@ app.get("/profile", async (req, res) => {
 app.use((req, res, next) => {
   res.status(404).render("error.ejs", { title: "not found" });
 });
+
+
