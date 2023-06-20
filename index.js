@@ -43,6 +43,8 @@ app.use(express.static("assets"));
 app.use(express.urlencoded({ extended: true }));
 app.listen(3000);
 
+
+
 const profileRoutes = require("./routes/profileRoutes.js");
 console.log(profileRoutes);
 app.use("/profile", profileRoutes);

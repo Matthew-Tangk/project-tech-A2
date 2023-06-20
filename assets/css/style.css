@@ -131,14 +131,14 @@ header a{
 /* Code for Footer */
 
 footer {
-        height: 50px;
+        height: 3.125em;
       }
 
       footer ul {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        height: 100px;
+        height: 6.25em;
         padding-left: 0;
 
         background-color: #2b2936;
@@ -149,10 +149,9 @@ footer {
       }
 
       footer img {
-        width: 60px;
-        height: 60px;
+        width: 3.75em;
+        height: 3.75em;
       }
-
 
 /* Code for Error page */
 #error h1{
