@@ -125,12 +125,13 @@ noscript p{
 
 /* Code select genres */
 #selectGenres  label {
+  justify-content: center;
   font-weight: 300;
   background-color: var(--input);
   list-style-type: none;
   border-radius: .5em;
-  padding: 1.5em 0 1em;
-  min-height: 4em;
+  margin: 0;
+  min-height: 6em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -154,6 +155,7 @@ noscript p{
 
 input[type="checkbox"]:checked + label {
   border: 2px solid var(--accent1);
+  box-sizing: border-box;
 }
 
  ul {
@@ -167,6 +169,7 @@ input[type="checkbox"]:checked + label {
   max-height: 58vh;
   overflow: scroll;
   scroll-behavior: smooth;
+  text-align: center;
 }
 
 
@@ -203,6 +206,8 @@ input[type="checkbox"]:checked + label {
 }
 
 #yourProfile li {
+  border-radius: 5em;
+  display: flex;
   justify-content: center;
   flex-direction: row;
   background-color: var(--input);
@@ -217,6 +222,7 @@ input[type="checkbox"]:checked + label {
   height: auto;
   margin: 0;
   border-radius: 0;
+  object-fit: contain;
 }
 
 #yourProfile li p{
