@@ -32,9 +32,7 @@ exports.invites = async(req, res) => {
 
         const newInvitesData = await invitesCollection.find({status:"New"}).toArray();
         const waitingForAcceptationInvitesData = await invitesCollection.find({status:"Waiting for acceptation"}).toArray();
-        const pendingData = await invitesCollection.find({status:"Pending"});
-        console.log(newInvitesData);
-        console.log(waitingForAcceptationInvitesData)
+        const pendingData = await invitesCollection.find({status:"Pending"}).toArray();
 
         res.render('invites.ejs', {
             title:"Invites",

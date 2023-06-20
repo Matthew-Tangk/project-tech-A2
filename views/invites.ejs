@@ -1,12 +1,9 @@
 <%- include('./partials/head') %>
 
 <body>
-    <header>
-
-    </header>
+    <%- include('./partials/header') %>
     <main>
         <section>
-            <h1>Invites</h1>
             <section>
                 <h2>New</h2>
                 <ul>
@@ -19,12 +16,6 @@
                                 <li><a href="">Event info</a></li>
                                 <li><a href="">Ignore</a></li>
                                 <li><a href="">Accept</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <ul>
-                                <li>Send phone</li>
-                                <li>Send mail</li>
                             </ul>
                         </li>
                     <% }) %>
@@ -45,11 +36,29 @@
                         </ul>
                         <% }) %>
                 <% } %>
-
             </section>
 
             <section>
                 <h2>Pending</h2>
+
+                <% if (pendingInvite.length == 0) { %>
+                    <p>Invites that you have not yet accepted, will appear here</p>
+                <% }  else { %>
+                    <% pendingInvite.forEach(invite => { %>
+                        <ul>
+                            <li>Hi! I am <%= invite.from %> </li>
+                            <li>Do you want to go to <%= invite.event %> with me?</li>
+                            <li><img src="../static/img/profilepic/8b9a94f7acedfadb9700cc067678b74f" alt="profielfoto"></li>
+                            <li>
+                                <ul>
+                                    <li><a href="">Event info</a></li>
+                                    <li><a href="">Ignore</a></li>
+                                    <li><a href="">Accept</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <% }) %>
+                <% } %>
             </section>
         </section>
         

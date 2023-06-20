@@ -8,7 +8,7 @@ main > section > section {
     align-items: center;
     justify-content:center;
 
-    margin:1rem 0;
+    margin:1rem 0 5rem;
 
 }
 
@@ -83,14 +83,6 @@ main > section > section > ul li img {
     width:75%;
     aspect-ratio: 1/1;
     border-radius:50%;
-}
-
-/* Share contacts */
-main > section > section > ul > li:last-of-type {
-    grid-column-start: 2;
-    grid-column-end: 3;
-
-    grid-row-start: 4;
 }
 
 main > section > section > ul > li:last-of-type ul {
