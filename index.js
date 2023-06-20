@@ -98,7 +98,7 @@ app.post("/add-bio", upload.single("file"), (req, res) => {
 
 // Select genres page
 app.post("/add-genres", async (req, res) => {
-  const { username, age, tel, email, picture, about } = req.body;
+  const { username, age, tel, email, file, about } = req.body;
 
   try {
     await client.connect();
@@ -111,7 +111,7 @@ app.post("/add-genres", async (req, res) => {
       age,
       tel,
       email,
-      picture,
+      file,
       about,
       genres: allGenreData,
       title: "Add genres"
@@ -158,7 +158,7 @@ app.post("/add-genres", async (req, res) => {
 });
 
 app.post("/profile", async (req, res) => {
-  const { username, age, tel, email, picture, about } = req.body;
+  const { username, age, tel, email, file, about } = req.body;
   const selectedFavoriteGenres = req.body.favoritegenres;
 
   const favoriteGenres = selectedFavoriteGenres;
@@ -168,7 +168,7 @@ app.post("/profile", async (req, res) => {
     age: age,
     tel: tel,
     email: email,
-    file: picture,
+    file: file,
     about: about,
     genres: favoriteGenres,
   };
