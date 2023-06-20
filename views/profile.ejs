@@ -18,10 +18,10 @@
     
     <section>
       <ul>
-        <% selectedGenre.forEach(selectedGenre => { %>
+        <% favoriteGenres.forEach(genre => { %>
           <li>
-            <img src="../static/img/genres/<%= selectedGenre.img %>" alt="<%= selectedGenre.name %>">
-            <p><%= selectedGenre.name %></p>
+            <img src="../static/img/genres/<%= genre %>.svg" alt="<%= genre %>">
+            <p><%= genre %></p>
           </li>
           <% }); %>
       </ul>

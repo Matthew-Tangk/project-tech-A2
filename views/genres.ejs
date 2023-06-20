@@ -13,7 +13,7 @@
             <ul>
               <% genres.forEach(genres => { %>
               <li>
-                <input type="checkbox" id="<%= genres.name %>" name="<%= genres.name %>" >
+                <input type="checkbox" id="<%= genres.name %>" name="favoritegenres" value="<%= genres.name %>" >
                 <label for="<%= genres.name %>">
                   <img src="../static/img/genres/<%= genres.img %>" alt="<%= genres.name %>">
                    <%= genres.name %> </label>

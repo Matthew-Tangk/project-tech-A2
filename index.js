@@ -98,42 +98,131 @@ app.post("/add-bio", upload.single("file"), (req, res) => {
 
 // Select genres page
 app.post("/add-genres", async (req, res) => {
-  const { username, age, tel, email, file, about } = req.body;
+  const { username, age, tel, email, picture, about } = req.body;
 
-  const userData = {
+  try {
+    await client.connect();
+
+    const genreCollection = client.db('concertBuddies').collection('genres')
+    const allGenreData = await genreCollection.find({}).toArray();
+
+    res.render("genres.ejs", {
+      username,
+      age,
+      tel,
+      email,
+      picture,
+      about,
+      genres: allGenreData,
+      title: "Add genres"
+    })
+  } catch (error) {
+    console.error("An error occurred while saving the data:", error);
+  }
+
+
+
+  // const userData = {
+  //   username: username,
+  //   age: age,
+  //   tel: tel,
+  //   email: email,
+  //   file: file,
+  //   about: about,
+  // };
+
+  // try {
+  //   await client.connect();
+
+  //   const db = client.db(dbName);
+  //   const collection = db.collection(collectionName);
+
+  //   await collection.insertOne(userData);
+
+  //   // HIER TOEVOEGEN LEGE object aanmaken in favoriete artiesten
+  //   const favoriteArtists = client.db('concertBuddies').collection('favoriteArtists');
+  //   await favoriteArtists.insertOne({});
+
+  //   console.log("User data successfully saved in MongoDB");
+
+  //   const genreCollection = client.db('concertBuddies').collection('genres')
+  //   const allGenreData = await genreCollection.find({}).toArray();
+
+  //   res.render("genres.ejs", { title: "Add genres", genres: allGenreData });
+  // } catch (error) {
+  //   console.error("An error occurred while saving the data:", error);
+  //   res.render("error.ejs");
+  // } finally {
+  //   await client.close();
+  // }
+});
+
+app.post("/profile", async (req, res) => {
+  const { username, age, tel, email, picture, about } = req.body;
+  const selectedFavoriteGenres = req.body.favoritegenres;
+
+  const favoriteGenres = selectedFavoriteGenres;
+
+  const userDataSend = {
     username: username,
     age: age,
     tel: tel,
     email: email,
-    file: file,
+    file: picture,
     about: about,
+    genres: favoriteGenres,
   };
 
+  try {
+    await sendUserData(userDataSend);
+
+    // Now that userData is stored, retrieve all userData again to render in the profile page
+    await client.connect();
+
+    const profileDataCollection = client.db(dbName).collection(collectionName);
+    const userData = await profileDataCollection.findOne({}, { sort: { _id: -1 } });
+
+    console.log(userData); // Add this line to check the value of userData
+
+    if (userData) {
+      const profileData = {
+        username: userData.username,
+        age: userData.age,
+        file: userData.file,
+        about: userData.about,
+        genres: userData.genres,
+      };
+
+      const favoriteGenres = userData.genres;
+      console.log(favoriteGenres); 
+
+      const favArtistsData = null;
+      const foundObjectsFromFavoriteArtists = null;
+
+      res.render("profile", { profileData: profileData, favoriteGenres: favoriteGenres, title: "My profile", favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
+    } else {
+      res.render("profile", { profileData: null, title: "My profile", favoriteArtists: mostRecentFavArtists });
+    }
+  } catch (error) {
+    console.error("An error occurred while saving the data:", error);
+    res.render("error.ejs");
+  }
+});
+
+
+const sendUserData = async (data) => {
   try {
     await client.connect();
 
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
 
-    await collection.insertOne(userData);
-
-    // HIER TOEVOEGEN LEGE object aanmaken in favoriete artiesten
-    const favoriteArtists = client.db('concertBuddies').collection('favoriteArtists');
-    await favoriteArtists.insertOne({});
-
-    console.log("User data successfully saved in MongoDB");
-
-    const genreCollection = client.db('concertBuddies').collection('genres')
-    const allGenreData = await genreCollection.find({}).toArray();
-
-    res.render("genres.ejs", { title: "Add genres", genres: allGenreData });
-  } catch (error) {
-    console.error("An error occurred while saving the data:", error);
-    res.render("error.ejs");
-  } finally {
-    await client.close();
+    await collection.insertOne(data);
+  } catch (err) {
+    console.error("Something went wrong with adding the profileinfo to the database :(", err);
   }
-});
+
+}
 
 
 // User profile
@@ -150,6 +239,7 @@ app.get("/profile", async (req, res) => {
         age: userData.age,
         file: userData.file,
         about: userData.about,
+        genres: userData.genres
       };
 
     // Retrieve favorite genres from db
