@@ -128,6 +128,31 @@ header a{
     margin: 0;
 }
 
+/* Code for Footer */
+
+footer {
+        height: 50px;
+      }
+
+      footer ul {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 100px;
+        padding-left: 0;
+
+        background-color: #2b2936;
+      }
+
+      footer li {
+        list-style: none;
+      }
+
+      footer img {
+        width: 60px;
+        height: 60px;
+      }
+
 
 /* Code for Error page */
 #error h1{
