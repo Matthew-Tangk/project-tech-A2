@@ -121,42 +121,6 @@ app.post("/add-genres", async (req, res) => {
   } catch (error) {
     console.error("An error occurred while saving the data:", error);
   }
-
-
-
-  // const userData = {
-  //   username: username,
-  //   age: age,
-  //   tel: tel,
-  //   email: email,
-  //   file: file,
-  //   about: about,
-  // };
-
-  // try {
-  //   await client.connect();
-
-  //   const db = client.db(dbName);
-  //   const collection = db.collection(collectionName);
-
-  //   await collection.insertOne(userData);
-
-  //   // HIER TOEVOEGEN LEGE object aanmaken in favoriete artiesten
-  //   const favoriteArtists = client.db('concertBuddies').collection('favoriteArtists');
-  //   await favoriteArtists.insertOne({});
-
-  //   console.log("User data successfully saved in MongoDB");
-
-  //   const genreCollection = client.db('concertBuddies').collection('genres')
-  //   const allGenreData = await genreCollection.find({}).toArray();
-
-  //   res.render("genres.ejs", { title: "Add genres", genres: allGenreData });
-  // } catch (error) {
-  //   console.error("An error occurred while saving the data:", error);
-  //   res.render("error.ejs");
-  // } finally {
-  //   await client.close();
-  // }
 });
 
 app.post("/profile", async (req, res) => {
