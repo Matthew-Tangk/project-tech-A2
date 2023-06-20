@@ -7,13 +7,13 @@
       <span>4/4</span>
       <h1>Add your favorite genres</h1>
     
-      <form >
+      <form action="/profile" method="post" >
         <fieldset>
           <legend>Fill in the about me below</legend>
             <ul>
               <% genres.forEach(genres => { %>
               <li>
-                <input type="checkbox" id="<%= genres.name %>" name="<%= genres.name %>" >
+                <input type="checkbox" id="<%= genres.name %>" name="favoritegenres" value="<%= genres.name %>" >
                 <label for="<%= genres.name %>">
                   <img src="../static/img/genres/<%= genres.img %>" alt="<%= genres.name %>">
                    <%= genres.name %> </label>
@@ -21,7 +21,14 @@
               <% }); %>
             </ul>
 
-            <a href="/profile">Next</a>
+            <input type="hidden" name="username" value="<%= username %>" />
+            <input type="hidden" name="age" value="<%= age %>" />
+            <input type="hidden" name="tel" value="<%= tel %>" />
+            <input type="hidden" name="email" value="<%= email %>" />
+            <input type="hidden" name="file" value="<%= file %>" />
+            <input type="hidden" name="about" value="<% about %>">
+
+            <input type="submit" value="Next" />
           </fieldset>
         </form>
     
