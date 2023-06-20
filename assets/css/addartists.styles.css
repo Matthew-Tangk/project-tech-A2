@@ -5,7 +5,7 @@ main > section {
     align-items: center;
 }
 
-main > section > h1 {
+main > section > h2 {
     order:-100;
     width:fit-content;
 }
@@ -31,7 +31,7 @@ form > fieldset {
     flex-wrap:wrap;
     gap:.5rem;
 
-    max-height:65vh;
+    max-height:45vh;
     overflow: auto;
 }
 
@@ -93,6 +93,10 @@ form > p {
 
 form > p > span {
     color:var(--accent1);
+}
+
+.jsactive {
+    display:none;
 }
 
 form > button {
