@@ -110,6 +110,19 @@ app.get("/upcoming-events", async (req, res) => {
   }
 });
 
+app.get("/upcoming-events/:date", async (req, res) => {
+  try {
+    const selectedDate = new Date(req.params.date);
+    const db = client.db(dbNameEvents);
+    const collection = db.collection(collectionEvents);
+    const eventData = await collection.find({ date: selectedDate }).toArray();
+    res.json(eventData);
+  } catch (error) {
+    console.error("An error occurred while fetching the data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.use((req, res, next) => {
   res.status(404).render("error.ejs", { title: "not found" });
 });

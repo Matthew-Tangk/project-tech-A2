@@ -108,7 +108,7 @@
   <main>
     <div id="slider-container" class="scroll-container">
       <% const currentMonth = new Date().getMonth(); %>
-              <% events.filter(event => event.date.getMonth() === currentMonth).forEach(event => {%> 
+      <% events.filter(event => event.date.getMonth() === currentMonth).forEach(event => {%> 
         <section class="hero scroll-item">
           <section>
             <h1>Populair in</h1>
@@ -132,15 +132,43 @@
       <h1>Evenementen Kalender</h1>
       <input type="text" id="myDatePicker" placeholder="Selecteer een datum">
     </section>
+
+    <section id="calendar-results"></section>
   </main>
   
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      flatpickr("#myDatePicker", {
+      const datePicker = flatpickr("#myDatePicker", {
         inline: true,
-        dateFormat: "d/m/Y"
+        dateFormat: "d/m/Y",
+        onChange: function(selectedDates, dateString) {
+          const formattedDate = dateString.split("/").reverse().join("-");
+          fetch(`/upcoming-events/${formattedDate}`)
+            .then(response => response.json())
+            .then(events => {
+              // Render the events dynamically in the calendar-results section
+              const calendarResults = document.getElementById("calendar-results");
+              // Clear existing events
+              calendarResults.innerHTML = "";
+              // Render the fetched events
+              events.forEach(event => {
+                const eventCard = document.createElement("div");
+                eventCard.classList.add("event-card");
+                eventCard.innerHTML = `
+                  <h2>${event.title}</h2>
+                  <p>${event.city}</p>
+                  <p>${event.location}</p>
+                  <!-- Add more event details here -->
+                `;
+                calendarResults.appendChild(eventCard);
+              });
+            })
+            .catch(error => {
+              console.error("An error occurred while fetching the events:", error);
+            });
+        }
       });
     });
   </script>
