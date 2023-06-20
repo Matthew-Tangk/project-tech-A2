@@ -43,9 +43,7 @@ app.use(express.static("assets"));
 app.use(express.urlencoded({ extended: true }));
 app.listen(3000);
 
-app.get("/my-events", (req, res) => {
-    res.render("my-events.ejs");
-  })
+
 
 const profileRoutes = require("./routes/profileRoutes.js");
 console.log(profileRoutes);
