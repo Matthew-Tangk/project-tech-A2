@@ -1,119 +1,257 @@
 /* Code for Home page */
 #homePage {
-    background-image: url("../static/img/concertbuddies-home.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    overflow: hidden;
-  }
+  background-image: url("../static/img/concertbuddies-home.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  overflow: hidden;
+}
 
-  #homePage section {
-    display: flex;
-    justify-content: space-between;
-    min-height: 90vh;
-    align-items: center;
-  }
+#homePage section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 90vh;
+  align-items: center;
+}
 
-  #homePage a {
-    margin-left: 0;
-    width: 80vw;
-  }
+#homePage a {
+  margin-left: 0;
+  width: 80vw;
+}
 
-  #homePage img {
-    margin: 2em 0 0 0;
-    width: 75vw;
-  }
+#homePage img {
+  margin: 2em 0 0 0;
+  width: 75vw;
+}
 
 
-  /* Code for registration */
-  label {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    font-weight: bold;
-    margin-top: 0.3em;
+/* Code for registration */
+section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-weight: bold;
+  margin-top: 0.3em;
 }
 
 input, textarea {
-    margin-top: .6em;
-    padding: 1em;
-    border: 2px solid var(--main);
-    background-color: var(--input);
-    color: var(--text);
-    border-radius: 10em;
-    font-weight: 400;
-    font-family: 'Catamaran', sans-serif;
-    width: 100%;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-    text-align: left;
+  margin-top: .6em;
+  padding: 1em;
+  border: 2px solid var(--main);
+  background-color: var(--input);
+  color: var(--text);
+  border-radius: 10em;
+  font-weight: 400;
+  font-family: 'Catamaran', sans-serif;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-align: left;
 }
 
 textarea#about  {
-    border-radius: 0.5em;
+  border-radius: 0.5em;
 }
 
+input[type=submit], a {
+  display: -ms-grid;
+  display: grid;
+  margin-left: auto;
+  margin-top: 2em;
+  text-decoration: none;
+  text-align: center;
+  border-radius: .5em;
+  background-color: var(--accent1);
+  color: white;
+  width: 10em;
+  padding: 1em 0; 
+}
+
+span::first-letter {
+  color: var(--accent2);
+}
+
+legend {
+  visibility: hidden;
+}
+
+
+/* Code for profile picture page */
+#profilePicture form label {
+  background-color: var(--light);
+  height: 80vw;
+  width: 80vw;
+  margin: auto;
+  margin-top: 2em;
+  border-radius: .5em;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+#profilePicture form label input {
+  display: none;
+}
+
+#profilePicture img {
+  height: 100%;
+  margin: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 
 /* Code select genres */
-#selectGenres li{
-    background-color: var(--input);
-    padding: 1em 0;
+#selectGenres  label {
+  justify-content: center;
+  font-weight: 300;
+  background-color: var(--input);
+  list-style-type: none;
+  border-radius: .5em;
+  margin: 0;
+  min-height: 6em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-#selectGenres label{
-    margin-top: 0.8em;
-    font-weight: 300;
+#selectGenres img{
+  border-radius: 0;
 }
 
 #selectGenres input[type=checkbox]{
-    height: 1.5em;
+  display: none;
 }
 
-.selectedGenre{
-    border: 2px solid var(--accent1);
+input[type="checkbox"]:checked + label {
+  border: 2px solid var(--accent1);
+  box-sizing: border-box;
+}
+
+ ul {
+  display: -ms-grid;
+  display: grid;
+  list-style: none;
+  -ms-grid-columns: 1fr .5em 1fr .5em 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: .5em;
+  margin-top: 1.3em;
+  max-height: 58vh;
+  overflow: scroll;
+  scroll-behavior: smooth;
+  text-align: center;
 }
 
 
 /* Code for profile page */
-#yourProfile h1 {
-    font-size: 1.8em;
+#yourProfile section#profileData {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 1em;
+}
+
+#yourProfile h2 {
+  font-size: 1.8em;
+  color: var(--accent2);
+  padding-bottom: 0.4em;
+  line-height: 1.3em;
 }
 
 #yourProfile p {
-    font-size: 0.9em;
+  padding-bottom: 0.6em;
 }
 
-#yourProfile p:nth-last-of-type(2) {
-    font-weight: 600;
-    padding-bottom: 0.6em;
+#yourProfile main img {
+  width: 7em;
+  height: 7em;
+  -o-object-fit: cover;
+      object-fit: cover;
+  border-radius: 100%;
 }
 
-#yourProfile img {
-    width: 8em;
-    height: 8em;
-    margin: auto;
-    -o-object-fit: cover;
-       object-fit: cover;
-    margin-bottom: 1em;
-    border-radius: 100%;
-}
-  #yourProfile li {
-    background-color: var(--light);
-    padding: 0.8em;
-    font-size: 0.9em;
-    border-radius: 5em;
+#yourProfile ul{
+  margin: 0;
 }
 
-/* Code for profile page */
-#yourProfile section:first-of-type {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    gap: 2em;
+#yourProfile section li {
+  border-radius: 5em;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  background-color: var(--input);
+  padding: 0.7em;
+  font-size: 0.9em;
+  border-radius: 5em;
+  gap: 0.5em;
 }
+
+#yourProfile #selectedGenres li img{
+  max-width: 1em;
+  height: auto;
+  margin: 0;
+  border-radius: 0;
+  object-fit: contain;
+}
+
+#yourProfile li p{
+  padding: 0;
+  font-weight: 300;
+}
+
+#yourProfile section#emptyState{
+  background-color: var(--input);
+  border-radius: 0.5em;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 5em 0;
+  gap: 0.5em;
+}
+
+#yourProfile section#emptyState a{
+  margin: auto;
+  padding: 0.5em 0;
+}
+
+#yourProfile section#favArtists li{
+  flex-direction: column;
+  border-radius: 0.5em;
+  padding: 0;
+  background-color: transparent;
+}
+
+#yourProfile section#favArtists li img{
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5em;
+}
+
+#yourProfile section#favArtists a{
+  padding: 0.6em;
+  width: 7em;
+}
+

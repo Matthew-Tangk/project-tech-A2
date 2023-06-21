@@ -29,12 +29,15 @@ run().catch(console.dir);
 
 const dbName = "usersData";
 const collectionName = "user";
+const dbNameEvents = "concertBuddies";
+const collectionEvents = "events";
 
 const express = require("express");
 const multer = require("multer");
 const upload = multer({ dest: "assets/static/img/profilepic" });
 const bodyParser = require("body-parser");
 const uglifycss = require("uglifycss");
+const path = require("path");
 
 const app = express();
 
@@ -45,7 +48,7 @@ app.use(express.urlencoded({ extended: true }));
 app.listen(3000);
 
 // Uglifycss
-const inputFiles = ["assets/css/style.css", "assets/css/addartists.styles.css", "assets/css/invites.styles.css", "assets/css/my-events.css", "assets/css/registration.css", "assets/css/upcoming-events.css"];
+const inputFiles = ["assets/css/style.css", "assets/css/addartists.styles.css", "assets/css/invites.styles.css", "assets/css/my-events.css", "assets/css/registration.css", "assets/css/upcoming-events.css" ];
 const options = {
   maxLineLen: 500,
   expandVars: true
@@ -63,15 +66,15 @@ app.get("/", (req, res) => {
   res.render("home.ejs", { title: "Concert buddies" });
 });
 
-// Upcoming events page
-
 app.get("/upcoming-events", async (req, res) => {
+
   try {
     const db = client.db(dbNameEvents);
     const collection = db.collection(collectionEvents);
     const eventData = await collection.find({}).toArray();
 
     const formattedEvents = eventData.map((event) => {
+
       const options = {
         weekday: "short",
         day: "numeric",
@@ -79,11 +82,10 @@ app.get("/upcoming-events", async (req, res) => {
         year: "numeric",
       };
       const formattedDate = event.date.toLocaleDateString("nl-NL", options);
+
       return { ...event, formattedDate };
     });
-
     console.log("Pulled data from MongoDB:", formattedEvents);
-
     res.render("upcoming-events.ejs", {
       events: formattedEvents,
       title: "Upcoming events",
@@ -94,14 +96,13 @@ app.get("/upcoming-events", async (req, res) => {
   }
 });
 
-
-// Get data from DB for calendar function in Upcoming events page
 app.get("/upcoming-events/:date", async (req, res) => {
   try {
     const selectedDate = new Date(req.params.date);
     const db = client.db(dbNameEvents);
     const collection = db.collection(collectionEvents);
     const eventData = await collection.find({ date: selectedDate }).toArray();
+
     res.json(eventData);
   } catch (error) {
     console.error("An error occurred while fetching the data:", error);
@@ -220,12 +221,12 @@ app.post("/profile", async (req, res) => {
       };
 
       const favoriteGenres = userData.genres;
-      console.log(favoriteGenres);
+      console.log(favoriteGenres); 
 
       const favArtistsData = null;
       const foundObjectsFromFavoriteArtists = null;
 
-      res.render("profile", { profileData: profileData, favoriteGenres: favoriteGenres, title: "My profile", favoriteArtists: favArtistsData, additionFavoriteArtistsData: foundObjectsFromFavoriteArtists });
+      res.render("profile", { profileData: profileData, favoriteGenres: favoriteGenres, title: "My profile", favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
     } else {
       res.render("profile", { profileData: null, title: "My profile", favoriteArtists: mostRecentFavArtists });
     }
@@ -256,7 +257,7 @@ app.get("/profile", async (req, res) => {
     await client.connect();
 
     const profileDataCollection = client.db(dbName).collection(collectionName)
-    const userData = await profileDataCollection.findOne({}, { sort: { _id: -1 } });
+    const userData = await profileDataCollection.findOne({}, { sort: { _id: -1}});
 
     if (userData) {
       const profileData = {
@@ -264,62 +265,62 @@ app.get("/profile", async (req, res) => {
         age: userData.age,
         file: userData.file,
         about: userData.about,
-        genres: userData.genres
+        genres:userData.genres
       };
-
+      
       const favoriteGenres = userData.genres;
 
-      // Retrieve favorite genres from db
-      const selectedGenreCollection = client.db('concertBuddies').collection('selectedGenres')
-      const allSelectedGenreData = await selectedGenreCollection.find({}).toArray();
+    // Retrieve favorite genres from db
+    const selectedGenreCollection = client.db('concertBuddies').collection('selectedGenres')
+    const allSelectedGenreData = await selectedGenreCollection.find({}).toArray();
 
-      // Retrieve favorite artists from db
-      const favoriteArtists = client.db('concertBuddies').collection('favoriteArtists');
-      const mostRecentFavArtists = await favoriteArtists.findOne({}, { sort: { _id: -1 } });
-      // Write a statement to prevent error when favArtistData is empty
-      const favArtistsData = mostRecentFavArtists ? mostRecentFavArtists.selectedFavoriteArtists : [];
+    // Retrieve favorite artists from db
+    const favoriteArtists = client.db('concertBuddies').collection('favoriteArtists');
+    const mostRecentFavArtists = await favoriteArtists.findOne({}, { sort: { _id: -1 } });
+    // Write a statement to prevent error when favArtistData is empty
+    const favArtistsData = mostRecentFavArtists ? mostRecentFavArtists.selectedFavoriteArtists : [];
+    
+    const foundObjectsFromFavoriteArtists = [];
 
-      const foundObjectsFromFavoriteArtists = [];
-
-      if (Array.isArray(favArtistsData)) {
-        const retrieveAdditionalArtistData = favArtistsData.map(artist => {
-          const findAllInfoOfFavArtist = async () => {
-            try {
-              await client.connect();
-              const allArtist = client.db('concertBuddies').collection('artists');
-              let nowActiveArtists = await allArtist.find({ name: artist }).toArray();
-              foundObjectsFromFavoriteArtists.push(...nowActiveArtists);
-            } catch (error) {
-              console.error("An error occurred while retrieving the data from the db", error);
-            }
-          };
-          return findAllInfoOfFavArtist();
-        });
-        await Promise.all(retrieveAdditionalArtistData);
-
-      } else {
-        console.log("KORTE ARRAY VAN 1");
-        const findAllInfoOfFavArtist = async () => {
-          try {
-            await client.connect();
-            const allArtist = client.db('concertBuddies').collection('artists');
-            let nowActiveArtists = await allArtist.find({ name: favArtistsData }).toArray();
+    if (Array.isArray(favArtistsData)) {
+      const retrieveAdditionalArtistData = favArtistsData.map(artist => {
+        const findAllInfoOfFavArtist = async() => { 
+           try {
+             await client.connect();
+             const allArtist = client.db('concertBuddies').collection('artists');
+             let nowActiveArtists = await allArtist.find({ name: artist }).toArray();
             foundObjectsFromFavoriteArtists.push(...nowActiveArtists);
           } catch (error) {
             console.error("An error occurred while retrieving the data from the db", error);
-          }
+          } 
         };
-        await findAllInfoOfFavArtist();
-      }
+         return findAllInfoOfFavArtist();
+       });
+       await Promise.all(retrieveAdditionalArtistData);
 
-      res.render("profile", { profileData: profileData, title: "My profile", favoriteGenres: favoriteGenres, favoriteArtists: favArtistsData, additionFavoriteArtistsData: foundObjectsFromFavoriteArtists });
-    } else {
-      res.render("profile", { profileData: null, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: mostRecentFavArtists });
-    }
+       } else {
+       console.log("KORTE ARRAY VAN 1");
+       const findAllInfoOfFavArtist = async() => { 
+        try {
+           await client.connect();
+           const allArtist = client.db('concertBuddies').collection('artists');
+          let nowActiveArtists = await allArtist.find({ name: favArtistsData }).toArray();
+          foundObjectsFromFavoriteArtists.push(...nowActiveArtists);
+         } catch (error) {
+           console.error("An error occurred while retrieving the data from the db", error);
+         } 
+       };
+      await findAllInfoOfFavArtist();
+     }
+    
+    res.render("profile", { profileData: profileData, title: "My profile", favoriteGenres: favoriteGenres, favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
+  } else {
+    res.render("profile", { profileData: null, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: mostRecentFavArtists  });
+  }
   } catch (error) {
     console.error("An error occurred while saving the data:", error);
     res.render("error.ejs");
-  }
+  } 
 });
 
 

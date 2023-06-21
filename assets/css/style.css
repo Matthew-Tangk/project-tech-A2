@@ -108,3 +108,138 @@ button[type=submit], a:not(.hero-cta) {
 fieldset {
     border: none;
 }
+
+noscript {
+    display: flex;
+    justify-content: center;
+}
+
+noscript p{
+  font-style: italic;
+  text-align: center;
+  color: var(--text);
+  background-color: var(--accent2);
+  border-radius: 10px;
+  width: 75%;
+  margin: 1em 0 0;
+  padding: 0.2em;
+}
+
+/*header code */
+header ul{
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    min-height: 4em;
+    text-align: center;
+    align-items: center;
+    padding: 0.8em 1.8em;
+    background-color: var(--input);
+}
+
+header li{
+    list-style: none;
+}
+  
+header li img {
+    margin: 0;
+    max-width: 2.5em;
+}
+  
+header a, footer a{
+    background-color: transparent;
+    width: auto;
+    padding: 0;
+    margin: 0;
+}
+
+/* Code for Footer */
+
+footer {
+        height: 3.125em;
+      }
+
+      footer ul {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 6.25em;
+        padding-left: 0;
+
+        background-color: #2b2936;
+      }
+
+      footer li {
+        list-style: none;
+      }
+
+      footer img {
+        width: 3.75em;
+        height: 3.75em;
+      }
+
+/* Code for Error page */
+#error h1{
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+}
+
+#error p {
+    text-align: center;
+}
+
+#error section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack :center;
+        -ms-flex-pack :center;
+            justify-content :center;
+    -webkit-box-align:center;
+        -ms-flex-align:center;
+            align-items:center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Notification */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #f8f8f8;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideIn 0.3s forwards;
+}
+
+.notification a {
+    background:transparent;
+    width:fit-content;
+    color:var(--background);
+    padding:0;
+    margin:0;
+}
+  
+@keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+}
+
+  
+  
+  
+  
+  
+  

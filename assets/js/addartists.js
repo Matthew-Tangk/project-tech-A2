@@ -1,7 +1,10 @@
 const artistCheckboxes = document.querySelectorAll('form fieldset div input');
-const artistCountText = document.querySelector('form > p');
-const artistCountNumber = document.querySelector('form > p:last-of-type > span');
+const artistCountText = document.querySelector('form > p:first-of-type');
+const artistCountNumber = document.querySelector('form > p:nth-of-type(2) > span');
+const javascriptFallbackText = document.querySelector('form > p:last-of-type');
 console.log(artistCheckboxes);
+
+javascriptFallbackText.classList.add('jsactive');
 
 let artistCheckedCount = 0;
 

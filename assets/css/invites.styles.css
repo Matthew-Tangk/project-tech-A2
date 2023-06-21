@@ -1,0 +1,126 @@
+ul li {
+    list-style:none;
+}
+
+main {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.jsactive {
+    display:none;
+}
+
+main > section > section {
+    display:flex;
+    flex-direction: column;;
+    align-items: center;
+    justify-content:center;
+
+    margin:1rem 0 5rem;
+
+}
+
+main > section > section:nth-of-type(2) {
+    gap:1rem;
+}
+
+main > section > section:nth-of-type(2) ul li:first-of-type {
+    font-weight:normal;
+    font-size:1.3rem;
+
+    align-self:center;
+}
+
+main > section > section:nth-of-type(2) ul li:last-of-type {
+    grid-column-start:1;
+    grid-column-end:2;
+
+    grid-row-start:1;
+
+    align-self:center;
+}
+
+main > section > section:nth-of-type(2) ul li:last-of-type img {
+    margin:auto;
+}
+
+main > section > section > h2 {
+    text-align: center;
+}
+
+main > section > section > ul {
+    width:95%;
+    background:var(--accent1dark);
+    border-radius:10px;
+
+    display:grid;
+    grid-template-columns: 1fr 3fr;
+
+    padding:1rem;
+}
+
+/* Greeting */
+main > section > section > ul > li:first-of-type {
+    grid-column-start: 2;
+    grid-column-end: -1;
+
+    font-weight:bold;
+    font-size:1.5rem;
+}
+
+/* Event */
+main > section > section > ul > li:nth-of-type(2) {
+    grid-column-start: 2;
+    grid-column-end: -1;
+
+    align-self: center;
+    font-size:1.3rem;
+}
+
+/* Profile picture */
+main > section > section > ul > li:nth-of-type(3) {
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+    grid-row-end: 3;
+}
+
+/* Options */
+main > section > section > ul > li:nth-of-type(4) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+    grid-row-start: 3;
+}
+
+main > section > section > ul > li:nth-of-type(4) ul {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-around;;
+    width:100%;
+}
+
+main > section > section > ul > li:nth-of-type(4) ul li {
+    width:fit-content;
+}
+
+main > section > section > ul > li:nth-of-type(4) ul li:first-of-type a,
+main > section > section > ul > li:nth-of-type(4) ul li:nth-of-type(2) a {
+    background-color:transparent;
+    color:var(--accent1);
+    width:fit-content;
+}
+
+main > section > section > ul li img {
+    width:75%;
+    aspect-ratio: 1/1;
+    border-radius:50%;
+}
+
+main > section > section > ul > li:last-of-type ul {
+    display:flex;
+    justify-content: space-around;
+    
+}

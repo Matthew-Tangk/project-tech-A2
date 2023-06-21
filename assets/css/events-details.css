@@ -1,0 +1,89 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: "Catamaran", sans-serif;
+  background-color: #1f1d2a;
+}
+
+header {
+  color: #2b2936;
+}
+
+header a {
+  display: flex;
+  justify-content: flex-end;
+  text-decoration: none;
+}
+
+h1 {
+  text-align: center;
+  margin: 0;
+  color: #ffffff;
+}
+
+h2 {
+  font-weight: lighter;
+  color: #ffffff;
+}
+
+h3 {
+  margin: 0;
+}
+
+#spread {
+    background-image: url(../static/img/events/mmatbs_spread.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 0.625em;
+    box-shadow: 0 0.3125em 0.3125em #322f54;
+    height: 11.25em;
+    border-radius: 1.5625em;
+    width: 90%;
+    margin: 0.625em;
+    border-radius: 1.5625em;
+  }
+
+  .page2 h2:first-of-type {
+    margin-left: 0.9375em;
+  }
+
+  .page2 p {
+    color: #ffffff;
+    font-size: 0.875em;
+    margin: 0.875em 0 0 0.9375em;
+  }
+
+  .page2 h2 {
+    color: #ffffff;
+    margin: 0.875em 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .attending {
+    display: flex;
+    justify-content: center;
+    background-color: #322f54;
+    width: 40%;
+    border-radius: 1.5625em;
+  }
+
+  .attending p {
+    color: #ffffff;
+    font-size: 0.875em;
+    height: 3.125em;
+    margin: 1.5625em 0 0 0;
+  }
+
+  #closingstatement {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 0.625em;
+  }
