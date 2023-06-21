@@ -1,16 +1,16 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   // Function to format the date string
-  function formatDate(dateString) {
+  const formatDate = (dateString) => {
     const options = { weekday: "long", day: "numeric", month: "long" };
     const date = new Date(dateString);
     return date.toLocaleDateString("nl-NL", options);
-  }
+  };
 
   // Initialize Flatpickr datepicker
   const datePicker = flatpickr("#myDatePicker", {
     inline: true,
     dateFormat: "d/m/Y",
-    onChange: function (selectedDates, dateString) {
+    onChange: (selectedDates, dateString) => {
       // Format the selected date
       const formattedDate = dateString.split("/").reverse().join("-");
 

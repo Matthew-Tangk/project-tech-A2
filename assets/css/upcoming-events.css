@@ -1,12 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 /* Styling for the hero section */
-
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  row-gap: 15%;
+  row-gap: 0.9em;
   justify-items: center;
   background-image: url("../static/img/events/burna-boy-hero.jpeg");
   background-size: cover;
@@ -14,8 +13,8 @@
   margin: 0;
 }
 
- a.hero-cta{
-  width: auto ;
+a.hero-cta {
+  width: auto;
 }
 
 /* Overlay for the hero section */
@@ -26,14 +25,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4); /* Adjust the opacity as desired */
-  z-index: 1; /* Move the overlay behind the text */
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
 }
 
 /* Styling for sections within the hero section */
 .hero section {
-  position: relative; /* Add position: relative to the sections */
-  z-index: 2; /* Move the text in front of the overlay */
+  position: relative;
+  z-index: 2;
 }
 
 /* Styling for heading elements within main */
@@ -74,14 +73,14 @@ main h3 {
 /* Styling for the "Select a date" input field */
 #myDatePicker {
   padding: 0.3em;
-  border: 1px solid #383744;
-  border-radius: 3px;
-  font-size: 16px;
+  border: 0.1em solid #383744;
+  border-radius: 0.2;
+  font-size: 1em;
   background-color: transparent;
   color: #333;
   max-width: 50%;
   margin: 4% 0 4% 0;
-  font-size: 14px;
+  font-size: 0.9;
   color: #ffffff;
   margin-left: 0.1em;
 }
@@ -105,8 +104,8 @@ button,
   font: inherit;
   color: #ffffff;
   cursor: pointer;
-  z-index: 1; /* Move the overlay behind the text */
-  align-items: end;
+  z-index: 1;
+  align-items: flex-end;
   text-decoration: none;
   font-weight: 500;
 }
@@ -130,12 +129,12 @@ button,
 /* Styling for the scroll container */
 .scroll-container {
   display: flex;
-  scroll-snap-type: x mandatory; /* Enable horizontal scroll snapping */
+  scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  overflow-x: auto; /* Enable horizontal scrolling */
-  white-space: nowrap; /* Keep scroll items in a single line */
-  width: 100%; /* Set the width to 100% to take the full available space */
-  height: auto; /* Remove fixed height to adjust based on content */
+  overflow-x: auto;
+  white-space: nowrap;
+  width: 100%;
+  height: auto;
 }
 
 /* Overlay for scroll items */
@@ -146,8 +145,8 @@ button,
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4); /* Adjust the opacity as desired */
-  z-index: 1; /* Move the overlay behind the text */
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
 }
 
 /* Styling for the calendar section */
@@ -160,7 +159,7 @@ section.calendar .flatpickr-month {
   color: #ffffff;
   font-weight: bold;
   margin: 1em;
-  font-size: 13px;
+  font-size: 0.8em;
 }
 
 section.calendar span.flatpickr-weekday {
@@ -175,7 +174,7 @@ section.calendar .flatpickr-days {
 
 section.calendar .flatpickr-day {
   color: #ffffff;
-  font-size: 14px;
+  font-size: 0.9em;
 }
 
 section.calendar .flatpickr-day.today {
@@ -192,8 +191,7 @@ section.calendar .flatpickr-day.selected {
 section.calendar .flatpickr-calendar {
   box-shadow: none;
   background-color: transparent;
-  border: 1px solid #383744;
-  /* Exclude properties defined in :root */
+  border: 0.1em solid #383744;
   --text: initial;
   --input: initial;
   --placeholder: initial;
@@ -222,7 +220,7 @@ section.calendar .flatpickr-calendar:after {
 
 /* Styling for sections within scroll items */
 .scroll-item section {
-  margin: 10%;
+  margin: 1.6em;
   position: relative;
   z-index: 2;
 }
@@ -270,10 +268,10 @@ section.calendar .flatpickr-calendar:after {
 /* Styling for event cards */
 .event-card {
   grid-template-columns: 1fr 1fr;
-  margin: 2% 2% 10% 2%;
+  margin-top: 1.5em;
   background-color: #322f54;
-  padding: 5%;
-  border-radius: 0.5em;
+  padding: 1em;
+  border-radius: 0.3em;
 }
 
 .event-card p:nth-of-type(1) {
