@@ -108,17 +108,23 @@ fieldset {
 }
 
 /*header code */
-header {
+header ul{
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
+    min-height: 4em;
     text-align: center;
     align-items: center;
-    padding: 1.3em 1.8em;
+    padding: 0.8em 1.8em;
     background-color: var(--input);
 }
+
+header li{
+    list-style: none;
+}
   
-header img {
+header li img {
     margin: 0;
+    max-width: 2.5em;
 }
   
 header a{
@@ -128,6 +134,30 @@ header a{
     margin: 0;
 }
 
+/* Code for Footer */
+
+footer {
+        height: 3.125em;
+      }
+
+      footer ul {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 6.25em;
+        padding-left: 0;
+
+        background-color: #2b2936;
+      }
+
+      footer li {
+        list-style: none;
+      }
+
+      footer img {
+        width: 3.75em;
+        height: 3.75em;
+      }
 
 /* Code for Error page */
 #error h1{

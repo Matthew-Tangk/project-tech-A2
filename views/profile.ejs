@@ -5,38 +5,57 @@
   <%- include('./partials/header') %>
 
   <main>
-    <section>
-      <div>
+    <section id="profileData">
+      <section>
         <p> Welcome </p>
         <h2> <%= profileData.username %> </h2>
-        <P> <%= profileData.age %> </P>
-        <P> <%= profileData.about %></P>
-      </div>
+        <p> <%= profileData.age %> </p>
+        <p> <%= profileData.about %></p>
+      </section>
 
       <img width="100px" src="/static/img/profilepic/<%= profileData.file %>"  alt="Profile Picture"/>
     </section>
     
-    <section>
-      <ul>
-        <% selectedGenre.forEach(selectedGenre => { %>
-          <li>
-            <img src="../static/img/genres/<%= selectedGenre.img %>" alt="<%= selectedGenre.name %>">
-            <p><%= selectedGenre.name %></p>
-          </li>
-          <% }); %>
-      </ul>
+    <section id="selectedGenres">
+      <% if(favoriteGenres != null) { %>
+        <ul>
+          <% favoriteGenres.forEach(genre => { %>
+            <li>
+              <img src="../static/img/genres/<%= genre %>.svg" alt="<%= genre %>">
+              <p><%= genre %></p>
+            </li>
+            <% }); %>
+        </ul>
+      <% } %>
     </section>
 
     <section>
       <p> My artists</p>
-      <div>
-        <p>Complete your profile</p>
-        <a href="/profile/add-artists">Add artists</a>
-      </div>
-    </section>
-    
-  </main>
+      <% if(favoriteArtists == null) { %>
+        <section id="emptyState">
+          <p>Complete your profile</p>
+          <a href="/profile/add-artists">Add artists</a>
+        </section>
 
-  <script src="../js/script.js"></script>
+      <% } else { %>
+        <section id="favArtists">
+          <ul>
+            <% additionFavoriteArtistsData.forEach(artist => { %>
+              <li>
+                <img src="<%= artist.path %>" alt="<%= artist.name %>">
+                <%= artist.name %>
+              </li>
+            <% }) %>
+          </ul>
+
+          <a href="/profile/add-artists">Edit artists</a>
+        </section>
+      <% } %>
+
+    </section>
+  </main>
+  <%- include('./partials/footer') %>
+
+  <script src="../js/profile.js"></script>
 </body>
 </html>

@@ -1,12 +1,9 @@
 <%-include('partials/head.ejs')%>
   <body>
-    <header>
-      <a href="">Profile</a>
+    <%-include('partials/header.ejs')%>
+    <main>
       <h1>My Events</h1>
 
-      <p class="inviteStatus">Invite you have accepted</p>
-    </header>
-    <main>
       <h2>June</h2>
 
       <div class="ticket">
@@ -25,25 +22,26 @@
         </div>
       </div>
 
-      <div class="ticket">
+      <div class="ticket" id="ticketKENDRICK">
         <div class="date">
           <p>12</p>
         </div>
-        <a href="./event-details.ejs">
+        <a href="./events2.html">
           <div class="eventDetails">
             <h3>Kendrick Lamar</h3>
             <p>Paradiso</p>
             <p>300+ going</p>
             <p>8 contacts going</p>
+            <p class="status">Status: attending</p>
             <label class="toggle-button">
-              <input id="toggle" type="checkbox" checked />
+              <input class="toggle" type="checkbox" checked />
               <span class="slider"></span>
             </label>
           </div>
         </a>
       </div>
 
-      <div class="ticket">
+      <div class="ticket" id="ticketDOJA">
         <div class="date">
           <p>21</p>
         </div>
@@ -52,18 +50,17 @@
           <p>Melkweg</p>
           <p>300+ going</p>
           <p>12 contacts going</p>
+          <p class="status">Status: attending</p>
           <label class="toggle-button">
-            <input id="toggle" type="checkbox" checked />
+            <input class="toggle" type="checkbox" checked />
             <span class="slider"></span>
           </label>
         </div>
       </div>
 
-      <p class="inviteStatus">Invites that are pending</p>
-
       <h2>August</h2>
 
-      <div class="ticket">
+      <div class="ticket" id="ticketDRAKE">
         <div class="date">
           <p>14</p>
         </div>
@@ -72,26 +69,17 @@
           <p>Ziggo dome</p>
           <p>500+ going</p>
           <p>7 contacts going</p>
+          <p class="status">Status: attending</p>
           <label class="toggle-button">
-            <input id="toggle" type="checkbox" />
+            <input class="toggle" type="checkbox" />
             <span class="slider"></span>
           </label>
         </div>
       </div>
     </main>
-    <footer>
-      <div class="footer-container">
-        <a href="index.html"
-          ><img src="../assets/static/img/events/calendar_icon.png" alt="calendar_icon"
-        /></a>
-        <a href="stage.html"
-          ><img src="../assets/static/img/events/inbox_icon.png" alt="my_events"
-        /></a>
-        <a href="profile.html"
-          ><img src="../assets/static/img/events/inbox_icon.png" alt="inbox"
-        /></a>
-      </div>
-    </footer>
+     
+    <%-include('partials/footer.ejs')%>
+  
     <style>
       /* CSS */
       styles {
@@ -111,16 +99,6 @@
         background-color: #1f1d2a;
       }
 
-      header {
-        color: #2b2936;
-      }
-
-      header a {
-        display: flex;
-        justify-content: flex-end;
-        text-decoration: none;
-      }
-
       h1 {
         text-align: center;
         margin: 0;
@@ -137,23 +115,21 @@
       /* container for the tickets */
       .ticket {
         background-color: #322f54;
-        width: 100%;
-        border-radius: 25px;
-        background-image: url(./static/img/events/sos_cover.jpeg);
+        border-radius: 1.5625em;
         background-size: cover;
         background-position: left;
         background-repeat: no-repeat;
         background-size: 40% 100%;
-        padding: 5px 0;
-        margin: 30px 0;
+        padding: 0.3125em 0;
+        margin: 1.875em 0;
       }
 
       .eventDetails {
         display: flex;
         flex-direction: column;
-        font-size: 14px;
+        font-size: 0.875em;
         color: white;
-        margin: 5px 0 5px 43%;
+        margin: 0.3125em 0 0.3125em 43%;
       }
 
       .eventDetails p {
@@ -162,7 +138,7 @@
       }
 
       .eventDetails p:first-of-type {
-        margin-bottom: 20px;
+        margin-bottom: 1.25em;
         font-weight: lighter;
       }
 
@@ -180,6 +156,7 @@
       }
 
       .date p {
+        margin-top: 1.3em;
         font-size: 2.5em;
       }
 
@@ -196,8 +173,8 @@
       .toggle-button {
         display: inline-block;
         position: relative;
-        width: 60px;
-        height: 34px;
+        width: 3.75em;
+        height: 2.125em;
         margin-left: 60%;
       }
 
@@ -207,7 +184,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        border-radius: 17px;
+        border-radius: 1.0625em;
         background-color: #6862c8;
         transition: 0.4s;
       }
@@ -215,34 +192,35 @@
       .slider:before {
         position: absolute;
         content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
+        height: 1.625em;
+        width: 1.625em;
+        left: 0.25em;
+        bottom: 0.25em;
         border-radius: 50%;
         background-color: #da6864;
         transition: 0.4s;
       }
 
-      #toggle:checked + .slider {
+      .toggle:checked + .slider {
         background-color: #6862c8;
       }
 
-      #toggle:checked + .slider:before {
-        transform: translateX(26px);
+      .toggle:checked + .slider:before {
+        transform: translateX(1.625em);
         background-color: #64ff88;
       }
 
+
       .ticket:nth-of-type(2) {
-        background-image: url(../static/img/events/MMATBS_cover.jpeg);
+        background-image: url(../img/events/MMATBS_cover.jpeg);
       }
 
       .ticket:nth-of-type(3) {
-        background-image: url(../static/img/events/planetHer_cover.jpeg);
+        background-image: url(../img/events/planetHer_cover.jpeg);
       }
 
       .ticket:nth-of-type(4) {
-        background-image: url(../static/img/events/drake_cover.jpeg);
+        background-image: url(../img/events/drake_cover.jpeg);
       }
 
       .main-container {
@@ -250,29 +228,6 @@
         padding-bottom: 50px;
       }
 
-      footer {
-        bottom: 0;
-        width: 100%;
-        height: 50px;
-      }
-
-      footer a {
-        text-decoration: none;
-        color: white;
-      }
-
-      footer a img {
-        width: 60px;
-        height: 60px;
-      }
-
-      .footer-container {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        height: 100px;
-        background-color: #2b2936;
-      }
     </style>
   </body>
 </html>
