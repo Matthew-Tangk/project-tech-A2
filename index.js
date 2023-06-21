@@ -45,12 +45,18 @@ app.use(express.urlencoded({ extended: true }));
 app.listen(3000);
 
 // Uglifycss
-const inputFiles = ["assets/css/style.css", "assets/css/addartists.styles.css", "assets/css/invites.styles.css", "assets/css/my-events.css", "assets/css/registration.css", "assets/css/upcoming-events.css" ];
+const inputFiles = [
+  "assets/css/style.css",
+  "assets/css/addartists.styles.css",
+  "assets/css/invites.styles.css",
+  "assets/css/my-events.css",
+  "assets/css/registration.css",
+  "assets/css/upcoming-events.css",
+];
 const options = {
   maxLineLen: 500,
-  expandVars: true
+  expandVars: true,
 };
-
 
 const profileRoutes = require("./routes/profileRoutes.js");
 app.use("/profile", profileRoutes);
@@ -124,7 +130,7 @@ app.post("/add-genres", async (req, res) => {
   try {
     await client.connect();
 
-    const genreCollection = client.db('concertBuddies').collection('genres')
+    const genreCollection = client.db("concertBuddies").collection("genres");
     const allGenreData = await genreCollection.find({}).toArray();
 
     res.render("genres.ejs", {
@@ -135,8 +141,8 @@ app.post("/add-genres", async (req, res) => {
       file,
       about,
       genres: allGenreData,
-      title: "Add genres"
-    })
+      title: "Add genres",
+    });
   } catch (error) {
     console.error("An error occurred while saving the data:", error);
   }
@@ -165,7 +171,10 @@ app.post("/profile", async (req, res) => {
     await client.connect();
 
     const profileDataCollection = client.db(dbName).collection(collectionName);
-    const userData = await profileDataCollection.findOne({}, { sort: { _id: -1 } });
+    const userData = await profileDataCollection.findOne(
+      {},
+      { sort: { _id: -1 } }
+    );
 
     console.log(userData); // Add this line to check the value of userData
 
@@ -179,14 +188,24 @@ app.post("/profile", async (req, res) => {
       };
 
       const favoriteGenres = userData.genres;
-      console.log(favoriteGenres); 
+      console.log(favoriteGenres);
 
       const favArtistsData = null;
       const foundObjectsFromFavoriteArtists = null;
 
-      res.render("profile", { profileData: profileData, favoriteGenres: favoriteGenres, title: "My profile", favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
+      res.render("profile", {
+        profileData: profileData,
+        favoriteGenres: favoriteGenres,
+        title: "My profile",
+        favoriteArtists: favArtistsData,
+        additionFavoriteArtistsData: foundObjectsFromFavoriteArtists,
+      });
     } else {
-      res.render("profile", { profileData: null, title: "My profile", favoriteArtists: mostRecentFavArtists });
+      res.render("profile", {
+        profileData: null,
+        title: "My profile",
+        favoriteArtists: mostRecentFavArtists,
+      });
     }
   } catch (error) {
     console.error("An error occurred while saving the data:", error);
@@ -203,19 +222,23 @@ const sendUserData = async (data) => {
 
     await collection.insertOne(data);
   } catch (err) {
-    console.error("Something went wrong with adding the profileinfo to the database :(", err);
+    console.error(
+      "Something went wrong with adding the profileinfo to the database :(",
+      err
+    );
   }
-
-}
-
+};
 
 // User profile
 app.get("/profile", async (req, res) => {
   try {
     await client.connect();
 
-    const profileDataCollection = client.db(dbName).collection(collectionName)
-    const userData = await profileDataCollection.findOne({}, { sort: { _id: -1}});
+    const profileDataCollection = client.db(dbName).collection(collectionName);
+    const userData = await profileDataCollection.findOne(
+      {},
+      { sort: { _id: -1 } }
+    );
 
     if (userData) {
       const profileData = {
@@ -223,64 +246,174 @@ app.get("/profile", async (req, res) => {
         age: userData.age,
         file: userData.file,
         about: userData.about,
-        genres:userData.genres
+        genres: userData.genres,
       };
-      
+
       const favoriteGenres = userData.genres;
 
-    // Retrieve favorite genres from db
-    const selectedGenreCollection = client.db('concertBuddies').collection('selectedGenres')
-    const allSelectedGenreData = await selectedGenreCollection.find({}).toArray();
+      // Retrieve favorite genres from db
+      const selectedGenreCollection = client
+        .db("concertBuddies")
+        .collection("selectedGenres");
+      const allSelectedGenreData = await selectedGenreCollection
+        .find({})
+        .toArray();
 
-    // Retrieve favorite artists from db
-    const favoriteArtists = client.db('concertBuddies').collection('favoriteArtists');
-    const mostRecentFavArtists = await favoriteArtists.findOne({}, { sort: { _id: -1 } });
-    // Write a statement to prevent error when favArtistData is empty
-    const favArtistsData = mostRecentFavArtists ? mostRecentFavArtists.selectedFavoriteArtists : [];
-    
-    const foundObjectsFromFavoriteArtists = [];
+      // Retrieve favorite artists from db
+      const favoriteArtists = client
+        .db("concertBuddies")
+        .collection("favoriteArtists");
+      const mostRecentFavArtists = await favoriteArtists.findOne(
+        {},
+        { sort: { _id: -1 } }
+      );
+      // Write a statement to prevent error when favArtistData is empty
+      const favArtistsData = mostRecentFavArtists
+        ? mostRecentFavArtists.selectedFavoriteArtists
+        : [];
 
-    if (Array.isArray(favArtistsData)) {
-      const retrieveAdditionalArtistData = favArtistsData.map(artist => {
-        const findAllInfoOfFavArtist = async() => { 
-           try {
-             await client.connect();
-             const allArtist = client.db('concertBuddies').collection('artists');
-             let nowActiveArtists = await allArtist.find({ name: artist }).toArray();
+      const foundObjectsFromFavoriteArtists = [];
+
+      if (Array.isArray(favArtistsData)) {
+        const retrieveAdditionalArtistData = favArtistsData.map((artist) => {
+          const findAllInfoOfFavArtist = async () => {
+            try {
+              await client.connect();
+              const allArtist = client
+                .db("concertBuddies")
+                .collection("artists");
+              let nowActiveArtists = await allArtist
+                .find({ name: artist })
+                .toArray();
+              foundObjectsFromFavoriteArtists.push(...nowActiveArtists);
+            } catch (error) {
+              console.error(
+                "An error occurred while retrieving the data from the db",
+                error
+              );
+            }
+          };
+          return findAllInfoOfFavArtist();
+        });
+        await Promise.all(retrieveAdditionalArtistData);
+      } else {
+        console.log("KORTE ARRAY VAN 1");
+        const findAllInfoOfFavArtist = async () => {
+          try {
+            await client.connect();
+            const allArtist = client.db("concertBuddies").collection("artists");
+            let nowActiveArtists = await allArtist
+              .find({ name: favArtistsData })
+              .toArray();
             foundObjectsFromFavoriteArtists.push(...nowActiveArtists);
           } catch (error) {
-            console.error("An error occurred while retrieving the data from the db", error);
-          } 
+            console.error(
+              "An error occurred while retrieving the data from the db",
+              error
+            );
+          }
         };
-         return findAllInfoOfFavArtist();
-       });
-       await Promise.all(retrieveAdditionalArtistData);
+        await findAllInfoOfFavArtist();
+      }
 
-       } else {
-       console.log("KORTE ARRAY VAN 1");
-       const findAllInfoOfFavArtist = async() => { 
-        try {
-           await client.connect();
-           const allArtist = client.db('concertBuddies').collection('artists');
-          let nowActiveArtists = await allArtist.find({ name: favArtistsData }).toArray();
-          foundObjectsFromFavoriteArtists.push(...nowActiveArtists);
-         } catch (error) {
-           console.error("An error occurred while retrieving the data from the db", error);
-         } 
-       };
-      await findAllInfoOfFavArtist();
-     }
-    
-    res.render("profile", { profileData: profileData, title: "My profile", favoriteGenres: favoriteGenres, favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
-  } else {
-    res.render("profile", { profileData: null, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: mostRecentFavArtists  });
-  }
+      res.render("profile", {
+        profileData: profileData,
+        title: "My profile",
+        favoriteGenres: favoriteGenres,
+        favoriteArtists: favArtistsData,
+        additionFavoriteArtistsData: foundObjectsFromFavoriteArtists,
+      });
+    } else {
+      res.render("profile", {
+        profileData: null,
+        title: "My profile",
+        selectedGenre: allSelectedGenreData,
+        favoriteArtists: mostRecentFavArtists,
+      });
+    }
   } catch (error) {
     console.error("An error occurred while saving the data:", error);
     res.render("error.ejs");
-  } 
+  }
 });
 
+// My events tickets
+
+app.post("/updateSzaStatus", async (req, res) => {
+  const status = req.body.status;
+
+  try {
+    await client.connect();
+
+    const collection = client.db("toggle_button").collection("status sza");
+
+    await collection.updateOne({}, { $set: { status } });
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.log("Error:", error);
+    res.sendStatus(500);
+  } finally {
+    await client.close();
+  }
+});
+
+app.post("/updateKendrickStatus", async (req, res) => {
+  const status = req.body.status;
+
+  try {
+    await client.connect();
+
+    const collection = client.db("toggle_button").collection("status kendrick");
+
+    await collection.updateOne({}, { $set: { status } });
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.log("Error:", error);
+    res.sendStatus(500);
+  } finally {
+    await client.close();
+  }
+});
+
+app.post("/updateDojaStatus", async (req, res) => {
+  const status = req.body.status;
+
+  try {
+    await client.connect();
+
+    const collection = client.db("toggle_button").collection("status doja");
+
+    await collection.updateOne({}, { $set: { status } });
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.log("Error:", error);
+    res.sendStatus(500);
+  } finally {
+    await client.close();
+  }
+});
+
+app.post("/updateDrakeStatus", async (req, res) => {
+  const status = req.body.status;
+
+  try {
+    await client.connect();
+
+    const collection = client.db("toggle_button").collection("status drake");
+
+    await collection.updateOne({}, { $set: { status } });
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.log("Error:", error);
+    res.sendStatus(500);
+  } finally {
+    await client.close();
+  }
+});
 
 // 404 error if page is not found
 app.use((req, res, next) => {
