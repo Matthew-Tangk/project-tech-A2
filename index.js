@@ -1,5 +1,4 @@
 require("dotenv").config();
-const path = require("path");
 
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri = process.env.DB_SIGNIN;
@@ -11,16 +10,6 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   },
 });
-
-const express = require("express");
-const compression = require("compression");
-const multer = require("multer");
-const upload = multer({ dest: "assets/static/img/profilepic" });
-const bodyParser = require("body-parser");
-
-const app = express();
-
-app.use(compression()); // Enable Gzip compression for all responses
 
 async function run() {
   try {
@@ -41,10 +30,18 @@ const dbNameEvents = "concertBuddies";
 const collectionName = "user";
 const collectionEvents = "events";
 
+const express = require("express");
+const multer = require("multer");
+const upload = multer({ dest: "assets/static/img/profilepic" });
+const bodyParser = require("body-parser");
+
+const app = express();
+
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static("assets"));
 app.use(express.urlencoded({ extended: true }));
+app.listen(3000);
 
 const artists = [
   // ...artists data
@@ -128,16 +125,4 @@ app.get("/upcoming-events/:date", async (req, res) => {
 
 app.use((req, res, next) => {
   res.status(404).render("error.ejs", { title: "not found" });
-});
-
-const staticAssetsPath = path.join(__dirname, "assets", "static");
-app.use(
-  express.static(staticAssetsPath, {
-    maxAge: "1y", // Set cache-control max-age to 1 year
-  })
-);
-console.log("Static assets middleware applied.");
-
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
 });
