@@ -1,106 +1,292 @@
-@import url('https://fonts.googleapis.com/css2?family=Catamaran&display=swap');
-body {
-    font-family: 'Catamaran', sans-serif;
-    background-color: #1F1D2A;
-    color: #DBDADA !important;
-    font-weight: 500;
-  }
-  
-.grid-container {
+@import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+/* Styling for the hero section */
+.hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  row-gap: 30px;
-}
-
-
-.grid-item {
-  padding: 20px 20px 0 20px 20px;
-  text-align: center;
-}
-
-.grid-item h1 {
-
-}
-
-.featured {
-  grid-column: 1/3;
-  justify-self: center;
-  display: flex;
-  align-items: flex-end;  
-  background-image: url('../static/img/events/drake.jpeg');
+  grid-template-rows: 1fr 1fr 1fr;
+  row-gap: 15%;
+  justify-items: center;
+  background-image: url("../static/img/events/burna-boy-hero.jpeg");
   background-size: cover;
-  height: 180px;
-  width: 275px;
-  border-radius: 25%;
-  margin-top: 10%;
-
+  height: 100vh;
+  margin: 0;
 }
 
+/* Overlay for the hero section */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* Adjust the opacity as desired */
+  z-index: 1; /* Move the overlay behind the text */
+}
 
-.grid-item button  {
-font-size: 1em;
-color: inherit;
-cursor: pointer;
-padding: 0;
-background: none;
-border: none;
-outline: none;
-text-align: inherit;
-text-decoration: none;
-cursor: pointer;
+/* Styling for sections within the hero section */
+.hero section {
+  position: relative; /* Add position: relative to the sections */
+  z-index: 2; /* Move the text in front of the overlay */
+}
 
-  }
+/* Styling for heading elements within main */
+main h1 {
+  font-size: 1.9em;
+  font-weight: 100;
+}
 
-  .featured h1 {
-font-size: 1.5em;
-padding-bottom: 30%;
+main h1:nth-of-type(2) {
+  font-weight: 500;
+}
 
-  }
-  .featured h2 {
-    font-size: 1em; 
+main h2 {
+  font-size: 1.4em;
+  font-weight: 500;
+}
 
-      }
+main h3 {
+  font-size: 0.9em;
+  font-weight: 400;
+}
 
-      .plus-button {
-        font-size: 1em;
-        background-color: #DBDADA;
-        color: #1F1D2A;
-        border: none;
-        border-radius: 100%;
-        width: 22px;
-        height: 15%;
-        margin-left: 5px;
-        cursor: pointer;
-      } 
+/* Specific styling for sections within the hero section */
+.hero section:nth-of-type(2) {
+  grid-column: 1;
+  grid-row: 3;
+}
 
-      #datepicker {
-        grid-column: 1/3;
-        justify-self: center;
-        width: 50%;
-      }
+.hero section:nth-of-type(3) {
+  grid-row: 3;
+  align-self: last baseline;
+}
 
+.hero section:nth-of-type(3) h3 {
+  display: inline;
+}
 
-  .text-container {
-    padding: 20px;
-    color: white;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust the background color and transparency as needed */
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    height: 140px;
-    border-radius: 25%;
-  }
+/* Styling for the "Select a date" input field */
+#myDatePicker {
+  padding: 0.3em;
+  border: 1px solid #383744;
+  border-radius: 3px;
+  font-size: 16px;
+  background-color: transparent;
+  color: #333;
+  max-width: 50%;
+  margin: 4% 0 4% 0;
+  font-size: 14px;
+  color: #ffffff;
+  margin-left: 0.1em;
+}
 
-  .text-container h1 {
-    margin-top: 50px;
-  }
-  .grid-item button:hover  {
-    color: #ffffff;
-    transition-duration: 0.5s;
+section.calendar #myDatePicker {
+  width: 100%;
+}
 
+/* Styling for buttons and hero-cta */
+button,
+.hero-cta {
+  display: grid;
+  grid-row: 3;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: #ffffff;
+  cursor: pointer;
+  z-index: 1; /* Move the overlay behind the text */
+  align-items: end;
+  text-decoration: none;
+  font-weight: 500;
+}
 
-      }
+#slider-container {
+  margin: 0;
+}
+
+/* Styling for scroll items within the slider container */
+.scroll-item section:nth-of-type(2) {
+  position: relative;
+  top: 50%;
+}
+
+.scroll-item section:nth-of-type(3) {
+  position: relative;
+  top: 36.5%;
+  left: 50%;
+}
+
+/* Styling for the scroll container */
+.scroll-container {
+  display: flex;
+  scroll-snap-type: x mandatory; /* Enable horizontal scroll snapping */
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Keep scroll items in a single line */
+  width: 100%; /* Set the width to 100% to take the full available space */
+  height: auto; /* Remove fixed height to adjust based on content */
+}
+
+/* Overlay for scroll items */
+.scroll-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* Adjust the opacity as desired */
+  z-index: 1; /* Move the overlay behind the text */
+}
+
+/* Styling for the calendar section */
+section.calendar {
+  overflow-y: hidden;
+}
+
+section.calendar .flatpickr-month {
+  background-color: transparent;
+  color: #ffffff;
+  font-weight: bold;
+  margin: 1em;
+  font-size: 13px;
+}
+
+section.calendar span.flatpickr-weekday {
+  color: white;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+section.calendar .flatpickr-days {
+  background-color: transparent;
+}
+
+section.calendar .flatpickr-day {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+section.calendar .flatpickr-day.today {
+  background-color: #6862c8;
+  border: none;
+}
+
+section.calendar .flatpickr-day.selected {
+  background-color: #322f54;
+  border: none;
+}
+
+/* Custom styles for the Flatpickr datepicker */
+section.calendar .flatpickr-calendar {
+  box-shadow: none;
+  background-color: transparent;
+  border: 1px solid #383744;
+  /* Exclude properties defined in :root */
+  --text: initial;
+  --input: initial;
+  --placeholder: initial;
+  --accent1: initial;
+  --accent1dark: initial;
+  --accent2: initial;
+  --accent2dark: initial;
+  --background: initial;
+}
+
+section.calendar .flatpickr-calendar:after {
+  border: 0;
+}
+
+/* Styling for scroll items */
+.scroll-item {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
+  background-size: cover;
+  position: relative;
+}
+
+/* Styling for sections within scroll items */
+.scroll-item section {
+  margin: 10%;
+  position: relative;
+  z-index: 2;
+}
+
+/* Styling for heading elements within scroll items */
+.scroll-item h1 {
+  font-size: 1.9em;
+  font-weight: 100;
+}
+
+.scroll-item h1:nth-of-type(2) {
+  font-weight: 500;
+}
+
+.scroll-item h2 {
+  font-size: 1.4em;
+  font-weight: 500;
+}
+
+.scroll-item h3 {
+  font-size: 0.9em;
+  font-weight: 400;
+}
+
+.scroll-item section:nth-of-type(2) {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.scroll-item section:nth-of-type(3) {
+  grid-row: 3;
+  align-self: last baseline;
+}
+
+.scroll-item section:nth-of-type(3) h3 {
+  display: inline;
+}
+
+/* Styling for the calendar heading */
+.calendar h1 {
+  text-align: center;
+  font-weight: 400;
+}
+
+/* Styling for event cards */
+.event-card {
+  grid-template-columns: 1fr 1fr;
+  margin: 2% 2% 10% 2%;
+  background-color: #322f54;
+  padding: 5%;
+  border-radius: 0.5em;
+}
+
+.event-card p:nth-of-type(1) {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.event-card p:nth-of-type(2) {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.event-card p:nth-of-type(3) {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.event-card button {
+  grid-column: 2;
+  grid-row: 1;
+}
