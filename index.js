@@ -37,7 +37,7 @@ app.set('view engine', 'ejs')
 app.set('views', 'views')
 app.use(express.static('assets'))
 app.use(express.urlencoded({ extended: true }))
-app.listen(3000)
+app.listen(699)
 
 // Array with data from artist and bands 
 const artists = [
