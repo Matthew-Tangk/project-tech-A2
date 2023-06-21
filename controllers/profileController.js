@@ -81,7 +81,6 @@ exports.profile = async (req, res) => {
     try {
       await sendFavoriteArtistData(favoriteArtists);
 
-      // Hier de profielData nog toevoegen door die uit de database te halen
       await client.connect();
 
       const profileDataCollection = client.db(dbName).collection(collectionName)
@@ -138,10 +137,8 @@ exports.profile = async (req, res) => {
         };
        await findAllInfoOfFavArtist();
       }
-      // res.render("profile", { profileData: profileData, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
       res.redirect("/profile");
     } else {
-      // res.render("profile", { profileData: null, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: mostRecentFavArtists  });
       res.redirect("/profile");
     }
     } catch (error) {
@@ -168,9 +165,3 @@ const sendFavoriteArtistData = async (data) => {
     );
   }
 };
-
-//       console.log("The artists are succesfully added to profile", uploadFavoriteArtistsData.insertedId);
-//   } catch(err) {
-//     console.error("Something went wrong with adding the artists to your profile :(", err);
-//   }
-// }
