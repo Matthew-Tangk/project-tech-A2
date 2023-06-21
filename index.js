@@ -78,6 +78,15 @@ app.post('/new-about', (req, res) => {
   res.render('make-about.ejs', { username, age, tel, file, about });
 });
 
+app.get("/my-events", (req, res) => {
+  res.render("my-events.ejs");
+});
+
+// Event details page
+app.get("/event-details", (req, res) => {
+  res.render("event-details.ejs");
+});
+
 // Select the band/artist page
 app.post('/select-artists', async (req, res) => {
   const { username, age, tel, file, about } = req.body;
