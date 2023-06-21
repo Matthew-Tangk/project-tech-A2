@@ -35,6 +35,7 @@ const multer = require("multer");
 const upload = multer({ dest: "assets/static/img/profilepic" });
 const bodyParser = require("body-parser");
 const uglifycss = require("uglifycss");
+const path = require("path");
 
 const app = express();
 
@@ -63,9 +64,48 @@ app.get("/", (req, res) => {
   res.render("home.ejs", { title: "Concert buddies" });
 });
 
-// Home page
-app.get("/upcoming-events", (req, res) => {
-  res.render("upcoming-events.ejs", { title: "Upcoming events" });
+app.get("/upcoming-events", async (req, res) => {
+
+  try {
+    const db = client.db(dbNameEvents);
+    const collection = db.collection(collectionEvents);
+    const eventData = await collection.find({}).toArray();
+
+    const formattedEvents = eventData.map((event) => {
+
+      const options = {
+        weekday: "short",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      };
+      const formattedDate = event.date.toLocaleDateString("nl-NL", options);
+
+      return { ...event, formattedDate };
+    });
+    console.log("Pulled data from MongoDB:", formattedEvents);
+    res.render("upcoming-events.ejs", {
+      events: formattedEvents,
+      title: "Upcoming events",
+    });
+  } catch (error) {
+    console.error("An error occurred while fetching the data:", error);
+    res.render("error.ejs");
+  }
+});
+
+app.get("/upcoming-events/:date", async (req, res) => {
+  try {
+    const selectedDate = new Date(req.params.date);
+    const db = client.db(dbNameEvents);
+    const collection = db.collection(collectionEvents);
+    const eventData = await collection.find({ date: selectedDate }).toArray();
+
+    res.json(eventData);
+  } catch (error) {
+    console.error("An error occurred while fetching the data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 // My events page
