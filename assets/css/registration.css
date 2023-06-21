@@ -217,7 +217,7 @@ input[type="checkbox"]:checked + label {
   gap: 0.5em;
 }
 
-#yourProfile li img{
+#yourProfile #selectedGenres li img{
   max-width: 1em;
   height: auto;
   margin: 0;
