@@ -43,47 +43,7 @@ app.use(express.static("assets"));
 app.use(express.urlencoded({ extended: true }));
 app.listen(3000);
 
-// Array with data from artist and bands
-const artists = [
-  { id: 1, name: "Sleep token", image: "/static/img/artists/sleeptoken.jpg" },
-  { id: 2, name: "PVRIS", image: "/static/img/artists/pvris.jpg" },
-  {
-    id: 3,
-    name: "Arctic monkeys",
-    image: "/static/img/artists/arcticmonkeys.jpg",
-  },
-  { id: 4, name: "Kovacs", image: "/static/img/artists/kovacs.jpg" },
-  {
-    id: 5,
-    name: "Melanie Martinez",
-    image: "/static/img/artists/melaniemartinez.jpg",
-  },
-  {
-    id: 6,
-    name: "Bring me the horizon",
-    image: "/static/img/artists/bmth.jpg",
-  },
-  { id: 7, name: "Doja Cat", image: "/static/img/artists/dojacat.jpg" },
-  { id: 8, name: "Grandson", image: "/static/img/artists/grandson.jpg" },
-  { id: 9, name: "Ashnikko", image: "/static/img/artists/ashnikko.jpg" },
-  { id: 10, name: "Inhaler", image: "/static/img/artists/inhaler.jpg" },
-  { id: 11, name: "NF", image: "/static/img/artists/nf.jpg" },
-  { id: 12, name: "Nothing but thieves", image: "/static/img/artists/nbt.jpg" },
-  { id: 13, name: "Cassyette", image: "/static/img/artists/cassyette.jpg" },
-  {
-    id: 14,
-    name: "Chase Atlantic",
-    image: "/static/img/artists/chaseatlantic.jpg",
-  },
-  {
-    id: 15,
-    name: "Palaye Royale",
-    image: "/static/img/artists/palayeroyale.jpg",
-  },
-  { id: 16, name: "Polyphia", image: "/static/img/artists/polyphia.jpg" },
-  { id: 17, name: "Maneskin", image: "/static/img/artists/maneskin.jpg" },
-  { id: 18, name: "Bad omens", image: "/static/img/artists/badomens.jpg" },
-];
+
 
 const profileRoutes = require("./routes/profileRoutes.js");
 console.log(profileRoutes);
@@ -122,7 +82,7 @@ app.post("/upload-photo", (req, res) => {
   });
 });
 
-// Fill in about info
+// Add a bio page
 app.post("/add-bio", upload.single("file"), (req, res) => {
   const { username, age, tel, email, about } = req.body;
   const picture = req.file.filename;
@@ -138,7 +98,7 @@ app.post("/add-bio", upload.single("file"), (req, res) => {
   });
 });
 
-// Select genres
+// Select genres page
 app.post("/add-genres", async (req, res) => {
   const { username, age, tel, email, file, about } = req.body;
 
@@ -159,8 +119,11 @@ app.post("/add-genres", async (req, res) => {
 
     await collection.insertOne(userData);
 
-    console.log("User data successfully saved in MongoDB");
+    // HIER TOEVOEGEN LEGE object aanmaken in favoriete artiesten
+    const favoriteArtists = client.db('concertBuddies').collection('favoriteArtists');
+    await favoriteArtists.insertOne({});
 
+    console.log("User data successfully saved in MongoDB");
 
     const genreCollection = client.db('concertBuddies').collection('genres')
     const allGenreData = await genreCollection.find({}).toArray();
@@ -180,10 +143,8 @@ app.get("/profile", async (req, res) => {
   try {
     await client.connect();
 
-    const db = client.db(dbName);
-    const collection = db.collection(collectionName);
-
-    const userData = await collection.findOne({});
+    const profileDataCollection = client.db(dbName).collection(collectionName)
+    const userData = await profileDataCollection.findOne({}, { sort: { _id: -1}});
 
     if (userData) {
       const profileData = {
@@ -193,22 +154,58 @@ app.get("/profile", async (req, res) => {
         about: userData.about,
       };
 
+    // Retrieve favorite genres from db
     const selectedGenreCollection = client.db('concertBuddies').collection('selectedGenres')
     const allSelectedGenreData = await selectedGenreCollection.find({}).toArray();
 
-    res.render("profile", { profileData: profileData, title: "My profile", selectedGenre: allSelectedGenreData });
+    // Retrieve favorite artists from db
+    const favoriteArtists = client.db('concertBuddies').collection('favoriteArtists');
+    const mostRecentFavArtists = await favoriteArtists.findOne({}, { sort: { _id: -1 } });
+    // Write a statement to prevent error when favArtistData is empty
+    const favArtistsData = mostRecentFavArtists ? mostRecentFavArtists.selectedFavoriteArtists : [];
+    
+    const foundObjectsFromFavoriteArtists = [];
+
+    if (Array.isArray(favArtistsData)) {
+      const retrieveAdditionalArtistData = favArtistsData.map(artist => {
+        const findAllInfoOfFavArtist = async() => { 
+           try {
+             await client.connect();
+             const allArtist = client.db('concertBuddies').collection('artists');
+             let nowActiveArtists = await allArtist.find({ name: artist }).toArray();
+            foundObjectsFromFavoriteArtists.push(...nowActiveArtists);
+          } catch (error) {
+            console.error("An error occurred while retrieving the data from the db", error);
+          } 
+        };
+         return findAllInfoOfFavArtist();
+       });
+       await Promise.all(retrieveAdditionalArtistData);
+
+       } else {
+       console.log("KORTE ARRAY VAN 1");
+       const findAllInfoOfFavArtist = async() => { 
+        try {
+           await client.connect();
+           const allArtist = client.db('concertBuddies').collection('artists');
+          let nowActiveArtists = await allArtist.find({ name: favArtistsData }).toArray();
+          foundObjectsFromFavoriteArtists.push(...nowActiveArtists);
+         } catch (error) {
+           console.error("An error occurred while retrieving the data from the db", error);
+         } 
+       };
+      await findAllInfoOfFavArtist();
+     }
+    
+    res.render("profile", { profileData: profileData, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
   } else {
-    res.render("profile", { profileData: null, title: "My profile", selectedGenre: allSelectedGenreData });
+    res.render("profile", { profileData: null, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: mostRecentFavArtists  });
   }
   } catch (error) {
     console.error("An error occurred while saving the data:", error);
     res.render("error.ejs");
-  } finally {
-    await client.close();
-  }
+  } 
 });
-
-
 
 
 // 404 error if page is not found
