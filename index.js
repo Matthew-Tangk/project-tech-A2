@@ -1,6 +1,14 @@
 require("dotenv").config();
 
 const { MongoClient, ServerApiVersion } = require("mongodb");
+const express = require("express");
+const multer = require("multer");
+const upload = multer({ dest: "assets/static/img/profilepic" });
+const bodyParser = require("body-parser");
+const uglifycss = require("uglifycss");
+const path = require("path");
+
+const app = express();
 const uri = process.env.DB_SIGNIN;
 
 const client = new MongoClient(uri, {
@@ -11,42 +19,17 @@ const client = new MongoClient(uri, {
   },
 });
 
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log(
-      "Pinged your deployment. You successfully connected to MongoDB!"
-    );
-  } finally {
-    console.log("Finally it works");
-  }
-}
-
-run().catch(console.dir);
-
-const dbName = "usersData";
-const collectionName = "user";
-const dbNameEvents = "concertBuddies";
-const collectionEvents = "events";
-
-const express = require("express");
-const multer = require("multer");
-const upload = multer({ dest: "assets/static/img/profilepic" });
-const bodyParser = require("body-parser");
-const uglifycss = require("uglifycss");
-const path = require("path");
-
-const app = express();
+app.use(express.static("assets", { maxAge: 86400000 })); // 1 day in milliseconds
 
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static("assets"));
 app.use(express.urlencoded({ extended: true }));
-app.listen(3000);
-app.use(bodyParser.json());
+
+const dbName = "usersData";
+const collectionName = "user";
+const dbNameEvents = "concertBuddies";
+const collectionEvents = "events";
 
 // Uglifycss
 const inputFiles = [
@@ -93,7 +76,7 @@ app.get("/upcoming-events", async (req, res) => {
     console.log("Pulled data from MongoDB:", formattedEvents);
     res.render("upcoming-events.ejs", {
       events: formattedEvents,
-      title: "Upcoming events"
+      title: "Upcoming events",
     });
   } catch (error) {
     console.error("An error occurred while fetching the data:", error);
@@ -264,7 +247,7 @@ const sendUserData = async (data) => {
     await collection.insertOne(data);
   } catch (err) {
     console.error(
-      "Something went wrong with adding the profileinfo to the database :(",
+      "Something went wrong with adding the profile info to the database :(",
       err
     );
   }
@@ -379,18 +362,35 @@ app.get("/profile", async (req, res) => {
 });
 
 // My events tickets
+app.post("/updateSzaStatus", async (req, res) => {
+  const status = req.body.status;
+
+  try {
+    await client.connect();
+
+    const collection = client.db("toggle_button").collection("status sza");
+
+    await collection.updateOne({}, { $set: { status } });
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.log("Error:", error);
+    res.sendStatus(500);
+  } finally {
+    await client.close();
+  }
+});
 
 app.post("/updateKendrickStatus", async (req, res) => {
   const status = req.body.status;
-  console.log(status, "status");
 
   try {
     await client.connect();
 
     const collection = client.db("toggle_button").collection("status kendrick");
 
-    await collection.updateOne({}, { $set: { status: status } });
-    console.log(status, "status");
+    await collection.updateOne({}, { $set: { status } });
+
     res.sendStatus(200);
   } catch (error) {
     console.log("Error:", error);
@@ -402,15 +402,14 @@ app.post("/updateKendrickStatus", async (req, res) => {
 
 app.post("/updateDojaStatus", async (req, res) => {
   const status = req.body.status;
-  console.log(status, "status");
 
   try {
     await client.connect();
 
     const collection = client.db("toggle_button").collection("status doja");
 
-    await collection.updateOne({}, { $set: { status: status } });
-    console.log(status, "status");
+    await collection.updateOne({}, { $set: { status } });
+
     res.sendStatus(200);
   } catch (error) {
     console.log("Error:", error);
@@ -422,35 +421,14 @@ app.post("/updateDojaStatus", async (req, res) => {
 
 app.post("/updateDrakeStatus", async (req, res) => {
   const status = req.body.status;
-  console.log(status, "status");
 
   try {
     await client.connect();
 
     const collection = client.db("toggle_button").collection("status drake");
 
-    await collection.updateOne({}, { $set: { status: status } });
-    console.log(status, "status");
-    res.sendStatus(200);
-  } catch (error) {
-    console.log("Error:", error);
-    res.sendStatus(500);
-  } finally {
-    await client.close();
-  }
-});
+    await collection.updateOne({}, { $set: { status } });
 
-app.post("/updateSzaStatus", async (req, res) => {
-  const status = req.body.status;
-  console.log(status, "status");
-
-  try {
-    await client.connect();
-
-    const collection = client.db("toggle_button").collection("status sza");
-
-    await collection.updateOne({}, { $set: { status: status } });
-    console.log(status, "status");
     res.sendStatus(200);
   } catch (error) {
     console.log("Error:", error);
@@ -464,3 +442,22 @@ app.post("/updateSzaStatus", async (req, res) => {
 app.use((req, res, next) => {
   res.status(404).render("error.ejs", { title: "not found" });
 });
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
+
+async function run() {
+  try {
+    await client.connect();
+    await client.db("admin").command({ ping: 1 });
+    console.log(
+      "Pinged your deployment. You successfully connected to MongoDB!"
+    );
+  } finally {
+    console.log("Finally it works");
+  }
+}
+
+run().catch(console.dir);
