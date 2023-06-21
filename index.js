@@ -46,6 +46,7 @@ app.set("views", "views");
 app.use(express.static("assets"));
 app.use(express.urlencoded({ extended: true }));
 app.listen(3000);
+app.use(bodyParser.json());
 
 // Uglifycss
 const inputFiles = [
@@ -73,14 +74,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/upcoming-events", async (req, res) => {
-
   try {
     const db = client.db(dbNameEvents);
     const collection = db.collection(collectionEvents);
     const eventData = await collection.find({}).toArray();
 
     const formattedEvents = eventData.map((event) => {
-
       const options = {
         weekday: "short",
         day: "numeric",
@@ -381,73 +380,17 @@ app.get("/profile", async (req, res) => {
 
 // My events tickets
 
-app.post("/updateSzaStatus", async (req, res) => {
-  const status = req.body.status;
-
-  try {
-    await client.connect();
-
-    const collection = client.db("toggle_button").collection("status sza");
-
-    await collection.updateOne({}, { $set: { status } });
-
-    res.sendStatus(200);
-  } catch (error) {
-    console.log("Error:", error);
-    res.sendStatus(500);
-  } finally {
-    await client.close();
-  }
-});
-
-app.post("/updateKendrickStatus", async (req, res) => {
-  const status = req.body.status;
-
-  try {
-    await client.connect();
-
-    const collection = client.db("toggle_button").collection("status kendrick");
-
-    await collection.updateOne({}, { $set: { status } });
-
-    res.sendStatus(200);
-  } catch (error) {
-    console.log("Error:", error);
-    res.sendStatus(500);
-  } finally {
-    await client.close();
-  }
-});
-
 app.post("/updateDojaStatus", async (req, res) => {
   const status = req.body.status;
+  console.log(status, "status");
 
   try {
     await client.connect();
 
     const collection = client.db("toggle_button").collection("status doja");
 
-    await collection.updateOne({}, { $set: { status } });
-
-    res.sendStatus(200);
-  } catch (error) {
-    console.log("Error:", error);
-    res.sendStatus(500);
-  } finally {
-    await client.close();
-  }
-});
-
-app.post("/updateDrakeStatus", async (req, res) => {
-  const status = req.body.status;
-
-  try {
-    await client.connect();
-
-    const collection = client.db("toggle_button").collection("status drake");
-
-    await collection.updateOne({}, { $set: { status } });
-
+    await collection.updateOne({}, { $set: { status: status } });
+    console.log(status, "status");
     res.sendStatus(200);
   } catch (error) {
     console.log("Error:", error);

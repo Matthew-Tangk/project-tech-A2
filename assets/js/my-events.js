@@ -6,15 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
       var statusElement = toggle
         .closest(".eventDetails")
         .querySelector(".status");
-      var ticketName = toggle
-        .closest(".ticket")
-        .querySelector("h3").textContent;
       if (toggle.checked) {
-        statusElement.textContent = +ticketName + "Status: attending";
+        statusElement.textContent = "Status: attending";
         updateStatus(toggle.closest(".ticket").id, "attending");
         console.log("attending");
       } else {
-        statusElement.textContent = ticketName + "Status: rejected";
+        statusElement.textContent = "Status: rejected";
         updateStatus(toggle.closest(".ticket").id, "rejected");
         console.log("rejected");
       }
@@ -24,9 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var statusElement = toggle
       .closest(".eventDetails")
       .querySelector(".status");
-    var ticketName = toggle.closest(".ticket").querySelector("h3").textContent;
     if (!toggle.checked) {
-      statusElement.textContent = "Status: rejected" + ticketName;
+      statusElement.textContent = "Status: rejected";
     }
   });
 
@@ -47,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ status }), // Send the status in the request body
+      body: JSON.stringify({ status: status }), // Send the status in the request body
     })
       .then(function (response) {
         if (response.ok) {
