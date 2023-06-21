@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 /* Styling for the hero section */
+
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -11,6 +12,10 @@
   background-size: cover;
   height: 100vh;
   margin: 0;
+}
+
+ a.hero-cta{
+  width: auto ;
 }
 
 /* Overlay for the hero section */
