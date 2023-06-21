@@ -73,6 +73,11 @@ app.get("/my-events", (req, res) => {
   res.render("my-events.ejs", { title: "My events" });
 });
 
+// Event details page
+app.get("/event-details", (req, res) => {
+  res.render("event-details.ejs", { title: "Event details" });
+});
+
 // Make new profile page
 app.get("/personal-info", (req, res) => {
   res.render("make-profile.ejs", {
@@ -281,5 +286,3 @@ app.get("/profile", async (req, res) => {
 app.use((req, res, next) => {
   res.status(404).render("error.ejs", { title: "not found" });
 });
-
-

@@ -2,11 +2,39 @@
 
 <body>
     <%- include('./partials/header') %>
+    <%- include('./partials/header') %>
     <main>
+        <p>Your javascript is disabled, you can not react to invites</p>
         <p>Your javascript is disabled, you can not react to invites</p>
         <section>
             <section>
                 <h2>New</h2>
+                <% if(newInvites.length ==0) { %>
+                    <p>No new invites yet</p>
+                <% } else { %>
+                    <ul>
+                        <% newInvites.forEach(invite => { %>
+                            <li>Hi! I am <%= invite.from %> </li>
+                            <li>Do you want to go to <%= invite.event %> with me?</li>
+                            <li><img src="../static/img/profilepic/serenoiia.jpg" alt="profielfoto"></li>
+                            <li>
+                                <ul>
+                                    <li><a href="">Event info</a></li>
+                                    <li><a href="">Ignore</a></li>
+                                    <li ><a href="" class="acceptationbutton">Accept</a></li>
+                                </ul>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } %>
+            </section>
+
+            <section>
+                <h2>Accepted</h2>
+                <% if (acceptedInvites.length == 0) { %>
+                    <p>Now accepted invites yet</p>
+                <% } else { %>
+                    <% acceptedInvites.forEach(invite => { %>
                 <% if(newInvites.length ==0) { %>
                     <p>No new invites yet</p>
                 <% } else { %>
