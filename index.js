@@ -1,6 +1,14 @@
 require("dotenv").config();
 
 const { MongoClient, ServerApiVersion } = require("mongodb");
+const express = require("express");
+const multer = require("multer");
+const upload = multer({ dest: "assets/static/img/profilepic" });
+const bodyParser = require("body-parser");
+const uglifycss = require("uglifycss");
+const path = require("path");
+
+const app = express();
 const uri = process.env.DB_SIGNIN;
 
 const client = new MongoClient(uri, {
@@ -11,41 +19,17 @@ const client = new MongoClient(uri, {
   },
 });
 
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log(
-      "Pinged your deployment. You successfully connected to MongoDB!"
-    );
-  } finally {
-    console.log("Finally it works");
-  }
-}
-
-run().catch(console.dir);
-
-const dbName = "usersData";
-const collectionName = "user";
-const dbNameEvents = "concertBuddies";
-const collectionEvents = "events";
-
-const express = require("express");
-const multer = require("multer");
-const upload = multer({ dest: "assets/static/img/profilepic" });
-const bodyParser = require("body-parser");
-const uglifycss = require("uglifycss");
-const path = require("path");
-
-const app = express();
+app.use(express.static("assets", { maxAge: 86400000 })); // 1 day in milliseconds
 
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static("assets"));
 app.use(express.urlencoded({ extended: true }));
-app.listen(3000);
+
+const dbName = "usersData";
+const collectionName = "user";
+const dbNameEvents = "concertBuddies";
+const collectionEvents = "events";
 
 // Uglifycss
 const inputFiles = [
@@ -73,14 +57,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/upcoming-events", async (req, res) => {
-
   try {
     const db = client.db(dbNameEvents);
     const collection = db.collection(collectionEvents);
     const eventData = await collection.find({}).toArray();
 
     const formattedEvents = eventData.map((event) => {
-
       const options = {
         weekday: "short",
         day: "numeric",
@@ -265,7 +247,7 @@ const sendUserData = async (data) => {
     await collection.insertOne(data);
   } catch (err) {
     console.error(
-      "Something went wrong with adding the profileinfo to the database :(",
+      "Something went wrong with adding the profile info to the database :(",
       err
     );
   }
@@ -380,7 +362,6 @@ app.get("/profile", async (req, res) => {
 });
 
 // My events tickets
-
 app.post("/updateSzaStatus", async (req, res) => {
   const status = req.body.status;
 
@@ -461,3 +442,22 @@ app.post("/updateDrakeStatus", async (req, res) => {
 app.use((req, res, next) => {
   res.status(404).render("error.ejs", { title: "not found" });
 });
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
+
+async function run() {
+  try {
+    await client.connect();
+    await client.db("admin").command({ ping: 1 });
+    console.log(
+      "Pinged your deployment. You successfully connected to MongoDB!"
+    );
+  } finally {
+    console.log("Finally it works");
+  }
+}
+
+run().catch(console.dir);
