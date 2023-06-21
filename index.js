@@ -45,8 +45,10 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static("assets"));
 app.use(express.urlencoded({ extended: true }));
-app.listen(3000);
 app.use(bodyParser.json());
+app.use(express.static("assets", { maxAge: 86400000 })); // 1 day in milliseconds
+app.listen(3000);
+
 
 // Uglifycss
 const inputFiles = [
