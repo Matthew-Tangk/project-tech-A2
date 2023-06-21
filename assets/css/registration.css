@@ -115,14 +115,6 @@ legend {
      object-fit: cover;
 }
 
-noscript p{
-  color: var(--accent2);
-  font-style: italic;
-  margin-top: 1em;
-  text-align: center;
-}
-
-
 /* Code select genres */
 #selectGenres  label {
   justify-content: center;
@@ -205,7 +197,7 @@ input[type="checkbox"]:checked + label {
   margin: 0;
 }
 
-#yourProfile li {
+#yourProfile section li {
   border-radius: 5em;
   display: flex;
   justify-content: center;
