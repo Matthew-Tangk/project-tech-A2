@@ -17,17 +17,18 @@
     </section>
     
     <section id="selectedGenres">
-      <% if(favoriteGenres != null) { %>
+      <% if (favoriteGenres && Array.isArray(favoriteGenres)) { %>
         <ul>
           <% favoriteGenres.forEach(genre => { %>
             <li>
               <img src="../static/img/genres/<%= genre %>.svg" alt="<%= genre %>">
               <p><%= genre %></p>
             </li>
-            <% }); %>
+          <% }); %>
         </ul>
       <% } %>
     </section>
+    
 
     <section>
       <p> My artists</p>
