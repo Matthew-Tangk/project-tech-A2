@@ -8,15 +8,17 @@
  
     <link rel="stylesheet" href="/css/style.css" />
     <% if (title === 'Concert buddies' || title === 'Personal info' || title ===
-    'Upload photo' || title === 'Add bio' || title === 'Add genres' || title === 'My events' || title === 'Event details' || title ===
+    'Upload photo' || title === 'Add bio' || title === 'Add genres' || title ===
     'My profile') { %>
     <link rel="stylesheet" href="/css/registration.css" />
     <% } %> <% if (title === 'Add artists') { %>
     <link rel="stylesheet" href="/css/addartists.styles.css" />
-    <% } %>
-
-    <% if (title === 'Invites') { %>
-        	<link rel="stylesheet" href="/css/invites.styles.css">
+    <% } %> <% if (title === 'My events') { %>
+    <link rel="stylesheet" href="/css/my-events.css" />
+    <% } %> <% if (title === 'Invites') { %>
+    <link rel="stylesheet" href="/css/invites.styles.css" />
+    <% } %> <% if (title === 'Event details') { %>
+    <link rel="stylesheet" href="/css/events-details.css" />
     <% } %>
 
     <% if (title === 'Upcoming events') { %>
@@ -32,7 +34,7 @@
             <%
           }) %>
       </style>
-<% } %>
+    <% } %>
 
 
   </head>

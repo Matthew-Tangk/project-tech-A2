@@ -2,31 +2,17 @@
   <body>
     <%-include('partials/header.ejs')%>
     <main>
-      <h1>My Events</h1>
+      
 
       <h2>June</h2>
 
-      <div class="ticket">
-        <div class="date">
-          <p>04</p>
-        </div>
-        <div class="eventDetails">
-          <h3>SZA</h3>
-          <p>Ziggo dome</p>
-          <p>400+ going</p>
-          <p>5 contacts going</p>
-          <label class="toggle-button">
-            <input id="toggle" type="checkbox" checked />
-            <span class="slider"></span>
-          </label>
-        </div>
-      </div>
+      
 
       <div class="ticket" id="ticketKENDRICK">
         <div class="date">
           <p>12</p>
         </div>
-        <a href="./events2.html">
+        <a href="./event-details">
           <div class="eventDetails">
             <h3>Kendrick Lamar</h3>
             <p>Paradiso</p>
@@ -62,7 +48,7 @@
 
       <div class="ticket" id="ticketDRAKE">
         <div class="date">
-          <p>14</p>
+          <p>04</p>
         </div>
         <div class="eventDetails">
           <h3>Drake</h3>
@@ -76,159 +62,28 @@
           </label>
         </div>
       </div>
-    </main>
+   
+
+    <div class="ticket" id="ticketSZA">
+      <div class="date">
+        <p>12</p>
+      </div>
+      <div class="eventDetails">
+        <h3>SZA</h3>
+        <p>Ziggo dome</p>
+        <p>400+ going</p>
+        <p>5 contacts going</p>
+        <p class="status">Status: attending</p>
+        <label class="toggle-button">
+          <input class="toggle" type="checkbox" checked />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+  </main>
      
     <%-include('partials/footer.ejs')%>
-  
-    <style>
-      /* CSS */
-      styles {
-        visibility: hidden;
-      }
-
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-      }
-
-      body {
-        display: flex;
-        flex-direction: column;
-        font-family: "Catamaran", sans-serif;
-        background-color: #1f1d2a;
-      }
-
-      h1 {
-        text-align: center;
-        margin: 0;
-        color: #ffffff;
-      }
-
-      .inviteStatus {
-        text-align: center;
-        margin: 0;
-        font-weight: lighter;
-        color: #ffffff;
-      }
-
-      /* container for the tickets */
-      .ticket {
-        background-color: #322f54;
-        border-radius: 1.5625em;
-        background-size: cover;
-        background-position: left;
-        background-repeat: no-repeat;
-        background-size: 40% 100%;
-        padding: 0.3125em 0;
-        margin: 1.875em 0;
-      }
-
-      .eventDetails {
-        display: flex;
-        flex-direction: column;
-        font-size: 0.875em;
-        color: white;
-        margin: 0.3125em 0 0.3125em 43%;
-      }
-
-      .eventDetails p {
-        margin: 0;
-        font-weight: bold;
-      }
-
-      .eventDetails p:first-of-type {
-        margin-bottom: 1.25em;
-        font-weight: lighter;
-      }
-
-      .eventDetails {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .date {
-        width: 20%;
-        float: left;
-        text-align: center;
-        color: white;
-        margin-left: 10%;
-      }
-
-      .date p {
-        margin-top: 1.3em;
-        font-size: 2.5em;
-      }
-
-      h2 {
-        font-weight: lighter;
-        color: #ffffff;
-      }
-
-      h3 {
-        margin: 0;
-      }
-
-      /* Toggle button */
-      .toggle-button {
-        display: inline-block;
-        position: relative;
-        width: 3.75em;
-        height: 2.125em;
-        margin-left: 60%;
-      }
-
-      .slider {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: 1.0625em;
-        background-color: #6862c8;
-        transition: 0.4s;
-      }
-
-      .slider:before {
-        position: absolute;
-        content: "";
-        height: 1.625em;
-        width: 1.625em;
-        left: 0.25em;
-        bottom: 0.25em;
-        border-radius: 50%;
-        background-color: #da6864;
-        transition: 0.4s;
-      }
-
-      .toggle:checked + .slider {
-        background-color: #6862c8;
-      }
-
-      .toggle:checked + .slider:before {
-        transform: translateX(1.625em);
-        background-color: #64ff88;
-      }
-
-
-      .ticket:nth-of-type(2) {
-        background-image: url(../img/events/MMATBS_cover.jpeg);
-      }
-
-      .ticket:nth-of-type(3) {
-        background-image: url(../img/events/planetHer_cover.jpeg);
-      }
-
-      .ticket:nth-of-type(4) {
-        background-image: url(../img/events/drake_cover.jpeg);
-      }
-
-      .main-container {
-        min-height: calc(100vh - 50px);
-        padding-bottom: 50px;
-      }
-
-    </style>
+  <script src="../js/my-events.js"></script>
   </body>
 </html>
 
