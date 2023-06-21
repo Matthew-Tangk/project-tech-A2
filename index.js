@@ -380,6 +380,26 @@ app.get("/profile", async (req, res) => {
 
 // My events tickets
 
+app.post("/updateKendrickStatus", async (req, res) => {
+  const status = req.body.status;
+  console.log(status, "status");
+
+  try {
+    await client.connect();
+
+    const collection = client.db("toggle_button").collection("status kendrick");
+
+    await collection.updateOne({}, { $set: { status: status } });
+    console.log(status, "status");
+    res.sendStatus(200);
+  } catch (error) {
+    console.log("Error:", error);
+    res.sendStatus(500);
+  } finally {
+    await client.close();
+  }
+});
+
 app.post("/updateDojaStatus", async (req, res) => {
   const status = req.body.status;
   console.log(status, "status");
@@ -388,6 +408,46 @@ app.post("/updateDojaStatus", async (req, res) => {
     await client.connect();
 
     const collection = client.db("toggle_button").collection("status doja");
+
+    await collection.updateOne({}, { $set: { status: status } });
+    console.log(status, "status");
+    res.sendStatus(200);
+  } catch (error) {
+    console.log("Error:", error);
+    res.sendStatus(500);
+  } finally {
+    await client.close();
+  }
+});
+
+app.post("/updateDrakeStatus", async (req, res) => {
+  const status = req.body.status;
+  console.log(status, "status");
+
+  try {
+    await client.connect();
+
+    const collection = client.db("toggle_button").collection("status drake");
+
+    await collection.updateOne({}, { $set: { status: status } });
+    console.log(status, "status");
+    res.sendStatus(200);
+  } catch (error) {
+    console.log("Error:", error);
+    res.sendStatus(500);
+  } finally {
+    await client.close();
+  }
+});
+
+app.post("/updateSzaStatus", async (req, res) => {
+  const status = req.body.status;
+  console.log(status, "status");
+
+  try {
+    await client.connect();
+
+    const collection = client.db("toggle_button").collection("status sza");
 
     await collection.updateOne({}, { $set: { status: status } });
     console.log(status, "status");
