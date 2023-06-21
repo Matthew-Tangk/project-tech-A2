@@ -29,6 +29,8 @@ run().catch(console.dir);
 
 const dbName = "usersData";
 const collectionName = "user";
+const dbNameEvents = "concertBuddies";
+const collectionEvents = "events";
 
 const express = require("express");
 const multer = require("multer");
