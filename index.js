@@ -66,6 +66,11 @@ app.get("/upcoming-events", (req, res) => {
   res.render("upcoming-events.ejs", { title: "Upcoming events" });
 });
 
+// My events page
+app.get("/my-events", (req, res) => {
+  res.render("my-events.ejs", { title: My events });
+});
+
 // Make new profile page
 app.get("/personal-info", (req, res) => {
   res.render("make-profile.ejs", {
