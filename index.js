@@ -169,7 +169,6 @@ app.post("/profile", async (req, res) => {
       };
 
       const favoriteGenres = userData.genres;
-      console.log(favoriteGenres); 
 
       const favArtistsData = null;
       const foundObjectsFromFavoriteArtists = null;
@@ -214,8 +213,10 @@ app.get("/profile", async (req, res) => {
         age: userData.age,
         file: userData.file,
         about: userData.about,
-        genres: userData.genres
+        genres:userData.genres
       };
+      
+      const favoriteGenres = userData.genres;
 
     // Retrieve favorite genres from db
     const selectedGenreCollection = client.db('concertBuddies').collection('selectedGenres')
@@ -260,7 +261,7 @@ app.get("/profile", async (req, res) => {
       await findAllInfoOfFavArtist();
      }
     
-    res.render("profile", { profileData: profileData, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
+    res.render("profile", { profileData: profileData, title: "My profile", favoriteGenres: favoriteGenres, favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
   } else {
     res.render("profile", { profileData: null, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: mostRecentFavArtists  });
   }
