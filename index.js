@@ -68,7 +68,7 @@ app.get("/upcoming-events", (req, res) => {
 
 // My events page
 app.get("/my-events", (req, res) => {
-  res.render("my-events.ejs", { title: My events });
+  res.render("my-events.ejs", { title: "My events" });
 });
 
 // Make new profile page
@@ -148,7 +148,7 @@ app.post("/profile", async (req, res) => {
     email: email,
     file: file,
     about: about,
-    genres: favoriteGenres
+    genres: favoriteGenres,
   };
 
   try {
@@ -171,15 +171,17 @@ app.post("/profile", async (req, res) => {
         genres: userData.genres,
       };
 
-      const allGenreData = profileData.genres
-
       const favoriteGenres = userData.genres;
+      console.log(favoriteGenres); 
 
       const favArtistsData = null;
       const foundObjectsFromFavoriteArtists = null;
 
-    res.render("genres.ejs", { title: "Add genres", genres: allGenreData, profileData: profiledata });
-  }} catch (error) {
+      res.render("profile", { profileData: profileData, favoriteGenres: favoriteGenres, title: "My profile", favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
+    } else {
+      res.render("profile", { profileData: null, title: "My profile", favoriteArtists: mostRecentFavArtists });
+    }
+  } catch (error) {
     console.error("An error occurred while saving the data:", error);
     res.render("error.ejs");
   }
