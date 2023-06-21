@@ -33,8 +33,7 @@ Ga in je browser naar http://localhost:3000
 
 ## License
 
-Copyright (c) 2023 Jeannet Welboren
-MIT
+Copyright (c) 2023 Jeannet Welboren, Julia Hoek, Matthew Tangkilissan & Rachid El Ouali MIT
 
 ## Resources
 
