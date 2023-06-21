@@ -1,28 +1,9 @@
+<%- include('./partials/head') %>
 <!DOCTYPE html>
 <html>
 
-<head>
-  <title>Upcoming Events</title>
-  <link rel="stylesheet" href="/css/upcoming-events.css">
-  <link rel="stylesheet" href="/css/style.css">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    /* Dynamically set the background image for each scroll item (done) */
-    <% events.forEach((event, index)=> {
-        %> .scroll-item:nth-of-type(<%=index + 1 %>) {
-          background-image: url('<%= event.background %>');
-          background-size: cover;
-        }
-
-        <%
-      }) %>
-  </style>
-</head>
-
 <body>
+  <%- include('./partials/header') %>
   <main>
     <section id="slider-container" class="scroll-container">
       <% const currentMonth=new Date().getMonth(); %>
@@ -70,6 +51,10 @@
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="js/upcoming-events.js"></script>
   <%- include('./partials/footer') %>
+  <noscript>
+    <!-- Fallback content for users without JavaScript -->
+    <p>Please enable JavaScript to view the content.</p>
+  </noscript>
 </body>
 
 </html>
