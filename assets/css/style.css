@@ -143,7 +143,7 @@ header li img {
     max-width: 2.5em;
 }
   
-header a{
+header a, footer a{
     background-color: transparent;
     width: auto;
     padding: 0;
