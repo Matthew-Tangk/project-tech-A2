@@ -107,6 +107,22 @@ fieldset {
     border: none;
 }
 
+noscript {
+    display: flex;
+    justify-content: center;
+}
+
+noscript p{
+  font-style: italic;
+  text-align: center;
+  color: var(--text);
+  background-color: var(--accent2);
+  border-radius: 10px;
+  width: 75%;
+  margin: 1em 0 0;
+  padding: 0.2em;
+}
+
 /*header code */
 header ul{
     display: grid;
