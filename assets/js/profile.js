@@ -1,6 +1,5 @@
 const birthdate = document.querySelector('#profileData > section > p:nth-of-type(2)').innerHTML;
 const ageTextfield = document.querySelector('#profileData > section > p:nth-of-type(2)')
-console.log(birthdate)
 
 // Get the current date
 const currentDate = new Date();
