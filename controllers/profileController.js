@@ -93,7 +93,7 @@ exports.profile = async (req, res) => {
           age: userData.age,
           file: userData.file,
           about: userData.about,
-          favoriteGenres:userData.genres
+          genres:userData.genres
         };
   
       // Retrieve favorite genres from db

@@ -35,6 +35,7 @@ const multer = require("multer");
 const upload = multer({ dest: "assets/static/img/profilepic" });
 const bodyParser = require("body-parser");
 const uglifycss = require("uglifycss");
+const uglifycss = require("uglifycss");
 
 const app = express();
 
@@ -51,8 +52,6 @@ const options = {
   expandVars: true
 };
 
-const output = uglifycss.processFiles(inputFiles, options);
-console.log(output);
 
 const profileRoutes = require("./routes/profileRoutes.js");
 console.log(profileRoutes);
@@ -146,6 +145,7 @@ app.post("/profile", async (req, res) => {
     file: file,
     about: about,
     genres: favoriteGenres,
+    genres: favoriteGenres,
   };
 
   try {
@@ -173,30 +173,12 @@ app.post("/profile", async (req, res) => {
       const favArtistsData = null;
       const foundObjectsFromFavoriteArtists = null;
 
-      res.render("profile", { profileData: profileData, favoriteGenres: favoriteGenres, title: "My profile", favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
-    } else {
-      res.render("profile", { profileData: null, title: "My profile", favoriteArtists: mostRecentFavArtists });
-    }
+    res.render("genres.ejs", { title: "Add genres", genres: allGenreData });
   } catch (error) {
     console.error("An error occurred while saving the data:", error);
     res.render("error.ejs");
   }
 });
-
-
-const sendUserData = async (data) => {
-  try {
-    await client.connect();
-
-    const db = client.db(dbName);
-    const collection = db.collection(collectionName);
-
-    await collection.insertOne(data);
-  } catch (err) {
-    console.error("Something went wrong with adding the profileinfo to the database :(", err);
-  }
-
-}
 
 
 // User profile
