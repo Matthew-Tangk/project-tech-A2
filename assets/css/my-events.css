@@ -1,4 +1,3 @@
-
 html,
 body {
   height: 100%;
@@ -12,18 +11,14 @@ body {
   background-color: #1f1d2a;
 }
 
-
-html,
-body {
-  height: 100%;
-  margin: 0;
+header {
+  color: #2b2936;
 }
 
-body {
+header a {
   display: flex;
-  flex-direction: column;
-  font-family: "Catamaran", sans-serif;
-  background-color: #1f1d2a;
+  justify-content: flex-end;
+  text-decoration: none;
 }
 
 h1 {
@@ -42,7 +37,9 @@ h1 {
 /* container for the tickets */
 .ticket {
   background-color: #322f54;
+
   border-radius: 1.5625em;
+
   background-size: cover;
   background-position: left;
   background-repeat: no-repeat;
@@ -137,20 +134,23 @@ h3 {
   background-color: #64ff88;
 }
 
+.ticket:first-of-type {
+  background-image: url(../static/img/events/sos_cover.jpeg);
+}
 
 .ticket:nth-of-type(2) {
-  background-image: url(../img/events/MMATBS_cover.jpeg);
+  background-image: url(../static/img/events/MMATBS_cover.jpeg);
 }
 
 .ticket:nth-of-type(3) {
-  background-image: url(../img/events/planetHer_cover.jpeg);
+  background-image: url(../static/img/events/planetHer_cover.jpeg);
 }
 
 .ticket:nth-of-type(4) {
-  background-image: url(../img/events/drake_cover.jpeg);
+  background-image: url(../static/img/events/drake_cover.jpeg);
 }
 
 .main-container {
-  min-height: calc(100vh - 50px);
-  padding-bottom: 50px;
+  min-height: calc(100vh - 3.125em);
+  padding-bottom: 3.125em;
 }

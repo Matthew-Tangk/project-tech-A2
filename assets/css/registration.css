@@ -115,14 +115,6 @@ legend {
      object-fit: cover;
 }
 
-noscript p{
-  color: var(--accent2);
-  font-style: italic;
-  margin-top: 1em;
-  text-align: center;
-}
-
-
 /* Code select genres */
 #selectGenres  label {
   justify-content: center;
