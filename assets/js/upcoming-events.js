@@ -1,15 +1,53 @@
-console.log("hello");
+document.addEventListener("DOMContentLoaded", function () {
+  // Function to format the date string
+  function formatDate(dateString) {
+    const options = { weekday: "long", day: "numeric", month: "long" };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("nl-NL", options);
+  }
 
-window.addEventListener('DOMContentLoaded', (event) => {
-    // Retrieve the text container element
-    const textContainer = document.querySelector('.text-container');
+  // Initialize Flatpickr datepicker
+  const datePicker = flatpickr("#myDatePicker", {
+    inline: true,
+    dateFormat: "d/m/Y",
+    onChange: function (selectedDates, dateString) {
+      // Format the selected date
+      const formattedDate = dateString.split("/").reverse().join("-");
 
-    // Retrieve the h1, h2, and h2 elements inside the text container
-    const h1Element = textContainer.querySelector('h1');
-    const h2Elements = textContainer.querySelectorAll('h2');
+      // Fetch events based on the selected date
+      fetch(`/upcoming-events/${formattedDate}`)
+        .then((response) => response.json())
+        .then((events) => {
+          const calendarResults = document.getElementById("calendar-results");
+          calendarResults.innerHTML = "";
 
-    // Extract the text content from the elements
-    const h1Text = h1Element.textContent;
-    const h2Text1 = h2Elements[0].textContent;
-    const h2Text2 = h2Elements[1].textContent;
-    const h2Text3 = h2Elements[2].textContent;
+          // Show error if no events found for the selected date 
+          if (events.length === 0) {
+            const noDataMessage = document.createElement("p");
+            noDataMessage.textContent = "Oops! There are no events for this date.";
+            calendarResults.appendChild(noDataMessage);
+          }
+          // Display events for the selected date
+          else {
+            events.forEach((event) => {
+              const eventCard = document.createElement("section");
+              const eventDate = new Date(event.date);
+              const formattedDate = `${eventDate.getDate()}-${eventDate.getMonth() + 1}-${eventDate.getFullYear()}`;
+              eventCard.classList.add("event-card");
+              eventCard.innerHTML = `
+                  <h2>${event.title}</h2>
+                  <h3>${event.city}</h3>
+                  <h3>${formattedDate}</h3>
+                  <h3>${event.location}</h3>
+                  <button><a class="event-button" href="${event.link}">Meer informatie</a></button>
+                `;
+              calendarResults.appendChild(eventCard);
+            });
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching events:", error);
+        });
+    },
+  });
+});
