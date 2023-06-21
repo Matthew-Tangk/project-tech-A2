@@ -173,7 +173,7 @@ app.post("/profile", async (req, res) => {
       const favArtistsData = null;
       const foundObjectsFromFavoriteArtists = null;
 
-    res.render("genres.ejs", { title: "Add genres", genres: allGenreData });
+    res.render("genres.ejs", { title: "Add genres", genres: allGenreData, profileData: profiledata });
   }} catch (error) {
     console.error("An error occurred while saving the data:", error);
     res.render("error.ejs");
