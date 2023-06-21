@@ -143,8 +143,7 @@ app.post("/profile", async (req, res) => {
     email: email,
     file: file,
     about: about,
-    genres: favoriteGenres,
-    genres: favoriteGenres,
+    genres: favoriteGenres
   };
 
   try {
@@ -167,6 +166,8 @@ app.post("/profile", async (req, res) => {
         genres: userData.genres,
       };
 
+      const allGenreData = profileData.genres
+
       const favoriteGenres = userData.genres;
 
       const favArtistsData = null;
@@ -178,6 +179,20 @@ app.post("/profile", async (req, res) => {
     res.render("error.ejs");
   }
 });
+
+const sendUserData = async (data) => {
+  try {
+    await client.connect();
+
+    const db = client.db(dbName);
+    const collection = db.collection(collectionName);
+
+    await collection.insertOne(data);
+  } catch (err) {
+    console.error("Something went wrong with adding the profileinfo to the database :(", err);
+  }
+
+}
 
 
 // User profile
