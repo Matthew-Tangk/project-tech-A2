@@ -61,6 +61,7 @@ const options = {
   maxLineLen: 500,
   expandVars: true,
 };
+const output = uglifycss.processFiles(inputFiles, options);
 
 const profileRoutes = require("./routes/profileRoutes.js");
 app.use("/profile", profileRoutes);
