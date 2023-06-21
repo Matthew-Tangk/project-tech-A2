@@ -16,12 +16,12 @@
       <img width="100px" src="/static/img/profilepic/<%= profileData.file %>"  alt="Profile Picture"/>
     </section>
     
-    <section>
+    <section id="selectedGenres">
       <ul>
-        <% selectedGenre.forEach(selectedGenre => { %>
+        <% favoriteGenres.forEach(genre => { %>
           <li>
-            <img src="../static/img/genres/<%= selectedGenre.img %>" alt="<%= selectedGenre.name %>">
-            <p><%= selectedGenre.name %></p>
+            <img src="../static/img/genres/<%= genre %>.svg" alt="<%= genre %>">
+            <p><%= genre %></p>
           </li>
           <% }); %>
       </ul>
@@ -53,5 +53,7 @@
     </section>
   </main>
   <%- include('./partials/footer') %>
+
+  <script src="../js/profile.js"></script>
 </body>
 </html>

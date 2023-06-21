@@ -23,6 +23,7 @@
     "mongoose": "^7.2.1",
     "multer": "^1.4.5-lts.1",
     "spotify-web-api-node": "^5.0.2",
-    "tinify": "^1.7.1"
+    "tinify": "^1.7.1",
+    "uglifycss": "^0.0.29"
   }
 }

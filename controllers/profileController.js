@@ -83,8 +83,6 @@ exports.profile = async (req, res) => {
 
       // Hier de profielData nog toevoegen door die uit de database te halen
       await client.connect();
-  
-      await sendFavoriteArtistData(favoriteArtists);
 
       const profileDataCollection = client.db(dbName).collection(collectionName)
       const userData = await profileDataCollection.findOne({}, { sort: { _id: -1}});
@@ -95,6 +93,7 @@ exports.profile = async (req, res) => {
           age: userData.age,
           file: userData.file,
           about: userData.about,
+          genres:userData.genres
         };
   
       // Retrieve favorite genres from db
