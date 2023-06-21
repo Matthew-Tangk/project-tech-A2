@@ -1,26 +1,77 @@
+<%- include('./partials/head') %>
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Upcoming Events</title>
   <link rel="stylesheet" href="/css/upcoming-events.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Dynamically set the background image for each scroll item (done) */
+    <% events.forEach((event, index)=> {
+        %> .scroll-item:nth-of-type(<%=index + 1 %>) {
+          background-image: url('<%= event.background %>');
+          background-size: cover;
+        }
 
+        <%
+      }) %>
+  </style>
 </head>
+
 <body>
-    <section class="grid-container">
-        <section class="grid-item"><button>Populair </button></section>
-        <section class="grid-item"> <button> Alles deze maand </button></section>
-        <section class="featured">        <div class="text-container"> <h1>Burna boy Love Damini</h1> <h2>Rotterdam | 10 juni 2023 | Ahoy</h2>     <button class="plus-button">+</button>
-        </section>
-        <section class="grid-item"> <h1> Kalender </h1></section>
-<input type="date" id="datepicker" name="datepicker">
-        </div> </section>
-        <section class="grid-container">
-          <section class="featured">        <div class="text-container"> <h1>Burna boy Love Damini</h1> <h2> Rotterdam </h2><h2>10 juni 2023</h2><h2>Ahoy</h2>    <button class="plus-button">+</button>
+  <%- include('./partials/header') %>
+  <main>
+    <section id="slider-container" class="scroll-container">
+      <% const currentMonth=new Date().getMonth(); %>
+        <% events.filter(event=> event.date.getMonth() === currentMonth).forEach(event => {%>
+          <section class="hero scroll-item">
+            <section>
+              <h1>Populair in</h1>
+              <h1>
+                <%= new Date().toLocaleString("default", { month: "long" }) %>
+              </h1>
+            </section>
+            <section>
+              <h2>
+                <%= event.title %>
+              </h2>
+              <h3>
+                <%= event.city %>
+              </h3>
+              <h3>
+                <%= event.formattedDate %>
+              </h3>
+              <h3>
+                <%= event.location %>
+              </h3>
+            </section>
+            <section>
+              <h3>
+                <%= event.attendees %>
+              </h3>
+              <h3>Deelnemers</h3>
+              <button><a class="hero-cta" href="<%= event.link %>">Meer informatie ></a></button>
+            </section>
           </section>
-          
-        
+          <% }) %>
+        </section>
+    <section class="calendar">
+      <h1>Evenementen Kalender</h1>
+      <input type="text" id="myDatePicker" placeholder="Selecteer een datum">
+    </section>
 
+    <section id="calendar-results"></section>
+  </main>
 
-          <script src="js/upcoming-events.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="js/upcoming-events.js"></script>
+  <%- include('./partials/footer') %>
 </body>
+
 </html>

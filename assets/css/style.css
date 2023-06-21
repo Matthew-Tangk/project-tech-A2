@@ -16,8 +16,8 @@
     --background: #1F1D2A;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@400;600;900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@400;600;100;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&display=swap');
 body {
     background-color: var(--background);
     color: var(--text);
@@ -88,6 +88,7 @@ input::placeholder {
 }
 
 button[type=submit], a {
+    /* Your default styles */
     display: -ms-grid;
     display: grid;
     margin-left: auto;
@@ -102,6 +103,7 @@ button[type=submit], a {
     width: 9em;
     padding: 0.6em 0; 
 }
+
 
 fieldset {
     border: none;
