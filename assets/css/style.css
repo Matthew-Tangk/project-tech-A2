@@ -111,10 +111,15 @@ fieldset {
 header ul{
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
+    min-height: 4em;
     text-align: center;
     align-items: center;
     padding: 0.8em 1.8em;
     background-color: var(--input);
+}
+
+header li{
+    list-style: none;
 }
   
 header li img {
