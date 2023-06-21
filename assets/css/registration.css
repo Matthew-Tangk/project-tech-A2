@@ -254,6 +254,7 @@ input[type="checkbox"]:checked + label {
 
 #yourProfile section#favArtists li img{
   max-width: 100%;
+  height: auto;
   border-radius: 0.5em;
 }
 
