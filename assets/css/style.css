@@ -108,17 +108,18 @@ fieldset {
 }
 
 /*header code */
-header {
+header ul{
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
     text-align: center;
     align-items: center;
-    padding: 1.3em 1.8em;
+    padding: 0.8em 1.8em;
     background-color: var(--input);
 }
   
-header img {
+header li img {
     margin: 0;
+    max-width: 2.5em;
 }
   
 header a{
