@@ -35,7 +35,6 @@ const multer = require("multer");
 const upload = multer({ dest: "assets/static/img/profilepic" });
 const bodyParser = require("body-parser");
 const uglifycss = require("uglifycss");
-const uglifycss = require("uglifycss");
 
 const app = express();
 
