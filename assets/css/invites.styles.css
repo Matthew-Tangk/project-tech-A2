@@ -8,16 +8,6 @@ main {
     align-items: center;
 }
 
-main > p {
-    text-align: center;
-    color:var(--text);
-    background-color:var(--accent2);
-    border-radius:10px;
-    width:75%;
-    margin:1rem 0 0;
-    padding:.2rem;
-}
-
 .jsactive {
     display:none;
 }
