@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Upcoming Events</title>
   <link rel="stylesheet" href="/css/upcoming-events.css">
@@ -9,125 +10,54 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    .scroll-container {
-      overflow-x: auto;
-      white-space: nowrap;
-      display: flex;
-      scroll-snap-type: x mandatory;
-    }
+    /* Dynamically set the background image for each scroll item (done) */
+    <% events.forEach((event, index)=> {
+        %> .scroll-item:nth-of-type(<%=index + 1 %>) {
+          background-image: url('<%= event.background %>');
+          background-size: cover;
+        }
 
-    .scroll-item {
-      scroll-snap-align: start;
-      flex: 0 0 auto;
-    }
-
-    <% events.forEach((event, index) => { %>
-    .scroll-item:nth-of-type(<%= index + 1 %>) {
-      background-image: url('<%= event.background %>');
-      background-size: cover;
-    }
-    <% }) %>
-
-    section.calendar {
-      overflow-y: hidden;
-    }
-
-    /* Custom styles for the Flatpickr datepicker */
-    section.calendar .flatpickr-calendar {
-      box-shadow: none;
-      border-color: 
-    }
-
-    section.calendar .flatpickr-month {
-      background-color: transparent;
-      color: #ffffff;
-      font-weight: bold;
-      margin: 1em;
-      font-size: 13px;
-    }
-
-    section.calendar span.flatpickr-weekday {
-      color: white;
-      font-weight: 400;
-      text-transform: uppercase;
-    }
-
-    section.calendar .flatpickr-days {
-      background-color: transparent;
-    }
-
-    section.calendar .flatpickr-day {
-      color: #ffffff;
-      font-size: 14px;
-
-    }
-
-    section.calendar .flatpickr-day.today {
-      background-color: #6862C8;
-      border: none;
-    }
-
-    section.calendar .flatpickr-day.selected {
-      background-color: #322F54;
-      border: none;
-    }
-
-    /* Custom styles for the "Select a date" input field */
-    #myDatePicker {
-      padding: 0.3em;
-      border: 1px solid #383744;
-      border-radius: 3px;
-      font-size: 16px;
-      background-color: transparent;
-      color: #333;
-   max-width: 50%;
-   margin: 4% 0 4% 0;
-      font-size: 14px;
-      color: #ffffff;
-      margin-left: 0.1em;
-    }
-    
-    /* Additional specificity for the input field */
-    section.calendar #myDatePicker {
-      width: 100%; /* Overriding the width for the input within section.calendar */
-    }
-    
-    /* Additional specificity for the datepicker background */
-    section.calendar .flatpickr-calendar {
-      background-color: transparent; /* Overriding the background color for the datepicker within section.calendar */
-      border: 1px solid #383744;
-    }
-
-    section.calendar .flatpickr-calendar:after {
-      border: 0;
-    }
-    
+        <%
+      }) %>
   </style>
 </head>
+
 <body>
   <main>
-    <div id="slider-container" class="scroll-container">
-      <% const currentMonth = new Date().getMonth(); %>
-      <% events.filter(event => event.date.getMonth() === currentMonth).forEach(event => {%> 
-        <section class="hero scroll-item">
-          <section>
-            <h1>Populair in</h1>
-            <h1><%= new Date().toLocaleString("default", { month: "long" }) %></h1>
+    <section id="slider-container" class="scroll-container">
+      <% const currentMonth=new Date().getMonth(); %>
+        <% events.filter(event=> event.date.getMonth() === currentMonth).forEach(event => {%>
+          <section class="hero scroll-item">
+            <section>
+              <h1>Populair in</h1>
+              <h1>
+                <%= new Date().toLocaleString("default", { month: "long" }) %>
+              </h1>
+            </section>
+            <section>
+              <h2>
+                <%= event.title %>
+              </h2>
+              <h3>
+                <%= event.city %>
+              </h3>
+              <h3>
+                <%= event.formattedDate %>
+              </h3>
+              <h3>
+                <%= event.location %>
+              </h3>
+            </section>
+            <section>
+              <h3>
+                <%= event.attendees %>
+              </h3>
+              <h3>Deelnemers</h3>
+              <button><a class="hero-cta" href="<%= event.link %>">Meer informatie ></a></button>
+            </section>
           </section>
-          <section>
-            <h2><%= event.title %></h2>
-            <h3><%= event.city %></h3>
-            <h3><%= event.formattedDate %></h3>
-            <h3><%= event.location %></h3>
-          </section>
-          <section>
-            <h3><%= event.attendees %></h3>
-            <h3>Deelnemers</h3>
-            <button><a class="hero-cta" href="<%= event.link %>">Meer informatie ></a></button>
-          </section>
+          <% }) %>
         </section>
-      <% }) %>
-    </div>
     <section class="calendar">
       <h1>Evenementen Kalender</h1>
       <input type="text" id="myDatePicker" placeholder="Selecteer een datum">
@@ -135,53 +65,11 @@
 
     <section id="calendar-results"></section>
   </main>
-  
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script>
-    
-    document.addEventListener("DOMContentLoaded", function() {
-      function formatDate(dateString) {
-  const options = { weekday: "long", day: "numeric", month: "long" };
-  const date = new Date(dateString);
-  return date.toLocaleDateString("nl-NL", options);
-}
-
-      const datePicker = flatpickr("#myDatePicker", {
-        inline: true,
-        dateFormat: "d/m/Y",
-        onChange: function(selectedDates, dateString) {
-          const formattedDate = dateString.split("/").reverse().join("-");
-          fetch(`/upcoming-events/${formattedDate}`)
-            .then(response => response.json())
-            .then(events => {
-              // Render the events dynamically in the calendar-results section
-              const calendarResults = document.getElementById("calendar-results");
-              // Clear existing events
-              calendarResults.innerHTML = "";
-              // Render the fetched events
-              events.forEach(event => {
-                const eventCard = document.createElement("div");
-                eventCard.classList.add("event-card");
-                eventCard.innerHTML = `
-                  <h2>${event.title}</h2>
-                  <p>${event.city}</p>
-                  <p>${event.location}</p>
-                  <p>${formatDate(event.date)}</p>
-
-                    <button class="event-button"><a href="${event.link}">Meer informatie</a></button>
-
-                  <!-- Add more event details here -->
-                `;
-                calendarResults.appendChild(eventCard);
-              });
-            })
-            .catch(error => {
-              console.error("An error occurred while fetching the events:", error);
-            });
-        }
-      });
-    });
-  </script>
+  <script src="js/upcoming-events.js"></script>
+  <%- include('./partials/footer') %>
 </body>
+
 </html>
