@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="author" content="Jeannet Welboren" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Concert buddies</title>
+    <title><%=title%></title>
+ 
     <link rel="stylesheet" href="/css/style.css" />
     <% if (title === 'Concert buddies' || title === 'Personal info' || title ===
     'Upload photo' || title === 'Add bio' || title === 'Add genres' || title === 'My events' || title === 'Event details' || title ===
@@ -20,6 +21,17 @@
 
     <% if (title === 'Upcoming events') { %>
       <link rel="stylesheet" href="/css/upcoming-events.css">
+      <style>
+        /* Dynamically set the background image for each scroll item (done inline ) */
+        <% events.forEach((event, index)=> {
+            %> .scroll-item:nth-of-type(<%=index + 1 %>) {
+              background-image: url('<%= event.background %>');
+              background-size: cover;
+            }
+    
+            <%
+          }) %>
+      </style>
 <% } %>
 
 
