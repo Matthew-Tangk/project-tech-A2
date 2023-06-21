@@ -93,7 +93,7 @@ app.get("/upcoming-events", async (req, res) => {
     console.log("Pulled data from MongoDB:", formattedEvents);
     res.render("upcoming-events.ejs", {
       events: formattedEvents,
-      title: "Upcoming events",
+      title: "Upcoming events"
     });
   } catch (error) {
     console.error("An error occurred while fetching the data:", error);
