@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri = process.env.DB_SIGNIN;
 
 const client = new MongoClient(uri, {
@@ -6,7 +6,7 @@ const client = new MongoClient(uri, {
     version: ServerApiVersion.v1,
     strict: true,
     deprecationErrors: true,
-  }
+  },
 });
 
 async function run() {
@@ -15,7 +15,9 @@ async function run() {
     await client.connect();
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    console.log(
+      "Pinged your deployment. You successfully connected to MongoDB!"
+    );
   } finally {
     console.log("Finally it works");
   }
@@ -54,25 +56,22 @@ let filesArray = fs.readdir(artistImgPath, (err, files) => {
 
 exports.addArtists = async (req, res) => {
   try {
-      await client.connect();
+    await client.connect();
 
-      const artistCollection = client.db('concertBuddies').collection('artists')
+    const artistCollection = client.db("concertBuddies").collection("artists");
 
-      const allArtistsData = await artistCollection.find({ }, 
-        { name: 1, img: 0, path:1, _id: 0 }
-        ).toArray();
-
-      //DATA KRIJG IK NU BINNEN< Nu nog omzetten hieronder in de render dat de data meegerenderd wordt en de afbeelding
-      //in de view plaatsen met ejs
-      res.render('addartists.ejs', {
-          title:"Add artists", 
-          artists: allArtistsData
-      });
-
+    const allArtistsData = await artistCollection
+      .find({}, { name: 1, img: 0, path: 1, _id: 0 })
+      .toArray();
+      
+    res.render("addartists.ejs", {
+      title: "Add artists",
+      artists: allArtistsData,
+    });
   } catch (err) {
-      console.error("Something went wrong with sending data to the server", err)
+    console.error("Something went wrong with sending data to the server", err);
   }
-}
+};
 
 exports.profile = async (req, res) => {
     selectedFavoriteArtists = req.body.favoriteartists;
@@ -154,29 +153,21 @@ exports.profile = async (req, res) => {
 const sendFavoriteArtistData = async (data) => {
   try {
     const favoriteArtists = client
-    .db("concertBuddies")
-    .collection("favoriteArtists");
+      .db("concertBuddies")
+      .collection("favoriteArtists");
 
     const uploadFavoriteArtistsData = await favoriteArtists.insertOne(data);
-    console.log("The artists are succesfully added to the database", uploadFavoriteArtistsData.insertedId);
+    console.log(
+      "The artists are succesfully added to the database",
+      uploadFavoriteArtistsData.insertedId
+    );
   } catch (err) {
-    console.error("Something went wrong with adding the artists to the database :(", err);
+    console.error(
+      "Something went wrong with adding the artists to the database :(",
+      err
+    );
   }
-}
-
-// WERKT NIET
-// const updateFavoriteArtists = async (data) => {
-//   try {
-//     const favoriteArtists = client
-//     .db("userData")
-//     .collection("user");
-
-//     const uploadFavoriteArtistsData =
-//     await favoriteArtists.findOneAndUpdate(
-//       { "username" : "testjulia" },
-//       { $set: { "favartists" : data } })
-
-//       console.log("get data" + uploadFavoriteArtistsData);
+};
 
 //       console.log("The artists are succesfully added to profile", uploadFavoriteArtistsData.insertedId);
 //   } catch(err) {
