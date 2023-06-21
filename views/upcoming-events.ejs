@@ -1,3 +1,5 @@
+<%- include('./partials/head') %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -139,49 +141,52 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script>
-    
     document.addEventListener("DOMContentLoaded", function() {
       function formatDate(dateString) {
-  const options = { weekday: "long", day: "numeric", month: "long" };
-  const date = new Date(dateString);
-  return date.toLocaleDateString("nl-NL", options);
-}
-
+        const options = { weekday: "long", day: "numeric", month: "long" };
+        const date = new Date(dateString);
+        return date.toLocaleDateString("nl-NL", options);
+      }
+  
       const datePicker = flatpickr("#myDatePicker", {
         inline: true,
         dateFormat: "d/m/Y",
         onChange: function(selectedDates, dateString) {
           const formattedDate = dateString.split("/").reverse().join("-");
           fetch(`/upcoming-events/${formattedDate}`)
-            .then(response => response.json())
-            .then(events => {
-              // Render the events dynamically in the calendar-results section
-              const calendarResults = document.getElementById("calendar-results");
-              // Clear existing events
-              calendarResults.innerHTML = "";
-              // Render the fetched events
-              events.forEach(event => {
-                const eventCard = document.createElement("div");
-                eventCard.classList.add("event-card");
-                eventCard.innerHTML = `
-                  <h2>${event.title}</h2>
-                  <p>${event.city}</p>
-                  <p>${event.location}</p>
-                  <p>${formatDate(event.date)}</p>
+  .then(response => response.json())
+  .then(events => {
+    const calendarResults = document.getElementById("calendar-results");
+    calendarResults.innerHTML = "";
 
-                    <button class="event-button"><a href="${event.link}">Meer informatie</a></button>
+    if (events.length === 0) {
+      const noDataMessage = document.createElement("p");
+      noDataMessage.textContent = "Oops! There are no events for this date.";
+      calendarResults.appendChild(noDataMessage);
+    } else {
+      events.forEach(event => {
+  const eventCard = document.createElement("div");
+  eventCard.classList.add("event-card");
+  eventCard.innerHTML = `
+    <h2>${event.title}</h2>
+    <h3>${event.city}</h3>
+    <h3>${event.formattedDate}</h3>
+    <h3>${event.location}</h3>
+    <button><a class="event-button" href="${event.link}">Meer informatie</a></button>
+  `;
+  calendarResults.appendChild(eventCard);
+});
 
-                  <!-- Add more event details here -->
-                `;
-                calendarResults.appendChild(eventCard);
-              });
-            })
-            .catch(error => {
-              console.error("An error occurred while fetching the events:", error);
-            });
+    }
+  })
+  .catch(error => {
+    console.error("Error fetching events:", error);
+  });
         }
       });
     });
   </script>
+      <%- include('./partials/footer') %>
+
 </body>
 </html>
