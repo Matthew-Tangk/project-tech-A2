@@ -12,14 +12,18 @@ body {
   background-color: #1f1d2a;
 }
 
-header {
-  color: #2b2936;
+
+html,
+body {
+  height: 100%;
+  margin: 0;
 }
 
-header a {
+body {
   display: flex;
-  justify-content: flex-end;
-  text-decoration: none;
+  flex-direction: column;
+  font-family: "Catamaran", sans-serif;
+  background-color: #1f1d2a;
 }
 
 h1 {
@@ -38,23 +42,21 @@ h1 {
 /* container for the tickets */
 .ticket {
   background-color: #322f54;
-  width: 100%;
-  border-radius: 25px;
-  background-image: url(../assets/static/img/events/sos_cover.jpeg);
+  border-radius: 1.5625em;
   background-size: cover;
   background-position: left;
   background-repeat: no-repeat;
   background-size: 40% 100%;
-  padding: 5px 0;
-  margin: 30px 0;
+  padding: 0.3125em 0;
+  margin: 1.875em 0;
 }
 
 .eventDetails {
   display: flex;
   flex-direction: column;
-  font-size: 14px;
-  color: #ffffff;
-  margin: 5px 0 5px 43%;
+  font-size: 0.875em;
+  color: white;
+  margin: 0.3125em 0 0.3125em 43%;
 }
 
 .eventDetails p {
@@ -63,7 +65,7 @@ h1 {
 }
 
 .eventDetails p:first-of-type {
-  margin-bottom: 20px;
+  margin-bottom: 1.25em;
   font-weight: lighter;
 }
 
@@ -81,6 +83,7 @@ h1 {
 }
 
 .date p {
+  margin-top: 1.3em;
   font-size: 2.5em;
 }
 
@@ -97,8 +100,8 @@ h3 {
 .toggle-button {
   display: inline-block;
   position: relative;
-  width: 60px;
-  height: 34px;
+  width: 3.75em;
+  height: 2.125em;
   margin-left: 60%;
 }
 
@@ -108,7 +111,7 @@ h3 {
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 17px;
+  border-radius: 1.0625em;
   background-color: #6862c8;
   transition: 0.4s;
 }
@@ -116,118 +119,38 @@ h3 {
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
+  height: 1.625em;
+  width: 1.625em;
+  left: 0.25em;
+  bottom: 0.25em;
   border-radius: 50%;
   background-color: #da6864;
   transition: 0.4s;
 }
 
-#toggle:checked + .slider {
+.toggle:checked + .slider {
   background-color: #6862c8;
 }
 
-#toggle:checked + .slider:before {
-  transform: translateX(26px);
+.toggle:checked + .slider:before {
+  transform: translateX(1.625em);
   background-color: #64ff88;
 }
 
+
 .ticket:nth-of-type(2) {
-  background-image: url(../assets/static/img/events/MMATBS_cover.jpeg);
+  background-image: url(../img/events/MMATBS_cover.jpeg);
 }
 
 .ticket:nth-of-type(3) {
-  background-image: url(../assets/static/img/events/planetHer_cover.jpeg);
+  background-image: url(../img/events/planetHer_cover.jpeg);
 }
 
 .ticket:nth-of-type(4) {
-  background-image: url(../assets/static/img/events/drake_cover.jpeg);
+  background-image: url(../img/events/drake_cover.jpeg);
 }
 
 .main-container {
   min-height: calc(100vh - 50px);
   padding-bottom: 50px;
-}
-
-footer {
-  bottom: 0;
-  width: 100%;
-  height: 50px;
-}
-
-footer a {
-  text-decoration: none;
-  color: white;
-}
-
-footer a img {
-  width: 60px;
-  height: 60px;
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 100px;
-
-  background-color: #2b2936;
-}
-
-.page2 header {
-  background-color: #2b2936;
-}
-
-#spread {
-  background-image: url(../assets/static/img/events/mmatbs_spread.webp);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 10px;
-  box-shadow: 0px 5px 5px #322f54;
-  height: 180px;
-  border-radius: 25px;
-  width: 90%;
-  margin: 10px;
-  border-radius: 25px;
-}
-
-.page2 h2:first-of-type {
-  margin-left: 15px;
-}
-
-.page2 p {
-  color: #ffffff;
-  font-size: 14px;
-  margin: 14px 0 0 15px;
-}
-
-.page2 h2 {
-  color: #ffffff;
-  margin: 14px 0;
-  display: flex;
-  justify-content: center;
-}
-
-.attending {
-  display: flex;
-  justify-content: center;
-  background-color: #322f54;
-  width: 40%;
-  border-radius: 25px;
-}
-
-.attending p {
-  color: #ffffff;
-  font-size: 14px;
-  height: 50px;
-  margin: 25px 0 0 0;
-}
-
-#closingstatement {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 10.1px;
 }
