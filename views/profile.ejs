@@ -9,22 +9,24 @@
       <section>
         <p> Welcome </p>
         <h2> <%= profileData.username %> </h2>
-        <P> <%= profileData.age %> </P>
-        <P> <%= profileData.about %></P>
+        <p> <%= profileData.age %> </p>
+        <p> <%= profileData.about %></p>
       </section>
 
       <img width="100px" src="/static/img/profilepic/<%= profileData.file %>"  alt="Profile Picture"/>
     </section>
     
-    <section>
-      <ul>
-        <% selectedGenre.forEach(selectedGenre => { %>
-          <li>
-            <img src="../static/img/genres/<%= selectedGenre.img %>" alt="<%= selectedGenre.name %>">
-            <p><%= selectedGenre.name %></p>
-          </li>
-          <% }); %>
-      </ul>
+    <section id="selectedGenres">
+      <% if(favoriteGenres != null) { %>
+        <ul>
+          <% favoriteGenres.forEach(genre => { %>
+            <li>
+              <img src="../static/img/genres/<%= genre %>.svg" alt="<%= genre %>">
+              <p><%= genre %></p>
+            </li>
+            <% }); %>
+        </ul>
+      <% } %>
     </section>
 
     <section>
@@ -53,5 +55,7 @@
     </section>
   </main>
   <%- include('./partials/footer') %>
+
+  <script src="../js/profile.js"></script>
 </body>
 </html>

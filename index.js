@@ -34,6 +34,8 @@ const express = require("express");
 const multer = require("multer");
 const upload = multer({ dest: "assets/static/img/profilepic" });
 const bodyParser = require("body-parser");
+const uglifycss = require("uglifycss");
+const uglifycss = require("uglifycss");
 
 const app = express();
 
@@ -43,6 +45,12 @@ app.use(express.static("assets"));
 app.use(express.urlencoded({ extended: true }));
 app.listen(3000);
 
+// Uglifycss
+const inputFiles = ["assets/css/style.css", "assets/css/addartists.styles.css", "assets/css/invites.styles.css", "assets/css/my-events.css", "assets/css/registration.css", "assets/css/upcoming-events.css" ];
+const options = {
+  maxLineLen: 500,
+  expandVars: true
+};
 
 
 const profileRoutes = require("./routes/profileRoutes.js");
@@ -57,6 +65,11 @@ app.get("/", (req, res) => {
 // Home page
 app.get("/upcoming-events", (req, res) => {
   res.render("upcoming-events.ejs", { title: "Upcoming events" });
+});
+
+// My events page
+app.get("/my-events", (req, res) => {
+  res.render("my-events.ejs", { title: My events });
 });
 
 // Make new profile page
@@ -102,38 +115,73 @@ app.post("/add-bio", upload.single("file"), (req, res) => {
 app.post("/add-genres", async (req, res) => {
   const { username, age, tel, email, file, about } = req.body;
 
-  const userData = {
+  try {
+    await client.connect();
+
+    const genreCollection = client.db('concertBuddies').collection('genres')
+    const allGenreData = await genreCollection.find({}).toArray();
+
+    res.render("genres.ejs", {
+      username,
+      age,
+      tel,
+      email,
+      file,
+      about,
+      genres: allGenreData,
+      title: "Add genres"
+    })
+  } catch (error) {
+    console.error("An error occurred while saving the data:", error);
+  }
+});
+
+app.post("/profile", async (req, res) => {
+  const { username, age, tel, email, file, about } = req.body;
+  const selectedFavoriteGenres = req.body.favoritegenres;
+
+  const favoriteGenres = selectedFavoriteGenres;
+
+  const userDataSend = {
     username: username,
     age: age,
     tel: tel,
     email: email,
     file: file,
     about: about,
+    genres: favoriteGenres,
+    genres: favoriteGenres,
   };
 
   try {
+    await sendUserData(userDataSend);
+
+    // Now that userData is stored, retrieve all userData again to render in the profile page
     await client.connect();
 
-    const db = client.db(dbName);
-    const collection = db.collection(collectionName);
+    const profileDataCollection = client.db(dbName).collection(collectionName);
+    const userData = await profileDataCollection.findOne({}, { sort: { _id: -1 } });
 
-    await collection.insertOne(userData);
+    console.log(userData); // Add this line to check the value of userData
 
-    // HIER TOEVOEGEN LEGE object aanmaken in favoriete artiesten
-    const favoriteArtists = client.db('concertBuddies').collection('favoriteArtists');
-    await favoriteArtists.insertOne({});
+    if (userData) {
+      const profileData = {
+        username: userData.username,
+        age: userData.age,
+        file: userData.file,
+        about: userData.about,
+        genres: userData.genres,
+      };
 
-    console.log("User data successfully saved in MongoDB");
+      const favoriteGenres = userData.genres;
 
-    const genreCollection = client.db('concertBuddies').collection('genres')
-    const allGenreData = await genreCollection.find({}).toArray();
+      const favArtistsData = null;
+      const foundObjectsFromFavoriteArtists = null;
 
     res.render("genres.ejs", { title: "Add genres", genres: allGenreData });
-  } catch (error) {
+  }} catch (error) {
     console.error("An error occurred while saving the data:", error);
     res.render("error.ejs");
-  } finally {
-    await client.close();
   }
 });
 
@@ -152,7 +200,10 @@ app.get("/profile", async (req, res) => {
         age: userData.age,
         file: userData.file,
         about: userData.about,
+        genres:userData.genres
       };
+      
+      const favoriteGenres = userData.genres;
 
     // Retrieve favorite genres from db
     const selectedGenreCollection = client.db('concertBuddies').collection('selectedGenres')
@@ -197,7 +248,7 @@ app.get("/profile", async (req, res) => {
       await findAllInfoOfFavArtist();
      }
     
-    res.render("profile", { profileData: profileData, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
+    res.render("profile", { profileData: profileData, title: "My profile", favoriteGenres: favoriteGenres, favoriteArtists: favArtistsData, additionFavoriteArtistsData:foundObjectsFromFavoriteArtists });
   } else {
     res.render("profile", { profileData: null, title: "My profile", selectedGenre: allSelectedGenreData, favoriteArtists: mostRecentFavArtists  });
   }
@@ -212,3 +263,5 @@ app.get("/profile", async (req, res) => {
 app.use((req, res, next) => {
   res.status(404).render("error.ejs", { title: "not found" });
 });
+
+
